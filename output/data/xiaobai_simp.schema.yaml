@@ -1,0 +1,173 @@
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: xiaobai_simp
+  name: 小白T9输入法
+  version: "20200601"
+  author:
+    - 寅类小白 <xiaobai9978@gmail.com>
+  description: |
+    小白T9输入法。
+  dependencies:
+    - stroke
+
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: [ 中文, 西文 ]
+  - name: full_shape
+    states: [ 半角, 全角 ]
+  - name: zh_simp
+    reset: 1
+    states: [ 漢字, 汉字 ]
+  - name: ascii_punct
+    states: [ 。，, ．， ]
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - table_translator@custom_phrase
+    - script_translator
+  filters:
+    - simplifier
+    - uniquifier
+
+speller:
+  alphabet: 0123456789   # 用于编码的可输入字符
+  delimiter: "7"
+  algebra:
+    - erase/^xx$/
+    - abbrev/^([a-z]).+$/$1/
+    - abbrev/^([zcs]h).+$/$1/
+    - derive/^([nl])ve$/$1ue/
+    - derive/^([jqxy])u/$1v/
+    - derive/un$/uen/
+    - derive/ui$/uei/
+    - derive/iu$/iou/
+    - derive/([aeiou])ng$/$1gn/
+    - derive/([dtngkhrzcs])o(u|ng)$/$1o/
+    - derive/ong$/on/
+    - derive/ao$/oa/
+    - derive/([iu])a(o|ng?)$/a$1$2/
+
+    - xform/^a/8/
+    - xform/^b/8/
+    - xform/^c/8/
+    - xform/^d/9/
+    - xform/^e/9/
+    - xform/^f/9/
+    - xform/^g/4/
+    - xform/^h/4/
+    - xform/^i/4/
+    - xform/^j/5/
+    - xform/^k/5/
+    - xform/^l/5/
+    - xform/^m/6/
+    - xform/^n/6/
+    - xform/^o/6/
+    - xform/^p/1/
+    - xform/^q/1/
+    - xform/^r/1/
+    - xform/^s/1/
+    - xform/^t/2/
+    - xform/^u/2/
+    - xform/^v/2/
+    - xform/^w/3/
+    - xform/^x/3/
+    - xform/^y/3/
+    - xform/^z/3/
+
+    - xform/a/8/
+    - xform/b/8/
+    - xform/c/8/
+    - xform/d/9/
+    - xform/e/9/
+    - xform/f/9/
+    - xform/g/4/
+    - xform/h/4/
+    - xform/i/4/
+    - xform/j/5/
+    - xform/k/5/
+    - xform/l/5/
+    - xform/m/6/
+    - xform/n/6/
+    - xform/o/6/
+    - xform/p/1/
+    - xform/q/1/
+    - xform/r/1/
+    - xform/s/1/
+    - xform/t/2/
+    - xform/u/2/
+    - xform/v/2/
+    - xform/w/3/
+    - xform/x/3/
+    - xform/y/3/
+    - xform/z/3/
+
+
+translator:
+  dictionary: xiaobai
+  prism: xiaobai_simp
+  spelling_hints: 99
+  preedit_format:
+    - xform/7/'/
+  comment_format:
+    - xform/7/'/
+
+custom_phrase:
+  dictionary: ""
+  user_dict: custom_phrase
+  db_class: stabledb
+  enable_completion: false
+  enable_sentence: false
+  initial_quality: 1
+
+simplifier:
+  option_name: zh_simp
+
+punctuator:
+  import_preset: default
+
+key_binder:
+  import_preset: default
+  bindings:
+    - { when: always, accept: Control+Shift+4, toggle: zh_simp }
+    - { when: always, accept: Control+Shift+dollar, toggle: zh_simp }
+    - {accept: KP_0, send: space, when: has_menu}
+    - {accept: KP_1, send: 1, when: always}
+    - {accept: KP_2, send: 2, when: always}
+    - {accept: KP_3, send: 3, when: always}
+    - {accept: KP_4, send: 4, when: always}
+    - {accept: KP_5, send: 5, when: always}
+    - {accept: KP_6, send: 6, when: always}
+    - {accept: KP_7, send: 7,  when: always}
+    - {accept: KP_8, send: 8, when: always}
+    - {accept: KP_9, send: 9, when: always}
+
+    - {accept: KP_Subtract, send: BackSpace, when: has_menu}
+    - {accept: KP_Divide, send: Page_Up, when: has_menu}
+    - {accept: KP_Multiply, send: Page_Down, when: has_menu}
+    - {accept: KP_Subtract, send: Up, when: has_menu}
+    - {accept: KP_Add, send: Down, when: has_menu}
+
+    - {accept: KP_Decimal, send: BackSpace, when: has_menu}
+
+
+recognizer:
+  import_preset: default
