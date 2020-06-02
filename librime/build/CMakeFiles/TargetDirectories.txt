@@ -1,0 +1,10 @@
+C:/weasel/librime/build/CMakeFiles/uninstall.dir
+C:/weasel/librime/build/CMakeFiles/INSTALL.dir
+C:/weasel/librime/build/CMakeFiles/ALL_BUILD.dir
+C:/weasel/librime/build/CMakeFiles/ZERO_CHECK.dir
+C:/weasel/librime/build/plugins/CMakeFiles/INSTALL.dir
+C:/weasel/librime/build/src/CMakeFiles/rime.dir
+C:/weasel/librime/build/src/CMakeFiles/INSTALL.dir
+C:/weasel/librime/build/tools/CMakeFiles/rime_api_console.dir
+C:/weasel/librime/build/tools/CMakeFiles/rime_patch.dir
+C:/weasel/librime/build/tools/CMakeFiles/INSTALL.dir
