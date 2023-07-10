@@ -1,7 +1,6 @@
 ﻿#include "stdafx.h"
 #include "WeaselServerImpl.h"
 #include <Windows.h>
-#include <VersionHelpers.hpp>
 #include <resource.h>
 
 namespace weasel {
@@ -44,13 +43,17 @@ void ServerImpl::_Finailize()
 {
 	if (pipeThread != nullptr) {
 		pipeThread->interrupt();
+		pipeThread = nullptr;
 	}
+	else {
+		// avoid finalize again
+		return;
+	}
+
 	if (IsWindow())
 	{
 		DestroyWindow();
 	}
-
-	m_pRequestHandler->Finalize();
 }
 
 LRESULT ServerImpl::OnCreate(UINT uMsg, WPARAM wParam, LPARAM lParam, BOOL& bHandled)
@@ -82,6 +85,7 @@ LRESULT ServerImpl::OnEndSystemSession(UINT uMsg, WPARAM wParam, LPARAM lParam, 
 	if (m_pRequestHandler)
 	{
 		m_pRequestHandler->Finalize();
+		m_pRequestHandler = nullptr;
 	}
 	return 0;
 }
@@ -135,9 +139,9 @@ int ServerImpl::Start()
 
 int ServerImpl::Stop()
 {
-	_Finailize();
-	// quit the server
-	::ExitProcess(0);
+	// DO NOT exit process or finalize here
+	// Let WeaselServer handle this
+	PostMessage(WM_QUIT);
 	return 0;
 }
 
@@ -255,7 +259,6 @@ DWORD ServerImpl::OnUpdateInputPosition(WEASEL_IPC_COMMAND uMsg, DWORD wParam, D
 	rc.right = rc.left + width;
 	rc.bottom = rc.top + height;
 
-	if (IsWindows8Point1OrGreater())
 	{
 		using PPTLPFPMDPI = BOOL (WINAPI *)(HWND, LPPOINT);
 		PPTLPFPMDPI PhysicalToLogicalPointForPerMonitorDPI = (PPTLPFPMDPI)::GetProcAddress(m_hUser32Module, "PhysicalToLogicalPointForPerMonitorDPI");

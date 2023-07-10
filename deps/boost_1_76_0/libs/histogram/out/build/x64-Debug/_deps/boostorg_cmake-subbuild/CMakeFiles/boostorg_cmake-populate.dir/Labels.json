@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_cmake-subbuild/CMakeFiles/boostorg_cmake-populate"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_cmake-subbuild/CMakeFiles/boostorg_cmake-populate.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_cmake-subbuild/CMakeFiles/boostorg_cmake-populate-complete.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_cmake-subbuild/boostorg_cmake-populate-prefix/src/boostorg_cmake-populate-stamp/boostorg_cmake-populate-build.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_cmake-subbuild/boostorg_cmake-populate-prefix/src/boostorg_cmake-populate-stamp/boostorg_cmake-populate-configure.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_cmake-subbuild/boostorg_cmake-populate-prefix/src/boostorg_cmake-populate-stamp/boostorg_cmake-populate-download.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_cmake-subbuild/boostorg_cmake-populate-prefix/src/boostorg_cmake-populate-stamp/boostorg_cmake-populate-install.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_cmake-subbuild/boostorg_cmake-populate-prefix/src/boostorg_cmake-populate-stamp/boostorg_cmake-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_cmake-subbuild/boostorg_cmake-populate-prefix/src/boostorg_cmake-populate-stamp/boostorg_cmake-populate-patch.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_cmake-subbuild/boostorg_cmake-populate-prefix/src/boostorg_cmake-populate-stamp/boostorg_cmake-populate-test.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_cmake-subbuild/boostorg_cmake-populate-prefix/src/boostorg_cmake-populate-stamp/boostorg_cmake-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"boostorg_cmake-populate"
+		],
+		"name" : "boostorg_cmake-populate"
+	}
+}

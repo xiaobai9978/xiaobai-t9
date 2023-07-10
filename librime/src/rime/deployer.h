@@ -34,6 +34,8 @@ class Deployer : public Messenger {
   // read-only access after library initialization {
   string shared_data_dir;
   string user_data_dir;
+  string prebuilt_data_dir;
+  string staging_dir;
   string sync_dir;
   string user_id;
   string distribution_name;

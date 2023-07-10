@@ -13,9 +13,6 @@
 #include <rime/schema.h>
 #include <rime/gear/chord_composer.h>
 
-// U+FEFF works better with MacType
-static const char* kZeroWidthSpace = "\xef\xbb\xbf";  //"\xe2\x80\x8b";
-
 namespace rime {
 
 ChordComposer::ChordComposer(const Ticket& ticket) : Processor(ticket) {
@@ -25,6 +22,9 @@ ChordComposer::ChordComposer(const Ticket& ticket) : Processor(ticket) {
     string alphabet;
     config->GetString("chord_composer/alphabet", &alphabet);
     chording_keys_.Parse(alphabet);
+    config->GetBool("chord_composer/use_control", &use_control_);
+    config->GetBool("chord_composer/use_alt", &use_alt_);
+    config->GetBool("chord_composer/use_shift", &use_shift_);
     config->GetString("speller/delimiter", &delimiter_);
     algebra_.Load(config->GetList("chord_composer/algebra"));
     output_format_.Load(config->GetList("chord_composer/output_format"));
@@ -64,38 +64,63 @@ ProcessResult ChordComposer::ProcessFunctionKey(const KeyEvent& key_event) {
   return kNoop;
 }
 
-ProcessResult ChordComposer::ProcessChordingKey(const KeyEvent& key_event) {
-  bool chording = !chord_.empty();
-  if (key_event.shift() || key_event.ctrl() || key_event.alt()) {
-    raw_sequence_.clear();
-    ClearChord();
-    return chording ? kAccepted : kNoop;
-  }
-  bool is_key_up = key_event.release();
+// Note: QWERTY layout only.
+static const char map_to_base_layer[] = {
+  " 1'3457'908=,-./"
+  "0123456789;;,=./"
+  "2abcdefghijklmno"
+  "pqrstuvwxyz[\\]6-"
+  "`abcdefghijklmno"
+  "pqrstuvwxyz[\\]`"
+};
+
+inline static int get_base_layer_key_code(const KeyEvent& key_event) {
   int ch = key_event.keycode();
+  bool is_shift = key_event.shift();
+  return (is_shift && ch >= 0x20 && ch <= 0x7e)
+      ? map_to_base_layer[ch - 0x20] : ch;
+}
+
+ProcessResult ChordComposer::ProcessChordingKey(const KeyEvent& key_event) {
+  if (key_event.ctrl() || key_event.alt()) {
+    raw_sequence_.clear();
+  }
+  if ((key_event.ctrl() && !use_control_) ||
+      (key_event.alt() && !use_alt_) ||
+      (key_event.shift() && !use_shift_)) {
+    ClearChord();
+    return kNoop;
+  }
+  int ch = get_base_layer_key_code(key_event);
   // non chording key
   if (std::find(chording_keys_.begin(),
                 chording_keys_.end(),
                 KeyEvent{ch, 0}) == chording_keys_.end()) {
-    return chording ? kAccepted : kNoop;
+    ClearChord();
+    return kNoop;
   }
   // chording key
+  editing_chord_ = true;
+  bool is_key_up = key_event.release();
   if (is_key_up) {
     if (pressed_.erase(ch) != 0 && pressed_.empty()) {
       FinishChord();
     }
-  }
-  else {  // key down
+  } else {  // key down
     pressed_.insert(ch);
     bool updated = chord_.insert(ch).second;
     if (updated)
       UpdateChord();
   }
+  editing_chord_ = false;
   return kAccepted;
 }
 
 ProcessResult ChordComposer::ProcessKeyEvent(const KeyEvent& key_event) {
-  if (pass_thru_) {
+  if (engine_->context()->get_option("ascii_mode")) {
+    return kNoop;
+  }
+  if (sending_chord_) {
     return ProcessFunctionKey(key_event);
   }
   bool is_key_up = key_event.release();
@@ -133,18 +158,16 @@ void ChordComposer::UpdateChord() {
   string code = SerializeChord();
   prompt_format_.Apply(&code);
   if (comp.empty()) {
-    // add an invisbile place holder segment
+    // add a placeholder segment
     // 1. to cheat ctx->IsComposing() == true
     // 2. to attach chord prompt to while chording
-    ctx->PushInput(kZeroWidthSpace);
-    if (comp.empty()) {
-      LOG(ERROR) << "failed to update chord.";
-      return;
-    }
-    comp.back().tags.insert("phony");
+    Segment placeholder(0, ctx->input().length());
+    placeholder.tags.insert("phony");
+    ctx->composition().AddSegment(placeholder);
   }
-  comp.back().tags.insert("chord_prompt");
-  comp.back().prompt = code;
+  auto& last_segment = comp.back();
+  last_segment.tags.insert("chord_prompt");
+  last_segment.prompt = code;
 }
 
 void ChordComposer::FinishChord() {
@@ -156,7 +179,7 @@ void ChordComposer::FinishChord() {
 
   KeySequence key_sequence;
   if (key_sequence.Parse(code) && !key_sequence.empty()) {
-    pass_thru_ = true;
+    sending_chord_ = true;
     for (const KeyEvent& key : key_sequence) {
       if (!engine_->ProcessKey(key)) {
         // direct commit
@@ -165,7 +188,7 @@ void ChordComposer::FinishChord() {
         raw_sequence_.clear();
       }
     }
-    pass_thru_ = false;
+    sending_chord_ = false;
   }
 }
 
@@ -176,26 +199,26 @@ void ChordComposer::ClearChord() {
     return;
   Context* ctx = engine_->context();
   Composition& comp = ctx->composition();
-  if (comp.empty()) {
+  if (comp.empty())
     return;
-  }
-  if (comp.input().substr(comp.back().start) == kZeroWidthSpace) {
-    ctx->PopInput(ctx->caret_pos() - comp.back().start);
-  }
-  else if (comp.back().HasTag("chord_prompt")) {
-    comp.back().prompt.clear();
-    comp.back().tags.erase("chord_prompt");
+  auto& last_segment = comp.back();
+  if (comp.size() == 1 && last_segment.HasTag("phony")) {
+    ctx->Clear();
+  } else if (last_segment.HasTag("chord_prompt")) {
+    last_segment.prompt.clear();
+    last_segment.tags.erase("chord_prompt");
   }
 }
 
 void ChordComposer::OnContextUpdate(Context* ctx) {
-  if (ctx->IsComposing() && ctx->input() != kZeroWidthSpace) {
+  if (ctx->IsComposing()) {
     composing_ = true;
-  }
-  else if (composing_) {
+  } else if (composing_) {
     composing_ = false;
-    raw_sequence_.clear();
-    DLOG(INFO) << "clear raw sequence.";
+    if (!editing_chord_ || sending_chord_) {
+      raw_sequence_.clear();
+      DLOG(INFO) << "clear raw sequence.";
+    }
   }
 }
 

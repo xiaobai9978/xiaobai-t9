@@ -5,11 +5,14 @@
 // 2012-07-07 GONG Chen <chen.sst@gmail.com>
 //
 #include <iostream>
+#include <boost/filesystem.hpp>
 #include <rime/config.h>
 #include <rime/deployer.h>
 #include <rime/service.h>
 #include <rime/setup.h>
 #include <rime/lever/deployment_tasks.h>
+
+namespace fs = boost::filesystem;
 
 using namespace rime;
 
@@ -57,29 +60,47 @@ int set_active_schema(const string& schema_id) {
   return 0;
 }
 
-static void configure_deployer(Deployer* deployer,
-                               int argc, char* argv[]) {
+static void setup_deployer(Deployer* deployer,
+                           int argc, char* argv[]) {
   if (argc > 0) {
     deployer->user_data_dir = argv[0];
-    if (argc > 1) {
-      deployer->shared_data_dir = argv[1];
-    }
-    else {
-      deployer->shared_data_dir = argv[0];
-    }
   }
+  if (argc > 1) {
+    deployer->shared_data_dir = argv[1];
+  } else if (argc > 0) {
+    deployer->shared_data_dir = argv[0];
+  }
+  if (argc > 2) {
+    deployer->staging_dir = argv[2];
+  } else {
+    deployer->staging_dir = (fs::path(deployer->user_data_dir) / "build").string();
+  }
+  deployer->prebuilt_data_dir = (fs::path(deployer->shared_data_dir) / "build").string();
 }
 
 int main(int argc, char* argv[]) {
   SetupLogging("rime.tools");
 
   if (argc == 1) {
-    std::cout << "options:" << std::endl
-              << "\t--build [dest_dir [shared_data_dir]]" << std::endl
-              << "\t--add-schema schema_id [...]" << std::endl
-              << "\t--set-active-schema schema_id" << std::endl
-              << "\t--compile x.schema.yaml [dest_dir [shared_data_dir]]" << std::endl
-        ;
+    std::cout << "Usage: " << std::endl
+              << "\t--add-schema <schema_id>..." << std::endl
+              << "\t\tAdd one or more schema_id(s) to the schema_list, write patch in default.custom.yaml" << std::endl
+              << std::endl
+              << "\t--build [user_data_dir] [shared_data_dir] [staging_dir]" << std::endl
+              << "\t\tBuild and deploy Rime data." << std::endl
+              << "\t\tIf unspecified, user_data_dir and shared_data_dir defaults to the working directory." << std::endl
+              << "\t\tTo deploy data for ibus-rime, use the following directories:" << std::endl
+              << "\t\tuser_data_dir    ~/.config/ibus/rime" << std::endl
+              << "\t\tshared_data_dir  /usr/share/rime-data" << std::endl
+              << "\t\tstaging_dir      ~/.config/ibus/rime/build" << std::endl
+              << std::endl
+              << "\t--compile <x.schema.yaml> [user_data_dir] [shared_data_dir] [staging_dir]" << std::endl
+              << "\t\tCompile a specific schema's dictionary files." << std::endl
+              << std::endl
+              << "\t--set-active-schema <schema_id>" << std::endl
+              << "\t\tSet the active schema in user.yaml" << std::endl
+      ;
+
     return 0;
   }
 
@@ -88,9 +109,9 @@ int main(int argc, char* argv[]) {
   // shift
   argc -= 2, argv += 2;
 
-  if (argc >= 0 && argc <= 2 && option == "--build") {
+  if (argc >= 0 && argc <= 3 && option == "--build") {
     Deployer& deployer(Service::instance().deployer());
-    configure_deployer(&deployer, argc, argv);
+    setup_deployer(&deployer, argc, argv);
     LoadModules(kDeployerModules);
     WorkspaceUpdate update;
     return update.Run(&deployer) ? 0 : 1;
@@ -106,7 +127,7 @@ int main(int argc, char* argv[]) {
 
   if (argc >= 1 && option == "--compile") {
     Deployer& deployer(Service::instance().deployer());
-    configure_deployer(&deployer, argc - 1, argv + 1);
+    setup_deployer(&deployer, argc - 1, argv + 1);
     LoadModules(kDeployerModules);
     string schema_file(argv[0]);
     SchemaUpdate update(schema_file);

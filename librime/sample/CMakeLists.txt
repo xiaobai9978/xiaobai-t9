@@ -1,5 +1,5 @@
 project(rime-sample)
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.10)
 
 set(SAMPLE_VERSION 1.0.0)
 set(SAMPLE_SOVERSION 1)
@@ -26,7 +26,7 @@ if(BUILD_SAMPLE)
       PROPERTIES
       INSTALL_NAME_DIR "@rpath")
   endif(XCODE_VERSION)
-  install(TARGETS ${sample_library} DESTINATION ${LIB_INSTALL_DIR})
+  install(TARGETS ${sample_library} DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR})
 
   add_subdirectory(tools)
   if(BUILD_TEST)

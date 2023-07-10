@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_config-subbuild/CMakeFiles/boostorg_config-populate"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_config-subbuild/CMakeFiles/boostorg_config-populate.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_config-subbuild/CMakeFiles/boostorg_config-populate-complete.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_config-subbuild/boostorg_config-populate-prefix/src/boostorg_config-populate-stamp/boostorg_config-populate-build.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_config-subbuild/boostorg_config-populate-prefix/src/boostorg_config-populate-stamp/boostorg_config-populate-configure.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_config-subbuild/boostorg_config-populate-prefix/src/boostorg_config-populate-stamp/boostorg_config-populate-download.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_config-subbuild/boostorg_config-populate-prefix/src/boostorg_config-populate-stamp/boostorg_config-populate-install.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_config-subbuild/boostorg_config-populate-prefix/src/boostorg_config-populate-stamp/boostorg_config-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_config-subbuild/boostorg_config-populate-prefix/src/boostorg_config-populate-stamp/boostorg_config-populate-patch.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_config-subbuild/boostorg_config-populate-prefix/src/boostorg_config-populate-stamp/boostorg_config-populate-test.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_config-subbuild/boostorg_config-populate-prefix/src/boostorg_config-populate-stamp/boostorg_config-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"boostorg_config-populate"
+		],
+		"name" : "boostorg_config-populate"
+	}
+}

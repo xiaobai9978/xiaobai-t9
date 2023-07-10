@@ -1,0 +1,506 @@
+{
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_custom_target"
+		],
+		"files" : 
+		[
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 125,
+				"parent" : 0
+			}
+		]
+	},
+	"folder" : 
+	{
+		"name" : "Documentation/"
+	},
+	"id" : "quickbook::@6890427a1f51a3e7e1df",
+	"name" : "quickbook",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20,
+				21,
+				22,
+				23,
+				24,
+				25,
+				26,
+				27,
+				28,
+				29,
+				30,
+				31,
+				32,
+				33,
+				34,
+				35,
+				36,
+				37,
+				38,
+				39,
+				40,
+				41,
+				42,
+				43,
+				44,
+				45,
+				46,
+				47,
+				48,
+				49,
+				50,
+				51,
+				52,
+				53,
+				54,
+				55,
+				56,
+				57,
+				58,
+				59,
+				60,
+				61,
+				62,
+				63,
+				64,
+				65,
+				66,
+				67,
+				68,
+				69,
+				70,
+				71,
+				72,
+				73,
+				74,
+				75
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/adv_scenarios.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/adv_scenarios/building_utf.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/adv_scenarios/entry_point_overview.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/adv_scenarios/external_test_runner.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/adv_scenarios/link_reference.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/adv_scenarios/obsolete_init_func.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/adv_scenarios/shared_lib_customizations.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/adv_scenarios/single_header_customizations.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/adv_scenarios/static_lib_customizations.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/adv_scenarios/test_module_init_overview.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/adv_scenarios/test_module_runner_overview.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/closing_chapters/acknowledgments.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/closing_chapters/change_log.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/closing_chapters/faq.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/closing_chapters/glossary.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/introduction/introduction.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/introduction/overview.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/prod_use/program_execution_monitor.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/runtime_configuration/runtime_config_reference.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/runtime_configuration/runtime_config_summary.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/runtime_configuration/runtime_configuration.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/runtime_configuration/runtime_custom.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/runtime_configuration/test_unit_filtering.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_organization/decorators.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_organization/fixtures.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_organization/logical_grouping.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_organization/managing_tests_dependencies.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_organization/master_test_suite.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_organization/nullary_tests.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_organization/parametric_test_case_generation.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_organization/semantic.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_organization/test_cases.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_organization/test_enabling_disabling.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_organization/test_naming.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_organization/test_organization.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_organization/test_suites.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_organization/test_tree.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_organization/test_tree_content.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_organization/testorg_reference.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_organization/testorg_summary.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_organization/typed_parametrized_tests.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_organization/unary_tests.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_output/checkpoints.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_output/contexts.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_output/log_format.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_output/logger_api.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_output/logging_floating_point.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_output/progress_display.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_output/report_format.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_output/test_output.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_output/test_tools_support.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_output/testout_reference.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/test_output/testout_summary.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/testing_tools/assertions_severity_levels.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/testing_tools/boost_test_bitwise_comparison.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/testing_tools/boost_test_collection_comparison.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/testing_tools/boost_test_debugging.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/testing_tools/boost_test_reported_information.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/testing_tools/boost_test_string_comparison.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/testing_tools/boost_test_technical_details.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/testing_tools/boost_test_universal_macro.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/testing_tools/custom_predicates.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/testing_tools/expected_failures.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/testing_tools/testing_exception_correctness.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/testing_tools/testing_floating_points.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/testing_tools/testing_output_streams.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/testing_tools/testing_tools.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/testing_tools/testing_tools_reference.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/testing_tools/testing_tools_summary.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/testing_tools/timeout.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/tutorials/hello_world.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/tutorials/new_year_resolution.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/tutorials/web_wisdom.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/usage_recommendations.qbk",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "C:/weasel/deps/boost_1_76_0/libs/test/doc/usage_variants.qbk",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "UTILITY"
+}

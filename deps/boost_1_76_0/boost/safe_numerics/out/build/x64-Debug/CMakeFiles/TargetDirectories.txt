@@ -1,0 +1,6 @@
+C:/weasel/deps/boost_1_76_0/boost/safe_numerics/out/build/x64-Debug/CMakeFiles/safe_numerics.dir
+C:/weasel/deps/boost_1_76_0/boost/safe_numerics/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+C:/weasel/deps/boost_1_76_0/boost/safe_numerics/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
+C:/weasel/deps/boost_1_76_0/boost/safe_numerics/out/build/x64-Debug/concept/CMakeFiles/concept.dir
+C:/weasel/deps/boost_1_76_0/boost/safe_numerics/out/build/x64-Debug/concept/CMakeFiles/edit_cache.dir
+C:/weasel/deps/boost_1_76_0/boost/safe_numerics/out/build/x64-Debug/concept/CMakeFiles/rebuild_cache.dir

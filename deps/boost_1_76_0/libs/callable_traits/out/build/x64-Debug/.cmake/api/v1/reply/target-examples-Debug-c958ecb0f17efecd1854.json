@@ -1,0 +1,409 @@
+{
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_custom_target",
+			"add_dependencies"
+		],
+		"files" : 
+		[
+			"example/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 6,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 24,
+				"parent" : 0
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "example.is_volatile_member::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "example.add_member_cv::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "example.add_varargs::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 5,
+			"id" : "example.apply_member_pointer::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 6,
+			"id" : "example.function_types_remove_const_comparison::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 7,
+			"id" : "example.add_member_volatile::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 8,
+			"id" : "example.is_noexcept::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 9,
+			"id" : "example.intro::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 10,
+			"id" : "example.add_member_rvalue_reference::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 11,
+			"id" : "example.class_of::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 12,
+			"id" : "example.args::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 13,
+			"id" : "example.is_reference_member::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 14,
+			"id" : "example.add_noexcept::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 15,
+			"id" : "example.add_member_lvalue_reference::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 16,
+			"id" : "example.add_member_const::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 17,
+			"id" : "example.add_transaction_safe::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 18,
+			"id" : "example.is_lvalue_reference_member::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 19,
+			"id" : "example.remove_member_cv::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 20,
+			"id" : "example.remove_transaction_safe::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 21,
+			"id" : "example.remove_noexcept::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 22,
+			"id" : "example.function_type::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 23,
+			"id" : "example.overview::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 24,
+			"id" : "example.has_varargs::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 25,
+			"id" : "example.is_cv_member::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 26,
+			"id" : "example.is_invocable::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 27,
+			"id" : "example.remove_varargs::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 28,
+			"id" : "example.void::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 29,
+			"id" : "example.return_type::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 30,
+			"id" : "example.is_rvalue_reference_member::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 31,
+			"id" : "example.is_transaction_safe::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 32,
+			"id" : "example.qualified_class_of::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 33,
+			"id" : "example.is_const_member::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 34,
+			"id" : "example.remove_member_const::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 35,
+			"id" : "example.remove_member_reference::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 36,
+			"id" : "example.remove_member_volatile::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 37,
+			"id" : "example.has_member_qualifiers::@70983d692f648185febe"
+		},
+		{
+			"backtrace" : 38,
+			"id" : "example.has_void_return::@70983d692f648185febe"
+		}
+	],
+	"id" : "examples::@70983d692f648185febe",
+	"name" : "examples",
+	"paths" : 
+	{
+		"build" : "example",
+		"source" : "example"
+	},
+	"sources" : [],
+	"type" : "UTILITY"
+}

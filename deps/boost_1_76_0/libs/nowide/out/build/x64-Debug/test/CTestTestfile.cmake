@@ -1,0 +1,36 @@
+# CMake generated Testfile for 
+# Source directory: C:/weasel/deps/boost_1_76_0/libs/nowide/test
+# Build directory: C:/weasel/deps/boost_1_76_0/libs/nowide/out/build/x64-Debug/test
+# 
+# This file includes the relevant testing commands required for 
+# testing this directory and lists subdirectories to be tested as well.
+add_test(boost_nowide-test_codecvt "C:/weasel/deps/boost_1_76_0/libs/nowide/out/build/x64-Debug/boost_nowide-test_codecvt.exe")
+set_tests_properties(boost_nowide-test_codecvt PROPERTIES  _BACKTRACE_TRIPLES "C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;23;add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;27;boost_nowide_add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;0;")
+add_test(boost_nowide-test_convert "C:/weasel/deps/boost_1_76_0/libs/nowide/out/build/x64-Debug/boost_nowide-test_convert.exe")
+set_tests_properties(boost_nowide-test_convert PROPERTIES  _BACKTRACE_TRIPLES "C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;23;add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;28;boost_nowide_add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;0;")
+add_test(boost_nowide-test_env "C:/weasel/deps/boost_1_76_0/libs/nowide/out/build/x64-Debug/boost_nowide-test_env.exe")
+set_tests_properties(boost_nowide-test_env PROPERTIES  _BACKTRACE_TRIPLES "C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;23;add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;29;boost_nowide_add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;0;")
+add_test(boost_nowide-test_env_win "C:/weasel/deps/boost_1_76_0/libs/nowide/out/build/x64-Debug/boost_nowide-test_env_win.exe")
+set_tests_properties(boost_nowide-test_env_win PROPERTIES  _BACKTRACE_TRIPLES "C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;23;add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;30;boost_nowide_add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;0;")
+add_test(boost_nowide-test_fstream "C:/weasel/deps/boost_1_76_0/libs/nowide/out/build/x64-Debug/boost_nowide-test_fstream.exe")
+set_tests_properties(boost_nowide-test_fstream PROPERTIES  _BACKTRACE_TRIPLES "C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;23;add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;31;boost_nowide_add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;0;")
+add_test(boost_nowide-test_fstream_cxx11 "C:/weasel/deps/boost_1_76_0/libs/nowide/out/build/x64-Debug/boost_nowide-test_fstream_cxx11.exe")
+set_tests_properties(boost_nowide-test_fstream_cxx11 PROPERTIES  _BACKTRACE_TRIPLES "C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;23;add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;32;boost_nowide_add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;0;")
+add_test(boost_nowide-test_iostream "C:/weasel/deps/boost_1_76_0/libs/nowide/out/build/x64-Debug/boost_nowide-test_iostream.exe")
+set_tests_properties(boost_nowide-test_iostream PROPERTIES  _BACKTRACE_TRIPLES "C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;23;add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;33;boost_nowide_add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;0;")
+add_test(boost_nowide-test_stackstring "C:/weasel/deps/boost_1_76_0/libs/nowide/out/build/x64-Debug/boost_nowide-test_stackstring.exe")
+set_tests_properties(boost_nowide-test_stackstring PROPERTIES  _BACKTRACE_TRIPLES "C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;23;add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;37;boost_nowide_add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;0;")
+add_test(boost_nowide-test_stat "C:/weasel/deps/boost_1_76_0/libs/nowide/out/build/x64-Debug/boost_nowide-test_stat.exe")
+set_tests_properties(boost_nowide-test_stat PROPERTIES  _BACKTRACE_TRIPLES "C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;23;add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;38;boost_nowide_add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;0;")
+add_test(boost_nowide-test_stdio "C:/weasel/deps/boost_1_76_0/libs/nowide/out/build/x64-Debug/boost_nowide-test_stdio.exe")
+set_tests_properties(boost_nowide-test_stdio PROPERTIES  _BACKTRACE_TRIPLES "C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;23;add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;39;boost_nowide_add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;0;")
+add_test(boost_nowide-test_system_n "C:/weasel/deps/boost_1_76_0/libs/nowide/out/build/x64-Debug/boost_nowide-test_system_n.exe")
+set_tests_properties(boost_nowide-test_system_n PROPERTIES  _BACKTRACE_TRIPLES "C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;23;add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;40;boost_nowide_add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;0;")
+add_test(boost_nowide-test_system_w "C:/weasel/deps/boost_1_76_0/libs/nowide/out/build/x64-Debug/boost_nowide-test_system_w.exe")
+set_tests_properties(boost_nowide-test_system_w PROPERTIES  _BACKTRACE_TRIPLES "C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;23;add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;42;boost_nowide_add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;0;")
+add_test(boost_nowide-test_traits "C:/weasel/deps/boost_1_76_0/libs/nowide/out/build/x64-Debug/boost_nowide-test_traits.exe")
+set_tests_properties(boost_nowide-test_traits PROPERTIES  _BACKTRACE_TRIPLES "C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;23;add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;47;boost_nowide_add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;0;")
+add_test(boost_nowide-test_fs "C:/weasel/deps/boost_1_76_0/libs/nowide/out/build/x64-Debug/boost_nowide-test_fs.exe")
+set_tests_properties(boost_nowide-test_fs PROPERTIES  _BACKTRACE_TRIPLES "C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;23;add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;52;boost_nowide_add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;0;")
+add_test(boost_nowide-test_traits_fs "C:/weasel/deps/boost_1_76_0/libs/nowide/out/build/x64-Debug/boost_nowide-test_traits_fs.exe")
+set_tests_properties(boost_nowide-test_traits_fs PROPERTIES  _BACKTRACE_TRIPLES "C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;23;add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;53;boost_nowide_add_test;C:/weasel/deps/boost_1_76_0/libs/nowide/test/CMakeLists.txt;0;")

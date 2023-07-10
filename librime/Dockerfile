@@ -1,5 +1,4 @@
 FROM ubuntu:18.04
-MAINTAINER a8568730
 
 RUN apt update
 RUN apt install -y \

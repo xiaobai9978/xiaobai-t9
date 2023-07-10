@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_mp11-subbuild/CMakeFiles/boostorg_mp11-populate"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_mp11-subbuild/CMakeFiles/boostorg_mp11-populate.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_mp11-subbuild/CMakeFiles/boostorg_mp11-populate-complete.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_mp11-subbuild/boostorg_mp11-populate-prefix/src/boostorg_mp11-populate-stamp/boostorg_mp11-populate-build.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_mp11-subbuild/boostorg_mp11-populate-prefix/src/boostorg_mp11-populate-stamp/boostorg_mp11-populate-configure.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_mp11-subbuild/boostorg_mp11-populate-prefix/src/boostorg_mp11-populate-stamp/boostorg_mp11-populate-download.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_mp11-subbuild/boostorg_mp11-populate-prefix/src/boostorg_mp11-populate-stamp/boostorg_mp11-populate-install.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_mp11-subbuild/boostorg_mp11-populate-prefix/src/boostorg_mp11-populate-stamp/boostorg_mp11-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_mp11-subbuild/boostorg_mp11-populate-prefix/src/boostorg_mp11-populate-stamp/boostorg_mp11-populate-patch.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_mp11-subbuild/boostorg_mp11-populate-prefix/src/boostorg_mp11-populate-stamp/boostorg_mp11-populate-test.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_mp11-subbuild/boostorg_mp11-populate-prefix/src/boostorg_mp11-populate-stamp/boostorg_mp11-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"boostorg_mp11-populate"
+		],
+		"name" : "boostorg_mp11-populate"
+	}
+}

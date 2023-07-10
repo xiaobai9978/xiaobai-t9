@@ -3,17 +3,17 @@ rem Rime build script for msvc toolchain.
 rem Maintainer: Chen Gong <chen.sst@gmail.com>
 
 setlocal
-set BACK=%CD%
 
 if not exist env.bat copy env.bat.template env.bat
 
-if exist env.bat call env.bat
+if exist env.bat call .\env.bat
 
 rem for Windows XP compatibility (Visual Studio 2015+)
 set CL=/Zc:threadSafeInit-
 
 set OLD_PATH=%PATH%
-if defined DEVTOOLS_PATH set PATH=%DEVTOOLS_PATH%%PATH%
+if defined DEVTOOLS_PATH set PATH=%OLD_PATH%;%DEVTOOLS_PATH%
+path
 echo.
 
 if not defined RIME_ROOT set RIME_ROOT=%CD%
@@ -29,26 +29,16 @@ exit /b 1
 echo BOOST_ROOT=%BOOST_ROOT%
 echo.
 
-if not defined BJAM_TOOLSET (
-  rem the number actually means platform toolset, not %VisualStudioVersion%
-  set BJAM_TOOLSET=msvc-14.0
-)
-
-if not defined CMAKE_GENERATOR (
-  set CMAKE_GENERATOR="Visual Studio 14 2015"
-)
-
-if not defined PLATFORM_TOOLSET (
-  set PLATFORM_TOOLSET=v140_xp
-)
-
+set clean=0
 set build_dir_base=build
 set build_dir_suffix=
 set build_config=Release
 set build_boost=0
+set build_boost_x86=0
 set build_boost_x64=0
+set build_boost_arm64=0
 set boost_build_variant=release
-set build_thirdparty=0
+set build_deps=0
 set build_librime=0
 set build_shared=ON
 set build_test=OFF
@@ -56,12 +46,23 @@ set enable_logging=ON
 
 :parse_cmdline_options
 if "%1" == "" goto end_parsing_cmdline_options
+if "%1" == "clean" set clean=1
 if "%1" == "boost" set build_boost=1
+if "%1" == "boost_x86" (
+  set build_boost=1
+  set build_boost_x86=1
+)
 if "%1" == "boost_x64" (
   set build_boost=1
   set build_boost_x64=1
 )
-if "%1" == "thirdparty" set build_thirdparty=1
+if "%1" == "boost_arm64" (
+  set build_boost=1
+  set build_boost_arm64=1
+)
+if "%1" == "deps" set build_deps=1
+rem `thirdparty` is deprecated in favor of `deps`
+if "%1" == "thirdparty" set build_deps=1
 if "%1" == "librime" set build_librime=1
 if "%1" == "static" (
   set build_dir_suffix=-static
@@ -96,143 +97,203 @@ shift
 goto parse_cmdline_options
 :end_parsing_cmdline_options
 
+if %clean% == 0 (
 if %build_librime% == 0 (
 if %build_boost% == 0 (
-if %build_thirdparty% == 0 (
+if %build_deps% == 0 (
   set build_librime=1
-)))
+))))
+
+if %clean% == 1 (
+  rmdir /s /q build
+  rmdir /s /q deps\glog\cmake-build
+  rmdir /s /q deps\googletest\build
+  rmdir /s /q deps\leveldb\build
+  rmdir /s /q deps\marisa-trie\build
+  rmdir /s /q deps\opencc\build
+  rmdir /s /q deps\yaml-cpp\build
+)
 
 set build_dir=%build_dir_base%%build_dir_suffix%
 
-set DIST_DIR=%RIME_ROOT%\dist
-set THIRDPARTY=%RIME_ROOT%\thirdparty
+rem set curl=%RIME_ROOT%\bin\curl.exe
+rem set download="%curl%" --remote-name-all
 
-rem set CURL=%THIRDPARTY%\bin\curl.exe
-rem set DOWNLOAD="%CURL%" --remote-name-all
-
-set BOOST_COMPILED_LIBS=--with-date_time^
+set boost_compiled_libs=--with-date_time^
  --with-filesystem^
  --with-locale^
  --with-regex^
  --with-system^
  --with-thread
 
-set BJAM_OPTIONS_COMMON=toolset=%BJAM_TOOLSET%^
+rem the number actually means platform toolset, not %VisualStudioVersion%
+rem eg. BJAM_TOOLSET=msvc-14.2 corresponds to PLATFORM_TOOLSET=v142
+if defined BJAM_TOOLSET (
+  set bjam_options=toolset=%BJAM_TOOLSET%
+)
+set bjam_options=%bjam_options%^
  variant=%boost_build_variant%^
  link=static^
  threading=multi^
  runtime-link=static^
  cxxflags="/Zc:threadSafeInit- "
 
-set BJAM_OPTIONS_X86=%BJAM_OPTIONS_COMMON%^
- define=BOOST_USE_WINAPI_VERSION=0x0501
+set bjam_options_x86=%bjam_options%^
+ define=BOOST_USE_WINAPI_VERSION=0x0501^
+ architecture=x86^
+ address-model=32
 
-set BJAM_OPTIONS_X64=%BJAM_OPTIONS_COMMON%^
+set bjam_options_x64=%bjam_options%^
  define=BOOST_USE_WINAPI_VERSION=0x0502^
- address-model=64^
- --stagedir=stage_x64
+ architecture=x86^
+ address-model=64
+
+set bjam_options_arm64=%bjam_options%^
+ define=BOOST_USE_WINAPI_VERSION=0x0A00^
+ architecture=arm^
+ address-model=64
 
 if %build_boost% == 1 (
-  cd /d %BOOST_ROOT%
-  if not exist bjam.exe call bootstrap.bat
+if %build_boost_x86% == 0 (
+if %build_boost_x64% == 0 (
+if %build_boost_arm64% == 0 (
+  rem default architecture
+  set build_boost_x86=1
+))))
+
+if %build_boost% == 1 (
+  pushd %BOOST_ROOT%
+  if not exist b2.exe call .\bootstrap.bat
   if errorlevel 1 goto error
 
-  bjam %BJAM_OPTIONS_X86% stage %BOOST_COMPILED_LIBS%
-  if errorlevel 1 goto error
-
-  if %build_boost_x64% == 1 (
-    bjam %BJAM_OPTIONS_X64% stage %BOOST_COMPILED_LIBS%
+  if %build_boost_x86% == 1 (
+    b2 %bjam_options_x86% stage %boost_compiled_libs%
     if errorlevel 1 goto error
   )
+
+  if %build_boost_x64% == 1 (
+    b2 %bjam_options_x64% stage %boost_compiled_libs%
+    if errorlevel 1 goto error
+  )
+
+  if %build_boost_arm64% == 1 (
+    b2 %bjam_options_arm64% stage %boost_compiled_libs%
+    if errorlevel 1 goto error
+  )
+  popd
 )
 
-set THIRDPARTY_COMMON_CMAKE_FLAGS=-G%CMAKE_GENERATOR%^
- -T%PLATFORM_TOOLSET%^
+if defined CMAKE_GENERATOR (
+  set common_cmake_flags=%common_cmake_flags% -G%CMAKE_GENERATOR%
+)
+if defined ARCH (
+  set common_cmake_flags=%common_cmake_flags% -A%ARCH%
+)
+if defined PLATFORM_TOOLSET (
+  set common_cmake_flags=%common_cmake_flags% -T%PLATFORM_TOOLSET%
+)
+set deps_cmake_flags=%common_cmake_flags%^
  -DCMAKE_CONFIGURATION_TYPES:STRING="%build_config%"^
  -DCMAKE_CXX_FLAGS_RELEASE:STRING="/MT /O2 /Ob2 /DNDEBUG"^
  -DCMAKE_C_FLAGS_RELEASE:STRING="/MT /O2 /Ob2 /DNDEBUG"^
  -DCMAKE_CXX_FLAGS_DEBUG:STRING="/MTd /Od"^
  -DCMAKE_C_FLAGS_DEBUG:STRING="/MTd /Od"^
- -DCMAKE_INSTALL_PREFIX:PATH="%THIRDPARTY%"
+ -DCMAKE_INSTALL_PREFIX:PATH="%RIME_ROOT%"
 
-if %build_thirdparty% == 1 (
-  cd /d %THIRDPARTY%
-
+if %build_deps% == 1 (
   echo building glog.
-  cd %THIRDPARTY%\src\glog
-  cmake . -Bcmake-%build_dir% %THIRDPARTY_COMMON_CMAKE_FLAGS%^
+  pushd deps\glog
+  cmake . -Bcmake-%build_dir% %deps_cmake_flags%^
+  -DBUILD_SHARED_LIBS:BOOL=OFF^
   -DBUILD_TESTING:BOOL=OFF^
-  -DWITH_GFLAGS:BOOL=OFF
+  -DWITH_GFLAGS:BOOL=OFF^
+  -DCMAKE_MSVC_RUNTIME_LIBRARY="MultiThreaded$<$<CONFIG:Debug>:Debug>"
   if errorlevel 1 goto error
   cmake --build cmake-%build_dir% --config %build_config% --target INSTALL
   if errorlevel 1 goto error
+  popd
 
   echo building leveldb.
-  cd %THIRDPARTY%\src\leveldb
-  cmake . -B%build_dir% %THIRDPARTY_COMMON_CMAKE_FLAGS%^
+  pushd deps\leveldb
+  cmake . -B%build_dir% %deps_cmake_flags%^
   -DLEVELDB_BUILD_BENCHMARKS:BOOL=OFF^
   -DLEVELDB_BUILD_TESTS:BOOL=OFF
   if errorlevel 1 goto error
   cmake --build %build_dir% --config %build_config% --target INSTALL
   if errorlevel 1 goto error
+  popd
 
   echo building yaml-cpp.
-  cd %THIRDPARTY%\src\yaml-cpp
-  cmake . -B%build_dir% %THIRDPARTY_COMMON_CMAKE_FLAGS%^
+  pushd deps\yaml-cpp
+  cmake . -B%build_dir% %deps_cmake_flags%^
   -DMSVC_SHARED_RT:BOOL=OFF^
+  -DYAML_MSVC_SHARED_RT:BOOL=OFF^
   -DYAML_CPP_BUILD_CONTRIB:BOOL=OFF^
   -DYAML_CPP_BUILD_TESTS:BOOL=OFF^
   -DYAML_CPP_BUILD_TOOLS:BOOL=OFF
   if errorlevel 1 goto error
   cmake --build %build_dir% --config %build_config% --target INSTALL
   if errorlevel 1 goto error
+  popd
 
   echo building gtest.
-  cd %THIRDPARTY%\src\googletest
-  cmake . -B%build_dir% %THIRDPARTY_COMMON_CMAKE_FLAGS%^
+  pushd deps\googletest
+  cmake . -B%build_dir% %deps_cmake_flags%^
   -DBUILD_GMOCK:BOOL=OFF
   if errorlevel 1 goto error
   cmake --build %build_dir% --config %build_config% --target INSTALL
   if errorlevel 1 goto error
+  popd
 
   echo building marisa.
-  cd %THIRDPARTY%\src\marisa-trie
-  cmake %THIRDPARTY%\src -B%build_dir% %THIRDPARTY_COMMON_CMAKE_FLAGS%
+  pushd deps\marisa-trie
+  cmake .. -B%build_dir% %deps_cmake_flags%
   if errorlevel 1 goto error
   cmake --build %build_dir% --config %build_config% --target INSTALL
   if errorlevel 1 goto error
+  popd
 
   echo building opencc.
-  cd %THIRDPARTY%\src\opencc
-  cmake . -B%build_dir% %THIRDPARTY_COMMON_CMAKE_FLAGS%^
+  pushd deps\opencc
+  cmake . -B%build_dir% %deps_cmake_flags%^
   -DBUILD_SHARED_LIBS=OFF^
   -DBUILD_TESTING=OFF
   if errorlevel 1 goto error
   cmake --build %build_dir% --config %build_config% --target INSTALL
   if errorlevel 1 goto error
+  popd
 )
 
 if %build_librime% == 0 goto exit
 
-set RIME_CMAKE_FLAGS=-G%CMAKE_GENERATOR%^
- -T%PLATFORM_TOOLSET%^
+set rime_cmake_flags=%common_cmake_flags%^
  -DBUILD_STATIC=ON^
  -DBUILD_SHARED_LIBS=%build_shared%^
  -DBUILD_TEST=%build_test%^
  -DENABLE_LOGGING=%enable_logging%^
  -DBOOST_USE_CXX11=ON^
  -DCMAKE_CONFIGURATION_TYPES="%build_config%"^
- -DCMAKE_INSTALL_PREFIX:PATH="%DIST_DIR%"
+ -DCMAKE_INSTALL_PREFIX:PATH="%RIME_ROOT%\dist"
 
-cd /d %RIME_ROOT%
-echo cmake %RIME_ROOT% -B%build_dir% %RIME_CMAKE_FLAGS%
-call cmake %RIME_ROOT% -B%build_dir% %RIME_CMAKE_FLAGS%
+echo on
+call cmake . -B%build_dir% %rime_cmake_flags%
+@echo off
 if errorlevel 1 goto error
 
 echo.
 echo building librime.
+echo.
+echo on
 cmake --build %build_dir% --config %build_config% --target INSTALL
+@echo off
 if errorlevel 1 goto error
+
+if "%build_test%" == "ON" (
+  copy /y dist\lib\rime.dll build\test
+  pushd build\test
+  .\Release\rime_test.exe || goto error
+  popd
+)
 
 echo.
 echo ready.
@@ -247,5 +308,4 @@ echo.
 
 :exit
 set PATH=%OLD_PATH%
-cd /d %BACK%
 exit /b %exitcode%

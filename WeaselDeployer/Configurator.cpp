@@ -13,9 +13,23 @@
 #include <rime_api.h>
 #include <rime_levers_api.h>
 #pragma warning(default: 4005)
+#include <fstream>
 
+static void CreateFileIfNotExist(std::string filename)
+{
+	std::string user_data_dir = weasel_user_data_dir();
+	std::wstring filepathw = string_to_wstring(user_data_dir) + L"\\" + string_to_wstring(filename);
+	DWORD dwAttrib = GetFileAttributes(filepathw.c_str());
+	if (!(INVALID_FILE_ATTRIBUTES != dwAttrib && 0 == (dwAttrib & FILE_ATTRIBUTE_DIRECTORY)))
+	{
+		std::wofstream o(filepathw, std::ios::app);
+		o.close();
+	}
+}
 Configurator::Configurator()
 {
+	CreateFileIfNotExist("default.custom.yaml");
+	CreateFileIfNotExist("weasel.custom.yaml");
 }
 
 void Configurator::Initialize()
@@ -23,6 +37,7 @@ void Configurator::Initialize()
 	RIME_STRUCT(RimeTraits, weasel_traits);
 	weasel_traits.shared_data_dir = weasel_shared_data_dir();
 	weasel_traits.user_data_dir = weasel_user_data_dir();
+	weasel_traits.prebuilt_data_dir = weasel_traits.shared_data_dir;
 	const int len = 20;
 	char utf8_str[len];
 	memset(utf8_str, 0, sizeof(utf8_str));
@@ -103,7 +118,7 @@ int Configurator::UpdateWorkspace(bool report_errors) {
 		CloseHandle(hMutex);
 		if (report_errors)
 		{
-			MessageBox(NULL, L"正在執行另一項部署任務，方纔所做的修改將在輸入法再次啓動後生效。", L"【小白T9】", MB_OK | MB_ICONINFORMATION);
+			MessageBox(NULL, L"正在执行另一项部署任务，方纔所做的修改将在输入法再次啓动后生效。", L"【小白T9】", MB_OK | MB_ICONINFORMATION);
 		}
 		return 1;
 	}
@@ -144,7 +159,7 @@ int Configurator::DictManagement() {
 	{
 		LOG(WARNING) << "another deployer process is running; aborting operation.";
 		CloseHandle(hMutex);
-		MessageBox(NULL, L"正在執行另一項部署任務，請稍候再試。", L"【小白T9】", MB_OK | MB_ICONINFORMATION);
+		MessageBox(NULL, L"正在执行另一项部署任务，请稍候再试。", L"【小白T9】", MB_OK | MB_ICONINFORMATION);
 		return 1;
 	}
 
@@ -186,7 +201,7 @@ int Configurator::SyncUserData() {
 	{
 		LOG(WARNING) << "another deployer process is running; aborting operation.";
 		CloseHandle(hMutex);
-		MessageBox(NULL, L"正在執行另一項部署任務，請稍候再試。", L"【小白T9】", MB_OK | MB_ICONINFORMATION);
+		MessageBox(NULL, L"正在执行另一项部署任务，请稍候再试。", L"【小白T9】", MB_OK | MB_ICONINFORMATION);
 		return 1;
 	}
 

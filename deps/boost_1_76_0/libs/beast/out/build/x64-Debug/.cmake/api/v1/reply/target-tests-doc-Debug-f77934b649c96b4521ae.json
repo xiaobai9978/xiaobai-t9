@@ -1,0 +1,532 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "test/doc/tests-doc.exe"
+		},
+		{
+			"path" : "test/doc/tests-doc.pdb"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"link_directories",
+			"target_link_libraries",
+			"add_compile_options",
+			"add_definitions",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"test/doc/CMakeLists.txt",
+			"CMakeLists.txt",
+			"test/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 14,
+				"parent" : 0
+			},
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 153,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 39,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 62,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 134,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 137,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 138,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 139,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 140,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 136,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 192,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 193,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 141,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 54,
+				"parent" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 103,
+				"parent" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 144,
+				"parent" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 229,
+				"parent" : 2
+			},
+			{
+				"file" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 2,
+				"line" : 10,
+				"parent" : 19
+			},
+			{
+				"command" : 5,
+				"file" : 2,
+				"line" : 11,
+				"parent" : 19
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 /MTd"
+				},
+				{
+					"backtrace" : 5,
+					"fragment" : "/bigobj"
+				},
+				{
+					"backtrace" : 5,
+					"fragment" : "/permissive-"
+				},
+				{
+					"backtrace" : 5,
+					"fragment" : "/W4"
+				},
+				{
+					"backtrace" : 5,
+					"fragment" : "/MP"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 6,
+					"define" : "BOOST_ALL_STATIC_LINK=1"
+				},
+				{
+					"backtrace" : 7,
+					"define" : "BOOST_ASIO_DISABLE_BOOST_ARRAY=1"
+				},
+				{
+					"backtrace" : 8,
+					"define" : "BOOST_ASIO_DISABLE_BOOST_BIND=1"
+				},
+				{
+					"backtrace" : 9,
+					"define" : "BOOST_ASIO_DISABLE_BOOST_DATE_TIME=1"
+				},
+				{
+					"backtrace" : 10,
+					"define" : "BOOST_ASIO_DISABLE_BOOST_REGEX=1"
+				},
+				{
+					"backtrace" : 11,
+					"define" : "BOOST_ASIO_NO_DEPRECATED=1"
+				},
+				{
+					"backtrace" : 12,
+					"define" : "BOOST_ASIO_SEPARATE_COMPILATION=1"
+				},
+				{
+					"backtrace" : 13,
+					"define" : "BOOST_BEAST_SEPARATE_COMPILATION=1"
+				},
+				{
+					"backtrace" : 14,
+					"define" : "BOOST_COROUTINES_NO_DEPRECATION_WARNING=1"
+				},
+				{
+					"backtrace" : 15,
+					"define" : "_CRT_SECURE_NO_WARNINGS=1"
+				},
+				{
+					"backtrace" : 15,
+					"define" : "_SCL_SECURE_NO_WARNINGS=1"
+				},
+				{
+					"backtrace" : 15,
+					"define" : "_SILENCE_CXX17_ADAPTOR_TYPEDEFS_DEPRECATION_WARNING"
+				},
+				{
+					"backtrace" : 15,
+					"define" : "_SILENCE_CXX17_ALLOCATOR_VOID_DEPRECATION_WARNING"
+				},
+				{
+					"backtrace" : 15,
+					"define" : "_WIN32_WINNT=0x0601"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 16,
+					"path" : "C:/weasel/deps/boost_1_76_0/libs/beast/include"
+				},
+				{
+					"backtrace" : 17,
+					"path" : "C:/weasel/deps/boost_1_76_0"
+				},
+				{
+					"backtrace" : 18,
+					"path" : "C:/weasel/deps/boost_1_76_0/libs/beast/."
+				},
+				{
+					"backtrace" : 20,
+					"path" : "C:/weasel/deps/boost_1_76_0/libs/beast/test/./extern"
+				},
+				{
+					"backtrace" : 21,
+					"path" : "C:/weasel/deps/boost_1_76_0/libs/beast/test/./extras/include"
+				}
+			],
+			"language" : "CXX",
+			"sourceIndexes" : 
+			[
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 4,
+			"id" : "lib-asio::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "lib-asio-ssl::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "lib-test::@36f028580bb02cc8272a"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "lib-beast::@6890427a1f51a3e7e1df"
+		}
+	],
+	"folder" : 
+	{
+		"name" : "tests"
+	},
+	"id" : "tests-doc::@7cc34a2d2b25573f03c4",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 /MTd",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "/machine:x64 /SAFESEH:NO /debug /INCREMENTAL /subsystem:console",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "-LIBPATH:C:\\weasel\\deps\\boost_1_76_0\\stage\\lib",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 1,
+				"fragment" : "bcrypt.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "..\\..\\lib-asio.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "..\\..\\lib-asio-ssl.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "..\\..\\lib-beast.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "..\\lib-test.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "..\\..\\lib-asio.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 1,
+				"fragment" : "bcrypt.lib",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "tests-doc",
+	"nameOnDisk" : "tests-doc.exe",
+	"paths" : 
+	{
+		"build" : "test/doc",
+		"source" : "test/doc"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13,
+				14,
+				15,
+				16,
+				17,
+				18,
+				19,
+				20
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"path" : "test/doc/Jamfile",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "test/doc/snippets.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "test/doc/snippets.ipp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/doc/core_snippets.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/doc/core_1_refresher.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/doc/core_3_timeouts.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/doc/core_4_layers.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/doc/http_10_custom_parser.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/doc/http_examples.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/doc/http_snippets.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "test/doc/websocket_common.ipp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/doc/websocket.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/doc/websocket_1_connecting.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/doc/websocket_2_handshaking.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/doc/websocket_3_decorator.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/doc/websocket_4_messages.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/doc/websocket_5_control_frames.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/doc/websocket_6_timeouts.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/doc/websocket_7_teardown.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/doc/websocket_8_notes.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/doc/exemplars.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "EXECUTABLE"
+}

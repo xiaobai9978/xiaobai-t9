@@ -38,10 +38,14 @@ class ChordComposer : public Processor {
   Projection algebra_;
   Projection output_format_;
   Projection prompt_format_;
+  bool use_control_ = false;
+  bool use_alt_ = false;
+  bool use_shift_ = false;
 
   set<int> pressed_;
   set<int> chord_;
-  bool pass_thru_ = false;
+  bool editing_chord_ = false;
+  bool sending_chord_ = false;
   bool composing_ = false;
   string raw_sequence_;
   connection update_connection_;

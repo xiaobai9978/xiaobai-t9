@@ -1,0 +1,3 @@
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_assert-subbuild/CMakeFiles/boostorg_assert-populate.dir
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_assert-subbuild/CMakeFiles/edit_cache.dir
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_assert-subbuild/CMakeFiles/rebuild_cache.dir

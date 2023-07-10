@@ -37,3 +37,5 @@ Thumbs.db
 /cmake-build-debug
 *.VC.db
 release-notes.html
+*.7z
+RELEASE_CHANGELOG.md

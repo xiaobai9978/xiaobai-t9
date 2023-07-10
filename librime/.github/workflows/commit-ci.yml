@@ -1,0 +1,19 @@
+name: Commit CI
+
+on:
+  push:
+    branches:
+      - '*'
+    tags:
+      - '![0-9]+.*'
+  pull_request:
+
+jobs:
+  linux:
+    uses: ./.github/workflows/linux-build.yml
+
+  macos:
+    uses: ./.github/workflows/macos-build.yml
+
+  windows:
+    uses: ./.github/workflows/windows-build.yml

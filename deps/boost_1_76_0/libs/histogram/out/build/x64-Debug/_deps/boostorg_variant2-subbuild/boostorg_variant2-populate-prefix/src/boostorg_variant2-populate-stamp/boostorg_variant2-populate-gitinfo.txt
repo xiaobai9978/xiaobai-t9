@@ -1,0 +1,3 @@
+repository='https://github.com/boostorg/variant2'
+module=''
+tag='origin'

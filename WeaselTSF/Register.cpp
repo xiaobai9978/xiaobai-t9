@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Register.h"
 #include <strsafe.h>
-#include <VersionHelpers.hpp>
 
 #define CLSID_STRLEN 38  // strlen("{xxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx}")
 
@@ -45,7 +44,6 @@ BOOL RegisterProfiles()
 	ULONG cchIconFile = GetModuleFileNameW(g_hInst, achIconFile, ARRAYSIZE(achIconFile));
 	HRESULT hr;
 
-	if (IsWindows8OrGreater())
 	{
 		CComPtr<ITfInputProcessorProfileMgr> pInputProcessorProfileMgr;
 		hr = pInputProcessorProfileMgr.CoCreateInstance(CLSID_TF_InputProcessorProfiles, NULL, CLSCTX_ALL);
@@ -65,52 +63,30 @@ BOOL RegisterProfiles()
 			0,
 			TRUE,
 			0);
-	}
-	else
-	{
-		CComPtr<ITfInputProcessorProfiles> pInputProcessorProfiles;
-		hr = pInputProcessorProfiles.CoCreateInstance(CLSID_TF_InputProcessorProfiles, NULL, CLSCTX_INPROC_SERVER);
-		if (FAILED(hr))
-			return FALSE;
-
-		hr = pInputProcessorProfiles->Register(c_clsidTextService);
-		if (FAILED(hr))
-			return FALSE;
-
-		hr = pInputProcessorProfiles->AddLanguageProfile(
-			c_clsidTextService,
-			TEXTSERVICE_LANGID,
-			c_guidProfile,
-			TEXTSERVICE_DESC,
-			(ULONG)wcslen(TEXTSERVICE_DESC),
-			achIconFile,
-			cchIconFile,
-			TEXTSERVICE_ICON_INDEX);
-		if (FAILED(hr))
-			return FALSE;
-
-		hr = pInputProcessorProfiles->SubstituteKeyboardLayout(
-			c_clsidTextService, TEXTSERVICE_LANGID, c_guidProfile, FindIME());
 		if (FAILED(hr))
 			return FALSE;
 	}
+
 	return TRUE;
 }
 
 void UnregisterProfiles()
 {
-	ITfInputProcessorProfiles *pInputProcessProfiles;
 	HRESULT hr;
 
-	hr = CoCreateInstance(CLSID_TF_InputProcessorProfiles, NULL, CLSCTX_INPROC_SERVER,
-		IID_ITfInputProcessorProfiles, (void **)&pInputProcessProfiles);
-	if (FAILED(hr))
-		return;
+	{
+		CComPtr<ITfInputProcessorProfileMgr> pInputProcessorProfileMgr;
+		hr = pInputProcessorProfileMgr.CoCreateInstance(CLSID_TF_InputProcessorProfiles, NULL, CLSCTX_ALL);
+		if (FAILED(hr))
+			return;
 
-	pInputProcessProfiles->SubstituteKeyboardLayout(
-		c_clsidTextService, TEXTSERVICE_LANGID, c_guidProfile, NULL);
-	pInputProcessProfiles->Unregister(c_clsidTextService);
-	pInputProcessProfiles->Release();
+		hr = pInputProcessorProfileMgr->UnregisterProfile(
+			c_clsidTextService,
+			TEXTSERVICE_LANGID,
+			c_guidProfile,
+			0);
+	}
+
 }
 
 BOOL RegisterCategories()
@@ -134,14 +110,15 @@ BOOL RegisterCategories()
 	if (hr != S_OK)
 		goto Exit;
 
-	if (IsWindows8OrGreater())
-	{
-		hr = pCategoryMgr->RegisterCategory(c_clsidTextService, GUID_TFCAT_TIPCAP_IMMERSIVESUPPORT, c_clsidTextService);
-		if (hr != S_OK)
-			goto Exit;
+	hr = pCategoryMgr->RegisterCategory(c_clsidTextService, GUID_TFCAT_DISPLAYATTRIBUTEPROVIDER, c_clsidTextService);
+	if (hr != S_OK)
+		goto Exit;
 
-		hr = pCategoryMgr->RegisterCategory(c_clsidTextService, GUID_TFCAT_TIPCAP_SYSTRAYSUPPORT, c_clsidTextService);
-	}
+	hr = pCategoryMgr->RegisterCategory(c_clsidTextService, GUID_TFCAT_TIPCAP_IMMERSIVESUPPORT, c_clsidTextService);
+	if (hr != S_OK)
+		goto Exit;
+
+	hr = pCategoryMgr->RegisterCategory(c_clsidTextService, GUID_TFCAT_TIPCAP_SYSTRAYSUPPORT, c_clsidTextService);
 
 Exit:
 	pCategoryMgr->Release();
@@ -158,6 +135,28 @@ void UnregisterCategories()
 		return;
 
 	hr = pCategoryMgr->UnregisterCategory(c_clsidTextService, GUID_TFCAT_TIP_KEYBOARD, c_clsidTextService);
+	if (hr != S_OK)
+		goto UnregisterExit;
+
+	hr = pCategoryMgr->UnregisterCategory(c_clsidTextService, GUID_TFCAT_TIPCAP_UIELEMENTENABLED, c_clsidTextService);
+	if (hr != S_OK)
+		goto UnregisterExit;
+
+	hr = pCategoryMgr->UnregisterCategory(c_clsidTextService, GUID_TFCAT_TIPCAP_INPUTMODECOMPARTMENT, c_clsidTextService);
+	if (hr != S_OK)
+		goto UnregisterExit;
+
+	hr = pCategoryMgr->UnregisterCategory(c_clsidTextService, GUID_TFCAT_DISPLAYATTRIBUTEPROVIDER, c_clsidTextService);
+	if (hr != S_OK)
+		goto UnregisterExit;
+
+	hr = pCategoryMgr->UnregisterCategory(c_clsidTextService, GUID_TFCAT_TIPCAP_IMMERSIVESUPPORT, c_clsidTextService);
+	if (hr != S_OK)
+		goto UnregisterExit;
+
+	hr = pCategoryMgr->UnregisterCategory(c_clsidTextService, GUID_TFCAT_TIPCAP_SYSTRAYSUPPORT, c_clsidTextService);
+
+UnregisterExit:
 	pCategoryMgr->Release();
 }
 

@@ -13,11 +13,13 @@
 
 namespace rime {
 
-EntryCollector::EntryCollector() {
-}
+EntryCollector::EntryCollector() {}
 
-EntryCollector::~EntryCollector() {
-}
+EntryCollector::EntryCollector(Syllabary&& fixed_syllabary)
+    : syllabary(std::move(fixed_syllabary)),
+      build_syllabary(false) {}
+
+EntryCollector::~EntryCollector() {}
 
 void EntryCollector::Configure(DictSettings* settings) {
   if (settings->use_preset_vocabulary()) {
@@ -181,10 +183,17 @@ void EntryCollector::CreateEntry(const string &word,
       e.weight = 0.0;
     }
   }
-  // learn new syllables
+  // learn new syllables, or check if syllables are in the fixed syllabary.
   for (const string& s : e.raw_code) {
-    if (syllabary.find(s) == syllabary.end())
-      syllabary.insert(s);
+    if (syllabary.find(s) == syllabary.end()) {
+      if (build_syllabary) {
+        syllabary.insert(s);
+      } else {
+        LOG(ERROR) << "dropping entry '" << e.text
+                   <<  "' with invalid syllable: " << s;
+        return;
+      }
+    }
   }
   // learn new word
   bool is_word = (e.raw_code.size() == 1);
@@ -197,7 +206,7 @@ void EntryCollector::CreateEntry(const string &word,
     words[e.text][code_str] += e.weight;
     total_weight[e.text] += e.weight;
   }
-  entries.push_back(e);
+  entries.emplace_back(New<RawDictEntry>(e));
   ++num_entries;
 }
 
@@ -231,10 +240,10 @@ void EntryCollector::Dump(const string& file_name) const {
     out << "# - " << syllable << std::endl;
   }
   out << std::endl;
-  for (const RawDictEntry& e : entries) {
-    out << e.text << '\t'
-        << e.raw_code.ToString() << '\t'
-        << e.weight << std::endl;
+  for (const auto &e : entries) {
+    out << e->text << '\t'
+        << e->raw_code.ToString() << '\t'
+        << e->weight << std::endl;
   }
   out.close();
 }

@@ -2,9 +2,10 @@ set(CMAKE_USER_MAKE_RULES_OVERRIDE ${CMAKE_CURRENT_SOURCE_DIR}/cmake/c_flag_over
 set(CMAKE_USER_MAKE_RULES_OVERRIDE_CXX ${CMAKE_CURRENT_SOURCE_DIR}/cmake/cxx_flag_overrides.cmake)
 
 project(rime)
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.12)
+set(CMAKE_CXX_STANDARD 14)
 
-set(rime_version 1.5.3)
+set(rime_version 1.8.5)
 set(rime_soversion 1)
 
 add_definitions(-DRIME_VERSION="${rime_version}")
@@ -22,15 +23,18 @@ option(ENABLE_LOGGING "Enable logging with google-glog library" ON)
 option(BOOST_USE_CXX11 "Boost has been built with C++11 support" OFF)
 option(BOOST_USE_SIGNALS2 "Boost use signals2 instead of signals" ON)
 option(ENABLE_ASAN "Enable Address Sanitizer (Unix Only)" OFF)
+option(INSTALL_PRIVATE_HEADERS "Install private headers (usually needed for externally built Rime plugins)" OFF)
+option(ENABLE_EXTERNAL_PLUGINS "Enable loading of externally built Rime plugins (from directory set by RIME_PLUGINS_DIR variable)" OFF)
 
-set(rime_data_dir "/share/rime-data" CACHE STRING "Target directory for Rime data")
+set(RIME_DATA_DIR "${CMAKE_INSTALL_FULL_DATADIR}/rime-data" CACHE STRING "Target directory for Rime data")
+set(RIME_PLUGINS_DIR "${CMAKE_INSTALL_FULL_LIBDIR}/rime-plugins" CACHE STRING "Target directory for externally built Rime plugins")
 
 if(WIN32)
   set(ext ".exe")
 endif(WIN32)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
-set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "${PROJECT_SOURCE_DIR}/thirdparty")
+set(CMAKE_PREFIX_PATH ${CMAKE_PREFIX_PATH} "${PROJECT_SOURCE_DIR}")
 
 if (ENABLE_ASAN)
   set(asan_cflags "-fsanitize=address -fno-omit-frame-pointer")
@@ -61,7 +65,7 @@ endif()
 set(BOOST_COMPONENTS filesystem regex system)
 
 if(BOOST_USE_SIGNALS2)
-  add_definitions("-DBOOST_SIGNALS2")
+  set(RIME_BOOST_SIGNALS2 1)
 else()
   set(BOOST_COMPONENTS ${BOOST_COMPONENTS} signals)
 endif()
@@ -87,7 +91,7 @@ if(ENABLE_LOGGING)
     add_definitions(-DGOOGLE_GLOG_DLL_DECL=)
   endif()
 
-  add_definitions(-DRIME_ENABLE_LOGGING)
+  set(RIME_ENABLE_LOGGING 1)
 
 endif()
 
@@ -132,9 +136,14 @@ else()
   message(WARNING "X11/keysym.h not found.")
 endif()
 
+configure_file(
+  "${PROJECT_SOURCE_DIR}/src/rime/build_config.h.in"
+  "${PROJECT_BINARY_DIR}/src/rime/build_config.h")
+
+include_directories(${PROJECT_BINARY_DIR}/src)
 include_directories(${PROJECT_SOURCE_DIR}/src)
-include_directories(${PROJECT_SOURCE_DIR}/thirdparty/include)
-link_directories(${PROJECT_SOURCE_DIR}/thirdparty/lib)
+include_directories(${PROJECT_SOURCE_DIR}/include)
+link_directories(${PROJECT_SOURCE_DIR}/lib)
 
 if(MSVC)
   # https://stackoverflow.com/a/31264946
@@ -142,16 +151,25 @@ if(MSVC)
   set(CMAKE_SHARED_LINKER_FLAGS_RELEASE "${CMAKE_SHARED_LINKER_FLAGS_RELEASE} /DEBUG /OPT:REF /OPT:ICF")
   if(MSVC10)
     # stdint.h is missing from VS2010
-    include_directories(${PROJECT_SOURCE_DIR}/thirdparty/include/msvc)
+    include_directories(${PROJECT_SOURCE_DIR}/include/msvc)
   endif()
   # Force Boost.Uuid to use wincrypt as random provider instead of bcrypt for Windows XP compatibility
   add_definitions("/wd4244 /wd4996 /DBOOST_UUID_RANDOM_PROVIDER_FORCE_WINCRYPT")
 endif()
 
 if(UNIX)
-  set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 endif()
 
+if (NOT CMAKE_BUILD_PARALLEL_LEVEL)
+  include(ProcessorCount)
+  ProcessorCount(N)
+  if (NOT N EQUAL 0)
+    set(CMAKE_BUILD_PARALLEL_LEVEL ${N})
+  endif()
+endif()
+
+# keep these variables lest some Rime plugin's cmake file is still using them {
 if(NOT DEFINED LIB_INSTALL_DIR)
     set(LIB_INSTALL_DIR ${CMAKE_INSTALL_LIBDIR})
 endif()
@@ -159,6 +177,7 @@ endif()
 if(NOT DEFINED BIN_INSTALL_DIR)
     set(BIN_INSTALL_DIR ${CMAKE_INSTALL_BINDIR})
 endif()
+# }
 
 # uninstall target
 configure_file(
@@ -168,30 +187,45 @@ configure_file(
 add_custom_target(uninstall
   COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
 
-if(${CMAKE_SYSTEM_NAME} MATCHES "Linux|FreeBSD|DragonFly|GNU")
+if(${CMAKE_SYSTEM_NAME} MATCHES "Linux|FreeBSD|DragonFly|GNU" OR MINGW)
   set(prefix "${CMAKE_INSTALL_PREFIX}")
   set(exec_prefix "${CMAKE_INSTALL_PREFIX}")
-  set(bindir "${exec_prefix}/${BIN_INSTALL_DIR}")
-  set(libdir "${exec_prefix}/${LIB_INSTALL_DIR}")
-  set(pkgdatadir "${prefix}${rime_data_dir}")
-  set(includedir "${prefix}/${CMAKE_INSTALL_INCLUDEDIR}")
+  set(bindir "${CMAKE_INSTALL_FULL_BINDIR}")
+  set(libdir "${CMAKE_INSTALL_FULL_LIBDIR}")
+  set(pkgdatadir "${RIME_DATA_DIR}")
+  set(pluginsdir "${RIME_PLUGINS_DIR}")
+  set(includedir "${CMAKE_INSTALL_FULL_INCLUDEDIR}")
   configure_file(
       ${PROJECT_SOURCE_DIR}/rime.pc.in
       ${PROJECT_BINARY_DIR}/rime.pc
       @ONLY)
   install(FILES ${PROJECT_BINARY_DIR}/rime.pc
-    DESTINATION ${LIB_INSTALL_DIR}/pkgconfig)
+    DESTINATION ${CMAKE_INSTALL_FULL_LIBDIR}/pkgconfig)
 endif()
 
-install(FILES cmake/RimeConfig.cmake DESTINATION share/cmake/rime)
+install(FILES cmake/RimeConfig.cmake
+  DESTINATION ${CMAKE_INSTALL_FULL_DATADIR}/cmake/rime)
 
 file(GLOB rime_public_header_files ${PROJECT_SOURCE_DIR}/src/*.h)
-install(FILES ${rime_public_header_files} DESTINATION include)
+install(FILES ${rime_public_header_files}
+  DESTINATION ${CMAKE_INSTALL_FULL_INCLUDEDIR})
+if(INSTALL_PRIVATE_HEADERS)
+  file(GLOB rime_private_header_files
+    ${PROJECT_SOURCE_DIR}/src/rime/*.h
+    ${PROJECT_BINARY_DIR}/src/rime/*.h)
+  install(FILES ${rime_private_header_files}
+    DESTINATION ${CMAKE_INSTALL_FULL_INCLUDEDIR}/rime)
+  foreach(rime_private_header_files_dir algo config dict gear lever)
+    file(GLOB rime_private_header_files
+      ${PROJECT_SOURCE_DIR}/src/rime/${rime_private_header_files_dir}/*.h)
+    install(FILES ${rime_private_header_files}
+      DESTINATION ${CMAKE_INSTALL_FULL_INCLUDEDIR}/rime/${rime_private_header_files_dir})
+  endforeach()
+endif()
 
 if(BUILD_DATA)
   file(GLOB rime_preset_data_files ${PROJECT_SOURCE_DIR}/data/preset/*.yaml)
-  install(FILES ${rime_preset_data_files}
-    DESTINATION ${CMAKE_INSTALL_PREFIX}${rime_data_dir})
+  install(FILES ${rime_preset_data_files} DESTINATION ${RIME_DATA_DIR})
 endif()
 
 if(BUILD_SHARED_LIBS)

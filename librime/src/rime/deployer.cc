@@ -6,26 +6,22 @@
 //
 #include <chrono>
 #include <utility>
-#include <boost/filesystem.hpp>
 #include <boost/date_time/posix_time/posix_time_types.hpp>
+#include <boost/filesystem.hpp>
 #include <rime/deployer.h>
 
 namespace rime {
 
 Deployer::Deployer() : shared_data_dir("."),
                        user_data_dir("."),
+                       prebuilt_data_dir("build"),
+                       staging_dir("build"),
                        sync_dir("sync"),
                        user_id("unknown") {
 }
 
 Deployer::~Deployer() {
   JoinWorkThread();
-}
-
-string Deployer::user_data_sync_dir() const {
-  boost::filesystem::path p(sync_dir);
-  p /= user_id;
-  return p.string();
 }
 
 bool Deployer::RunTask(const string& task_name, TaskInitializer arg) {
@@ -139,6 +135,10 @@ void Deployer::JoinWorkThread() {
 
 void Deployer::JoinMaintenanceThread() {
   JoinWorkThread();
+}
+
+string Deployer::user_data_sync_dir() const {
+  return (boost::filesystem::path(sync_dir) / user_id).string();
 }
 
 }  // namespace rime

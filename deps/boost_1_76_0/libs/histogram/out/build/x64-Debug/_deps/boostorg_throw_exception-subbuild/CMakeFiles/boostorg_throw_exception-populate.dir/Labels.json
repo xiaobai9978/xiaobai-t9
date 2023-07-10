@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_throw_exception-subbuild/CMakeFiles/boostorg_throw_exception-populate"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_throw_exception-subbuild/CMakeFiles/boostorg_throw_exception-populate.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_throw_exception-subbuild/CMakeFiles/boostorg_throw_exception-populate-complete.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_throw_exception-subbuild/boostorg_throw_exception-populate-prefix/src/boostorg_throw_exception-populate-stamp/boostorg_throw_exception-populate-build.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_throw_exception-subbuild/boostorg_throw_exception-populate-prefix/src/boostorg_throw_exception-populate-stamp/boostorg_throw_exception-populate-configure.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_throw_exception-subbuild/boostorg_throw_exception-populate-prefix/src/boostorg_throw_exception-populate-stamp/boostorg_throw_exception-populate-download.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_throw_exception-subbuild/boostorg_throw_exception-populate-prefix/src/boostorg_throw_exception-populate-stamp/boostorg_throw_exception-populate-install.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_throw_exception-subbuild/boostorg_throw_exception-populate-prefix/src/boostorg_throw_exception-populate-stamp/boostorg_throw_exception-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_throw_exception-subbuild/boostorg_throw_exception-populate-prefix/src/boostorg_throw_exception-populate-stamp/boostorg_throw_exception-populate-patch.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_throw_exception-subbuild/boostorg_throw_exception-populate-prefix/src/boostorg_throw_exception-populate-stamp/boostorg_throw_exception-populate-test.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/boostorg_throw_exception-subbuild/boostorg_throw_exception-populate-prefix/src/boostorg_throw_exception-populate-stamp/boostorg_throw_exception-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"boostorg_throw_exception-populate"
+		],
+		"name" : "boostorg_throw_exception-populate"
+	}
+}

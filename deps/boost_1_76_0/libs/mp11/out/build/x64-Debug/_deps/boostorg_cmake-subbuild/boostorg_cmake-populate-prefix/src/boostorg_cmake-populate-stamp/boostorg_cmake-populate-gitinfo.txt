@@ -1,0 +1,3 @@
+repository='https://github.com/boostorg/cmake'
+module=''
+tag='origin'

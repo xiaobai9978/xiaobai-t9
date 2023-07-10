@@ -6,11 +6,11 @@
 #pragma once
 
 // Change these values to use different versions
-#define WINVER		0x0500
-#define _WIN32_WINNT	0x0501
-#define _WIN32_IE	0x0501
+#define WINVER		0x0603
+#define _WIN32_WINNT	0x0603
+#define _WIN32_IE	0x0600
 #define _RICHEDIT_VER	0x0200
-
+#define NTDDI_VERSION  NTDDI_WINBLUE
 // This project was generated for VC++ 2005 Express and ATL 3.0 from Platform SDK.
 // Comment out this line to build the project with different versions of VC++ and ATL.
 //#define _WTL_SUPPORT_SDK_ATL3
@@ -47,7 +47,5 @@
 #include <wtl/atldlgs.h>
 
 #include <VersionHelpers.hpp>
-
-typedef HRESULT (WINAPI *PRAR)(PCWSTR, DWORD);
 
 extern CAppModule _Module;

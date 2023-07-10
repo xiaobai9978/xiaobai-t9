@@ -1,0 +1,78 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1
+					],
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "concept",
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "concept",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1
+					],
+					"name" : "Project",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 1,
+					"id" : "concept::@322a35671245290c259e",
+					"jsonFile" : "target-concept-Debug-0b2be5a758d32d3ef934.json",
+					"name" : "concept",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "safe_numerics::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-safe_numerics-Debug-ba086617f3a105fd5ffc.json",
+					"name" : "safe_numerics",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/weasel/deps/boost_1_76_0/boost/safe_numerics/out/build/x64-Debug",
+		"source" : "C:/weasel/deps/boost_1_76_0/boost/safe_numerics"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 2
+	}
+}

@@ -1,0 +1,95 @@
+# Rime dictionary
+# encoding: utf-8
+#
+# https://github.com/iDvel/rime-settings/
+# 著名表演艺术家
+# 分别对应简中、日文，简中和日文相同的只保留一个。
+
+---
+name: d_av
+version: "2021-05-30"
+sort: by_weight
+vocabulary: essay-zh-hans
+...
+爱田飞鸟	ai tian fei niao
+あいだ飛鳥	ai tian fei niao
+安斋拉拉	an zhai la la
+安齋拉拉	an zhai la la
+彩美旬果	cai mei xun guo
+あやみ旬果	cai mei xun guo
+春咲凉	chun xiao liang
+春咲りょう	chun xiao liang
+蒂亚	di ya
+蒂亞	di ya
+东凛	dong lin
+枫花恋	feng hua lian
+楓カレン	feng hua lian
+河北春菜	he bei chun cai
+河北はるな	he bei chun cai
+吉泽明步	ji ze ming bu
+吉沢明歩	ji ze ming bu
+林由奈	lin you nai
+林ゆな	lin you nai
+凛音桃花	lin yin tao hua
+凛音とうか	lin yin tao hua
+里美尤利娅	li mei you li ya
+里美ゆりあ	li mei you li ya
+芦名尤莉亚	lu ming you li ya
+芦名ユリア	lu ming you li ya
+美雪爱莉丝	mei xue ai li si
+美雪ありす	mei xue ai li si
+目黑惠	mu hei hui
+目黒めぐみ	mu hei hui
+明里䌷	ming li chou
+明里つむぎ	ming li chou
+七海缇娜	qi hai ti na
+七海ティナ	qi hai ti na
+桃谷绘里香	tao gu hui li xiang
+桃谷エリカ	tao gu hui li xiang
+辻井穗乃果	shi jing hui nai guo
+辻井ほのか	shi jing hui nai guo
+桥本有菜	qiao ben you cai
+橋本ありな	qiao ben you cai
+深田咏美	shen tian yong mei
+深田えいみ	shen tian yong mei
+三上悠亚	san shang you ya
+三上悠亜	san shang you ya
+山岸逢花	shan an feng hua
+通野未帆
+藤森里穂	teng sen li hui
+桃乃木香奈	tao nai mu xiang nai
+桃乃木かな	tao nai mu xiang nai
+武藤绫香	wu teng ling xiang
+武藤あやか	wu teng ling xiang
+夏希栗	xia xi li
+夏希まろん	xia xi li
+相泽南	xiang ze nan
+相沢みなみ	xiang ze nan
+星宫一花	xing gong yi hua
+星宮一花	xing gong yi hua
+星野娜美	xing ye na mei
+星野ナミ	xing ye na mei
+篠田步美	xiao tian bu mei
+篠田あゆみ	xiao tian bu mei
+柚木蒂娜	you mu di na
+柚木ティナ	you mu di na
+樱井步	ying jing bu
+桜井あゆ	ying jing bu
+樱井彩	ying jing cai
+桜井彩	ying jing cai
+樱空桃	ying kong tao
+桜空もも	ying kong tao
+宇都宫紫苑	yu du gong zi yuan
+宇都宮しをん	yu du gong zi yuan
+一之濑亚美莉	yi zhi lai ya mei li
+一ノ瀬アメリ	yi zhi lai ya mei li
+樱木凛	ying mu lin
+桜木凛	ying mu lin
+园田美樱	yuan tian mei ying
+園田みおん	yuan tian mei ying
+早川濑里奈	zao chuan lai li nai
+早川瀬里奈	zao chuan lai li nai
+椎名由奈	zhi ming you nai
+椎名ゆな	zhi ming you nai
+佐伯由美香
+

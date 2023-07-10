@@ -5,6 +5,8 @@
 // 2012-01-05 GONG Chen <chen.sst@gmail.com>
 // 2014-07-06 GONG Chen <chen.sst@gmail.com> redesigned binary file format.
 //
+#include <cfloat>
+#include <cstdlib>
 #include <sstream>
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem.hpp>
@@ -18,7 +20,8 @@
 
 namespace rime {
 
-const char kReverseFormat[] = "Rime::Reverse/3.0";
+const char kReverseFormat[] = "Rime::Reverse/3.1";
+const double kReverseFormatCompatible = 3.0;
 
 const char kReverseFormatPrefix[] = "Rime::Reverse/";
 const size_t kReverseFormatPrefixLen = sizeof(kReverseFormatPrefix) - 1;
@@ -52,7 +55,13 @@ bool ReverseDb::Load() {
     Close();
     return false;
   }
-  //double format = atof(&metadata_->format[kReverseFormatPrefixLen]);
+  double format = std::atof(&metadata_->format[kReverseFormatPrefixLen]);
+  if (format - kReverseFormatCompatible < 0.0 - DBL_EPSILON ||
+      format - kReverseFormatCompatible > 1.0 + DBL_EPSILON) {
+    LOG(ERROR) << "incompatible reversedb format.";
+    Close();
+    return false;
+  }
 
   key_trie_.reset(new StringTable(metadata_->key_trie.get(),
                                   metadata_->key_trie_size));
@@ -173,7 +182,7 @@ bool ReverseDb::Build(DictSettings* settings,
   metadata_->key_trie_size = key_trie_image_size;
 
   // save value trie image
-  char* value_trie_image = Allocate<char>();
+  char* value_trie_image = Allocate<char>(value_trie_image_size);
   if (!value_trie_image) {
     LOG(ERROR) << "Error creating value trie image.";
     return false;
@@ -186,6 +195,11 @@ bool ReverseDb::Build(DictSettings* settings,
   std::strncpy(metadata_->format, kReverseFormat,
                reverse::Metadata::kFormatMaxLength);
   return true;
+}
+
+bool ReverseDb::Save() {
+  LOG(INFO) << "saving reverse file: " << file_name();
+  return ShrinkToFit();
 }
 
 uint32_t ReverseDb::dict_file_checksum() const {
@@ -226,13 +240,25 @@ an<DictSettings> ReverseLookupDictionary::GetDictSettings() {
 }
 
 static const ResourceType kReverseDbResourceType = {
-  "reverse_db", "build/", ".reverse.bin"
+  "reverse_db", "", ".reverse.bin"
 };
 
 ReverseLookupDictionaryComponent::ReverseLookupDictionaryComponent()
     : resource_resolver_(
-          Service::instance().CreateResourceResolver(kReverseDbResourceType)) {
+          Service::instance().CreateDeployedResourceResolver(
+              kReverseDbResourceType)) {
 }
+
+ReverseLookupDictionary*
+ReverseLookupDictionaryComponent::Create(const string& dict_name) {
+  auto db = db_pool_[dict_name].lock();
+  if (!db) {
+    auto file_path = resource_resolver_->ResolvePath(dict_name).string();
+    db = New<ReverseDb>(file_path);
+    db_pool_[dict_name] = db;
+  }
+  return new ReverseLookupDictionary(db);
+};
 
 ReverseLookupDictionary*
 ReverseLookupDictionaryComponent::Create(const Ticket& ticket) {
@@ -244,13 +270,7 @@ ReverseLookupDictionaryComponent::Create(const Ticket& ticket) {
     // missing!
     return NULL;
   }
-  auto db = db_pool_[dict_name].lock();
-  if (!db) {
-    auto file_path = resource_resolver_->ResolvePath(dict_name).string();
-    db = New<ReverseDb>(file_path);
-    db_pool_[dict_name] = db;
-  }
-  return new ReverseLookupDictionary(db);
+  return Create(dict_name);
 }
 
 }  // namespace rime

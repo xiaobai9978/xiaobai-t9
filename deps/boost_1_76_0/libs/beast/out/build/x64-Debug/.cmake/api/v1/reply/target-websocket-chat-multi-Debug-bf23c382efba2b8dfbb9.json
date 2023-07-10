@@ -1,0 +1,418 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "example/websocket/server/chat-multi/websocket-chat-multi.exe"
+		},
+		{
+			"path" : "example/websocket/server/chat-multi/websocket-chat-multi.pdb"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"link_directories",
+			"target_link_libraries",
+			"add_compile_options",
+			"add_definitions",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"example/websocket/server/chat-multi/CMakeLists.txt",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 32,
+				"parent" : 0
+			},
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 153,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 37,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 62,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 134,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 137,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 138,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 139,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 140,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 136,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 192,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 193,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 141,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 54,
+				"parent" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 103,
+				"parent" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 144,
+				"parent" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 229,
+				"parent" : 2
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 /MTd"
+				},
+				{
+					"backtrace" : 5,
+					"fragment" : "/bigobj"
+				},
+				{
+					"backtrace" : 5,
+					"fragment" : "/permissive-"
+				},
+				{
+					"backtrace" : 5,
+					"fragment" : "/W4"
+				},
+				{
+					"backtrace" : 5,
+					"fragment" : "/MP"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 6,
+					"define" : "BOOST_ALL_STATIC_LINK=1"
+				},
+				{
+					"backtrace" : 7,
+					"define" : "BOOST_ASIO_DISABLE_BOOST_ARRAY=1"
+				},
+				{
+					"backtrace" : 8,
+					"define" : "BOOST_ASIO_DISABLE_BOOST_BIND=1"
+				},
+				{
+					"backtrace" : 9,
+					"define" : "BOOST_ASIO_DISABLE_BOOST_DATE_TIME=1"
+				},
+				{
+					"backtrace" : 10,
+					"define" : "BOOST_ASIO_DISABLE_BOOST_REGEX=1"
+				},
+				{
+					"backtrace" : 11,
+					"define" : "BOOST_ASIO_NO_DEPRECATED=1"
+				},
+				{
+					"backtrace" : 12,
+					"define" : "BOOST_ASIO_SEPARATE_COMPILATION=1"
+				},
+				{
+					"backtrace" : 13,
+					"define" : "BOOST_BEAST_SEPARATE_COMPILATION=1"
+				},
+				{
+					"backtrace" : 14,
+					"define" : "BOOST_COROUTINES_NO_DEPRECATION_WARNING=1"
+				},
+				{
+					"backtrace" : 15,
+					"define" : "_CRT_SECURE_NO_WARNINGS=1"
+				},
+				{
+					"backtrace" : 15,
+					"define" : "_SCL_SECURE_NO_WARNINGS=1"
+				},
+				{
+					"backtrace" : 15,
+					"define" : "_SILENCE_CXX17_ADAPTOR_TYPEDEFS_DEPRECATION_WARNING"
+				},
+				{
+					"backtrace" : 15,
+					"define" : "_SILENCE_CXX17_ALLOCATOR_VOID_DEPRECATION_WARNING"
+				},
+				{
+					"backtrace" : 15,
+					"define" : "_WIN32_WINNT=0x0601"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 16,
+					"path" : "C:/weasel/deps/boost_1_76_0/libs/beast/include"
+				},
+				{
+					"backtrace" : 17,
+					"path" : "C:/weasel/deps/boost_1_76_0"
+				},
+				{
+					"backtrace" : 18,
+					"path" : "C:/weasel/deps/boost_1_76_0/libs/beast/."
+				}
+			],
+			"language" : "CXX",
+			"sourceIndexes" : 
+			[
+				3,
+				5,
+				7,
+				9,
+				11
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 4,
+			"id" : "lib-asio::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "lib-beast::@6890427a1f51a3e7e1df"
+		}
+	],
+	"folder" : 
+	{
+		"name" : "example-websocket-server"
+	},
+	"id" : "websocket-chat-multi::@4e33d0309864701b4597",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 /MTd",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "/machine:x64 /SAFESEH:NO /debug /INCREMENTAL /subsystem:console",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "-LIBPATH:C:\\weasel\\deps\\boost_1_76_0\\stage\\lib",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 1,
+				"fragment" : "bcrypt.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "..\\..\\..\\..\\lib-asio.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "..\\..\\..\\..\\lib-beast.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "..\\..\\..\\..\\lib-asio.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 1,
+				"fragment" : "bcrypt.lib",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "websocket-chat-multi",
+	"nameOnDisk" : "websocket-chat-multi.exe",
+	"paths" : 
+	{
+		"build" : "example/websocket/server/chat-multi",
+		"source" : "example/websocket/server/chat-multi"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3,
+				4,
+				5,
+				6,
+				7,
+				8,
+				9,
+				10,
+				11,
+				12
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"path" : "example/websocket/server/chat-multi/Jamfile",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "example/websocket/server/chat-multi/beast.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "example/websocket/server/chat-multi/chat_client.html",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "example/websocket/server/chat-multi/http_session.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "example/websocket/server/chat-multi/http_session.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "example/websocket/server/chat-multi/listener.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "example/websocket/server/chat-multi/listener.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "example/websocket/server/chat-multi/main.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "example/websocket/server/chat-multi/net.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "example/websocket/server/chat-multi/shared_state.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "example/websocket/server/chat-multi/shared_state.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "example/websocket/server/chat-multi/websocket_session.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "example/websocket/server/chat-multi/websocket_session.hpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "EXECUTABLE"
+}

@@ -2,6 +2,7 @@
 //
 #include "stdafx.h"
 #include <WeaselUtility.h>
+#include <fstream>
 #include "WeaselDeployer.h"
 #include "Configurator.h"
 
@@ -61,7 +62,6 @@ static int Run(LPTSTR lpCmdLine)
 {
 	Configurator configurator;
 	configurator.Initialize();
-
 	bool deployment_scheduled = !wcscmp(L"/deploy", lpCmdLine);
 	if (deployment_scheduled)
 	{

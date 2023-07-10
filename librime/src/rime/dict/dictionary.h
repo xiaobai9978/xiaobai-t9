@@ -18,58 +18,40 @@ namespace rime {
 
 namespace dictionary {
 
-struct Chunk {
-  Code code;
-  const table::Entry* entries = nullptr;
-  size_t size = 0;
-  size_t cursor = 0;
-  string remaining_code;  // for predictive queries
-  double credibility = 0.0;
-
-  Chunk() = default;
-  Chunk(const Code& c, const table::Entry* e, double cr = 0.0)
-      : code(c), entries(e), size(1), cursor(0), credibility(cr) {}
-  Chunk(const TableAccessor& a, double cr = 0.0)
-      : Chunk(a, string(), cr) {}
-  Chunk(const TableAccessor& a, const string& r, double cr = 0.0)
-      : code(a.index_code()), entries(a.entry()),
-        size(a.remaining()), cursor(0), remaining_code(r), credibility(cr) {}
-};
-
-bool compare_chunk_by_leading_element(const Chunk& a, const Chunk& b);
+struct Chunk;
+struct QueryResult;
 
 }  // namespace dictionary
 
 class DictEntryIterator : public DictEntryFilterBinder {
  public:
-  DictEntryIterator() = default;
-  DictEntryIterator(DictEntryIterator&& other) = default;
-  DictEntryIterator& operator= (DictEntryIterator&& other) = default;
+  RIME_API DictEntryIterator();
+  virtual ~DictEntryIterator() = default;
   DictEntryIterator(const DictEntryIterator& other) = default;
   DictEntryIterator& operator= (const DictEntryIterator& other) = default;
+  DictEntryIterator(DictEntryIterator&& other) = default;
+  DictEntryIterator& operator= (DictEntryIterator&& other) = default;
 
-  void AddChunk(dictionary::Chunk&& chunk, Table* table);
+  void AddChunk(dictionary::Chunk&& chunk);
   void Sort();
   RIME_API void AddFilter(DictEntryFilter filter) override;
   RIME_API an<DictEntry> Peek();
   RIME_API bool Next();
   bool Skip(size_t num_entries);
-  bool exhausted() const { return chunk_index_ >= chunks_.size(); }
+  RIME_API bool exhausted() const;
   size_t entry_count() const { return entry_count_; }
 
  protected:
   bool FindNextEntry();
 
  private:
-  vector<dictionary::Chunk> chunks_;
+  an<dictionary::QueryResult> query_result_;
   size_t chunk_index_ = 0;
-  Table* table_ = nullptr;
   an<DictEntry> entry_ = nullptr;
   size_t entry_count_ = 0;
 };
 
-struct DictEntryCollector : map<size_t, DictEntryIterator> {
-};
+using DictEntryCollector = map<size_t, DictEntryIterator>;
 
 class Config;
 class Schema;
@@ -79,8 +61,9 @@ struct Ticket;
 
 class Dictionary : public Class<Dictionary, const Ticket&> {
  public:
-  RIME_API Dictionary(const string& name,
-                      an<Table> table,
+  RIME_API Dictionary(string name,
+                      vector<string> packs,
+                      vector<of<Table>> tables,
                       an<Prism> prism);
   virtual ~Dictionary();
 
@@ -103,12 +86,15 @@ class Dictionary : public Class<Dictionary, const Ticket&> {
   const string& name() const { return name_; }
   RIME_API bool loaded() const;
 
-  an<Table> table() { return table_; }
-  an<Prism> prism() { return prism_; }
+  const vector<string>& packs() const { return packs_; }
+  const vector<of<Table>>& tables() const { return tables_; }
+  const an<Table>& primary_table() const { return tables_[0]; }
+  const an<Prism>& prism() const { return prism_; }
 
  private:
   string name_;
-  an<Table> table_;
+  vector<string> packs_;
+  vector<of<Table>> tables_;
   an<Prism> prism_;
 };
 
@@ -119,8 +105,9 @@ class DictionaryComponent : public Dictionary::Component {
   DictionaryComponent();
   ~DictionaryComponent() override;
   Dictionary* Create(const Ticket& ticket) override;
-  Dictionary* CreateDictionaryWithName(const string& dict_name,
-                                       const string& prism_name);
+  Dictionary* Create(string dict_name,
+                     string prism_name,
+                     vector<string> packs);
 
  private:
   map<string, weak<Prism>> prism_map_;

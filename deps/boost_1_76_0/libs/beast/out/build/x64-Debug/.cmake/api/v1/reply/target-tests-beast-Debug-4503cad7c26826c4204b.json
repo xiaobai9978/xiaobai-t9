@@ -1,0 +1,500 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "test/beast/tests-beast.exe"
+		},
+		{
+			"path" : "test/beast/tests-beast.pdb"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"link_directories",
+			"target_link_libraries",
+			"add_compile_options",
+			"add_definitions",
+			"include_directories"
+		],
+		"files" : 
+		[
+			"test/beast/CMakeLists.txt",
+			"CMakeLists.txt",
+			"test/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 28,
+				"parent" : 0
+			},
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 153,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 40,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 62,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 134,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 137,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 138,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 139,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 140,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 136,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 192,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 10,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 193,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 13,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 141,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 54,
+				"parent" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 103,
+				"parent" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 144,
+				"parent" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 229,
+				"parent" : 2
+			},
+			{
+				"file" : 2
+			},
+			{
+				"command" : 5,
+				"file" : 2,
+				"line" : 10,
+				"parent" : 21
+			},
+			{
+				"command" : 5,
+				"file" : 2,
+				"line" : 11,
+				"parent" : 21
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 /MTd"
+				},
+				{
+					"backtrace" : 5,
+					"fragment" : "/bigobj"
+				},
+				{
+					"backtrace" : 5,
+					"fragment" : "/permissive-"
+				},
+				{
+					"backtrace" : 5,
+					"fragment" : "/W4"
+				},
+				{
+					"backtrace" : 5,
+					"fragment" : "/MP"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 6,
+					"define" : "BOOST_ALL_STATIC_LINK=1"
+				},
+				{
+					"backtrace" : 7,
+					"define" : "BOOST_ASIO_DISABLE_BOOST_ARRAY=1"
+				},
+				{
+					"backtrace" : 8,
+					"define" : "BOOST_ASIO_DISABLE_BOOST_BIND=1"
+				},
+				{
+					"backtrace" : 9,
+					"define" : "BOOST_ASIO_DISABLE_BOOST_DATE_TIME=1"
+				},
+				{
+					"backtrace" : 10,
+					"define" : "BOOST_ASIO_DISABLE_BOOST_REGEX=1"
+				},
+				{
+					"backtrace" : 11,
+					"define" : "BOOST_ASIO_NO_DEPRECATED=1"
+				},
+				{
+					"backtrace" : 12,
+					"define" : "BOOST_ASIO_SEPARATE_COMPILATION=1"
+				},
+				{
+					"backtrace" : 13,
+					"define" : "BOOST_BEAST_ALLOW_DEPRECATED"
+				},
+				{
+					"backtrace" : 14,
+					"define" : "BOOST_BEAST_SEPARATE_COMPILATION=1"
+				},
+				{
+					"backtrace" : 15,
+					"define" : "BOOST_BEAST_TESTS"
+				},
+				{
+					"backtrace" : 16,
+					"define" : "BOOST_COROUTINES_NO_DEPRECATION_WARNING=1"
+				},
+				{
+					"backtrace" : 17,
+					"define" : "_CRT_SECURE_NO_WARNINGS=1"
+				},
+				{
+					"backtrace" : 17,
+					"define" : "_SCL_SECURE_NO_WARNINGS=1"
+				},
+				{
+					"backtrace" : 17,
+					"define" : "_SILENCE_CXX17_ADAPTOR_TYPEDEFS_DEPRECATION_WARNING"
+				},
+				{
+					"backtrace" : 17,
+					"define" : "_SILENCE_CXX17_ALLOCATOR_VOID_DEPRECATION_WARNING"
+				},
+				{
+					"backtrace" : 17,
+					"define" : "_WIN32_WINNT=0x0601"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 18,
+					"path" : "C:/weasel/deps/boost_1_76_0/libs/beast/include"
+				},
+				{
+					"backtrace" : 19,
+					"path" : "C:/weasel/deps/boost_1_76_0"
+				},
+				{
+					"backtrace" : 20,
+					"path" : "C:/weasel/deps/boost_1_76_0/libs/beast/."
+				},
+				{
+					"backtrace" : 22,
+					"path" : "C:/weasel/deps/boost_1_76_0/libs/beast/test/./extern"
+				},
+				{
+					"backtrace" : 23,
+					"path" : "C:/weasel/deps/boost_1_76_0/libs/beast/test/./extras/include"
+				}
+			],
+			"language" : "CXX",
+			"sourceIndexes" : 
+			[
+				8,
+				9,
+				10,
+				11,
+				12,
+				13
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 4,
+			"id" : "lib-asio::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "lib-asio-ssl::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "lib-test::@36f028580bb02cc8272a"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "lib-beast::@6890427a1f51a3e7e1df"
+		}
+	],
+	"folder" : 
+	{
+		"name" : "tests"
+	},
+	"id" : "tests-beast::@0e07be4e48d41d861767",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /MDd /Zi /Ob0 /Od /RTC1 /MTd",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "/machine:x64 /SAFESEH:NO /debug /INCREMENTAL /subsystem:console",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "-LIBPATH:C:\\weasel\\deps\\boost_1_76_0\\stage\\lib",
+				"role" : "libraryPath"
+			},
+			{
+				"backtrace" : 1,
+				"fragment" : "bcrypt.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "..\\..\\lib-asio.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "..\\..\\lib-asio-ssl.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "..\\..\\lib-beast.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "..\\lib-test.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
+				"fragment" : "..\\..\\lib-asio.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 1,
+				"fragment" : "bcrypt.lib",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "tests-beast",
+	"nameOnDisk" : "tests-beast.exe",
+	"paths" : 
+	{
+		"build" : "test/beast",
+		"source" : "test/beast"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "beast",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "beast\\test",
+			"sourceIndexes" : 
+			[
+				1,
+				2,
+				3,
+				4,
+				5,
+				6
+			]
+		},
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				7,
+				8,
+				9,
+				10,
+				11,
+				12,
+				13
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"path" : "test/extras/include/boost/beast/doc_debug.hpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "test/extras/include/boost/beast/test/fuzz.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "test/extras/include/boost/beast/test/sig_wait.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "test/extras/include/boost/beast/test/test_allocator.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "test/extras/include/boost/beast/test/throughput.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "test/extras/include/boost/beast/test/websocket.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "test/extras/include/boost/beast/test/yield_to.hpp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"path" : "test/beast/Jamfile",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/beast/core.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/beast/http.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/beast/ssl.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/beast/version.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/beast/websocket.cpp",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "test/beast/zlib.cpp",
+			"sourceGroupIndex" : 2
+		}
+	],
+	"type" : "EXECUTABLE"
+}

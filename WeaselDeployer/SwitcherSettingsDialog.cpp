@@ -147,7 +147,7 @@ LRESULT SwitcherSettingsDialog::OnOK(WORD, WORD code, HWND, BOOL&) {
 			}
 		}
 		if (count == 0) {
-			MessageBox(_T("至少要選用一項吧。"), _T("小白T9不是這般用法"), MB_OK | MB_ICONEXCLAMATION);
+			MessageBox(_T("至少要选用一项吧。"), _T("小白T9不是这般用法"), MB_OK | MB_ICONEXCLAMATION);
 			delete selection;
 			return 0;
 		}

@@ -4,9 +4,9 @@
 schema:
   schema_id: xiaobai_simp
   name: 小白T9输入法
-  version: "20200601"
+  version: "2022.05.09"
   author:
-    - 寅类小白 <xiaobai9978@gmail.com>
+    - 寅类小白 <i@xiaobai.pro>
   description: |
     小白T9输入法。
   dependencies:
@@ -44,13 +44,16 @@ engine:
     - punct_translator
     - table_translator@custom_phrase
     - script_translator
+    - lua_translator@time_translator
   filters:
     - simplifier
     - uniquifier
+#    - lua_filter@single_char_first_filter
+
 
 speller:
   alphabet: 0123456789   # 用于编码的可输入字符
-  delimiter: "7"
+  #delimiter: "7"
   algebra:
     - erase/^xx$/
     - abbrev/^([a-z]).+$/$1/
@@ -65,6 +68,95 @@ speller:
     - derive/ong$/on/
     - derive/ao$/oa/
     - derive/([iu])a(o|ng?)$/a$1$2/
+    - derive/^(\w+);(\w+)$/$1$2/
+    - derive/^(\w+);\w+$/$1/
+    - erase/^;.*$/
+
+    #- derive/^([a-z]{1})([a-z])$/$1/
+    
+    # 模糊音定义
+    # 需要哪组就删去行首的 # 号，单双向任选
+    #- derive/^([zcs])h/$1/             # zh, ch, sh => z, c, s
+    #- derive/^([zcs])([^h])/$1h$2/     # z, c, s => zh, ch, sh
+
+    #- derive/^n/l/                     # n => l
+    #- derive/^l/n/                     # l => n
+
+    # 这两组一般是单向的
+    #- derive/^r/l/                     # r => l
+
+    #- derive/^ren/yin/                 # ren => yin, reng => ying
+    #- derive/^r/y/                     # r => y
+
+    # 下面 hu <=> f 这组写法複杂一些，分情况讨论
+    #- derive/^hu$/fu/                  # hu => fu
+    #- derive/^hong$/feng/              # hong => feng
+    #- derive/^hu([in])$/fe$1/          # hui => fei, hun => fen
+    #- derive/^hu([ao])/f$1/            # hua => fa, ...
+
+    #- derive/^fu$/hu/                  # fu => hu
+    #- derive/^feng$/hong/              # feng => hong
+    #- derive/^fe([in])$/hu$1/          # fei => hui, fen => hun
+    #- derive/^f([ao])/hu$1/            # fa => hua, ...
+
+    # 韵母部份
+    #- derive/^([bpmf])eng$/$1ong/      # meng = mong, ...
+    #- derive/([ei])n$/$1ng/            # en => eng, in => ing
+    #- derive/([ei])ng$/$1n/            # eng => en, ing => in
+    #- derive/^un/iong/                 # un => iong
+    #- derive/^iong/un/                 # iong => un
+    #- derive/^an/ang/                  # an => ang
+    #- derive/^ian/iang/                # ian => iang
+    #- derive/^uan/uang/                # uan => uang
+
+    # 样例足够了，其他请自己总结……
+
+    # 反模糊音？
+    # 谁说方言没有普通话精确、有模糊音，就能有反模糊音。
+    # 示例爲分尖团的中原官话：
+    #- derive/^ji$/zii/   # 在设计者安排下鸠佔鹊巢，尖音i只好双写了
+    #- derive/^qi$/cii/
+    #- derive/^xi$/sii/
+    #- derive/^ji/zi/
+    #- derive/^qi/ci/
+    #- derive/^xi/si/
+    #- derive/^ju/zv/
+    #- derive/^qu/cv/
+    #- derive/^xu/sv/
+    # 韵母部份，只能从大面上覆盖
+    #- derive/^([bpm])o$/$1eh/          # bo => beh, ...
+    #- derive/(^|[dtnlgkhzcs]h?)e$/$1eh/  # ge => geh, se => sheh, ...
+    #- derive/^([gkh])uo$/$1ue/         # guo => gue, ...
+    #- derive/^([gkh])e$/$1uo/          # he => huo, ...
+    #- derive/([uv])e$/$1o/             # jue => juo, lve => lvo, ...
+    #- derive/^fei$/fi/                 # fei => fi
+    #- derive/^wei$/vi/                 # wei => vi
+    #- derive/^([nl])ei$/$1ui/          # nei => nui, lei => lui
+    #- derive/^([nlzcs])un$/$1vn/       # lun => lvn, zun => zvn, ...
+    #- derive/^([nlzcs])ong$/$1iong/    # long => liong, song => siong, ...
+    # 这个办法虽从拼写上做出了区分，然而受词典制约，候选字仍是混的。
+    # 只有真正的方音输入方案纔能做到！但「反模糊音」这个玩法快速而有效！
+
+    # 模糊音定义先于简拼定义，方可令简拼支持以上模糊音
+    #- abbrev/^([a-z]).+$/$1/           # 简拼（首字母）
+    #- abbrev/^([zcs]h).+$/$1/          # 简拼（zh, ch, sh）
+
+    # 以下是一组容错拼写，《汉语拼音》方案以前者爲正
+    #- derive/^([nl])ve$/$1ue/          # nve = nue, lve = lue
+    #- derive/^([jqxy])u/$1v/           # ju = jv,
+    #- derive/un$/uen/                  # gun = guen,
+    #- derive/ui$/uei/                  # gui = guei,
+    #- derive/iu$/iou/                  # jiu = jiou,
+
+    # 自动纠正一些常见的按键错误
+    #- derive/([aeiou])ng$/$1gn/        # dagn => dang
+    #- derive/([dtngkhrzcs])o(u|ng)$/$1o/  # zho => zhong|zhou
+    #- derive/ong$/on/                  # zhonguo => zhong guo
+    #- derive/ao$/oa/                   # hoa => hao
+    #- derive/([iu])a(o|ng?)$/a$1$2/    # tain => tian
+
+
+
 
     - xform/^a/8/
     - xform/^b/8/
@@ -92,7 +184,8 @@ speller:
     - xform/^x/3/
     - xform/^y/3/
     - xform/^z/3/
-
+    - xform/^;/7/
+    
     - xform/a/8/
     - xform/b/8/
     - xform/c/8/
@@ -119,6 +212,16 @@ speller:
     - xform/x/3/
     - xform/y/3/
     - xform/z/3/
+    - xform/;/7/
+    
+
+
+
+
+
+
+
+
 
 
 translator:
@@ -129,7 +232,19 @@ translator:
     - xform/7/'/
   comment_format:
     - xform/7/'/
-
+    
+    # 开启自动造词相关设置，将下面四项都改为 true
+  # enable_user_dict: true
+  # enable_sentence: true
+  # enable_encoder: true
+  # encode_commit_history: true
+  
+  # max_phrase_length: 6
+  # user_dict: user                              # 用户词典名
+  # db_class: tabledb
+  # disable_user_dict_for_patterns:       # 不需要录入用户词典的编码
+    # - "^z.*$"
+  
 custom_phrase:
   dictionary: ""
   user_dict: custom_phrase
@@ -156,18 +271,28 @@ key_binder:
     - {accept: KP_4, send: 4, when: always}
     - {accept: KP_5, send: 5, when: always}
     - {accept: KP_6, send: 6, when: always}
-    - {accept: KP_7, send: 7,  when: always}
+    - {accept: KP_7, send: 7, when: always}
     - {accept: KP_8, send: 8, when: always}
     - {accept: KP_9, send: 9, when: always}
 
-    - {accept: KP_Subtract, send: BackSpace, when: has_menu}
+
+    #把大键盘数字映射成小键盘数字
+    - {accept: 1, send: KP_1, when: always}
+    - {accept: 2, send: KP_2, when: always}
+    - {accept: 3, send: KP_3, when: always}
+    - {accept: 4, send: KP_4, when: always}
+    - {accept: 5, send: KP_5, when: always}
+    - {accept: 6, send: KP_6, when: always}
+    - {accept: 7, send: KP_7, when: always}
+    - {accept: 8, send: KP_8, when: always}
+    - {accept: 9, send: KP_9, when: always}
+
+
     - {accept: KP_Divide, send: Page_Up, when: has_menu}
     - {accept: KP_Multiply, send: Page_Down, when: has_menu}
     - {accept: KP_Subtract, send: Up, when: has_menu}
     - {accept: KP_Add, send: Down, when: has_menu}
-
+    - {accept: Left, send: Left, when: has_menu}
+    - {accept: Right, send: Right, when: has_menu}
     - {accept: KP_Decimal, send: BackSpace, when: has_menu}
-
-
-recognizer:
-  import_preset: default
+    - {accept: KP_Enter, send: Return, when: has_menu}

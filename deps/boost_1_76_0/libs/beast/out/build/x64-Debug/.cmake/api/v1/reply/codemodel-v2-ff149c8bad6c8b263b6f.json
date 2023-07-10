@@ -1,0 +1,1112 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						31
+					],
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						17,
+						18,
+						19
+					]
+				},
+				{
+					"build" : "example",
+					"childIndexes" : 
+					[
+						2,
+						5,
+						18,
+						30
+					],
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "example"
+				},
+				{
+					"build" : "example/advanced",
+					"childIndexes" : 
+					[
+						3,
+						4
+					],
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "example/advanced"
+				},
+				{
+					"build" : "example/advanced/server",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 0,
+					"source" : "example/advanced/server",
+					"targetIndexes" : 
+					[
+						0
+					]
+				},
+				{
+					"build" : "example/advanced/server-flex",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 0,
+					"source" : "example/advanced/server-flex"
+				},
+				{
+					"build" : "example/http",
+					"childIndexes" : 
+					[
+						6,
+						11
+					],
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "example/http"
+				},
+				{
+					"build" : "example/http/client",
+					"childIndexes" : 
+					[
+						7,
+						8,
+						9,
+						10
+					],
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 5,
+					"projectIndex" : 0,
+					"source" : "example/http/client"
+				},
+				{
+					"build" : "example/http/client/async",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 6,
+					"projectIndex" : 0,
+					"source" : "example/http/client/async",
+					"targetIndexes" : 
+					[
+						7
+					]
+				},
+				{
+					"build" : "example/http/client/coro",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 6,
+					"projectIndex" : 0,
+					"source" : "example/http/client/coro",
+					"targetIndexes" : 
+					[
+						8
+					]
+				},
+				{
+					"build" : "example/http/client/crawl",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 6,
+					"projectIndex" : 0,
+					"source" : "example/http/client/crawl",
+					"targetIndexes" : 
+					[
+						10
+					]
+				},
+				{
+					"build" : "example/http/client/sync",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 6,
+					"projectIndex" : 0,
+					"source" : "example/http/client/sync",
+					"targetIndexes" : 
+					[
+						9
+					]
+				},
+				{
+					"build" : "example/http/server",
+					"childIndexes" : 
+					[
+						12,
+						13,
+						14,
+						15,
+						16,
+						17
+					],
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 5,
+					"projectIndex" : 0,
+					"source" : "example/http/server"
+				},
+				{
+					"build" : "example/http/server/async",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 11,
+					"projectIndex" : 0,
+					"source" : "example/http/server/async",
+					"targetIndexes" : 
+					[
+						11
+					]
+				},
+				{
+					"build" : "example/http/server/coro",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 11,
+					"projectIndex" : 0,
+					"source" : "example/http/server/coro",
+					"targetIndexes" : 
+					[
+						12
+					]
+				},
+				{
+					"build" : "example/http/server/fast",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 11,
+					"projectIndex" : 0,
+					"source" : "example/http/server/fast",
+					"targetIndexes" : 
+					[
+						13
+					]
+				},
+				{
+					"build" : "example/http/server/small",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 11,
+					"projectIndex" : 0,
+					"source" : "example/http/server/small",
+					"targetIndexes" : 
+					[
+						14
+					]
+				},
+				{
+					"build" : "example/http/server/stackless",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 11,
+					"projectIndex" : 0,
+					"source" : "example/http/server/stackless",
+					"targetIndexes" : 
+					[
+						15
+					]
+				},
+				{
+					"build" : "example/http/server/sync",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 11,
+					"projectIndex" : 0,
+					"source" : "example/http/server/sync",
+					"targetIndexes" : 
+					[
+						16
+					]
+				},
+				{
+					"build" : "example/websocket",
+					"childIndexes" : 
+					[
+						19,
+						23
+					],
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "example/websocket"
+				},
+				{
+					"build" : "example/websocket/client",
+					"childIndexes" : 
+					[
+						20,
+						21,
+						22
+					],
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 18,
+					"projectIndex" : 0,
+					"source" : "example/websocket/client"
+				},
+				{
+					"build" : "example/websocket/client/async",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 19,
+					"projectIndex" : 0,
+					"source" : "example/websocket/client/async",
+					"targetIndexes" : 
+					[
+						31
+					]
+				},
+				{
+					"build" : "example/websocket/client/coro",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 19,
+					"projectIndex" : 0,
+					"source" : "example/websocket/client/coro",
+					"targetIndexes" : 
+					[
+						32
+					]
+				},
+				{
+					"build" : "example/websocket/client/sync",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 19,
+					"projectIndex" : 0,
+					"source" : "example/websocket/client/sync",
+					"targetIndexes" : 
+					[
+						33
+					]
+				},
+				{
+					"build" : "example/websocket/server",
+					"childIndexes" : 
+					[
+						24,
+						25,
+						26,
+						27,
+						28,
+						29
+					],
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 18,
+					"projectIndex" : 0,
+					"source" : "example/websocket/server"
+				},
+				{
+					"build" : "example/websocket/server/async",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 23,
+					"projectIndex" : 0,
+					"source" : "example/websocket/server/async",
+					"targetIndexes" : 
+					[
+						34
+					]
+				},
+				{
+					"build" : "example/websocket/server/chat-multi",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 23,
+					"projectIndex" : 0,
+					"source" : "example/websocket/server/chat-multi",
+					"targetIndexes" : 
+					[
+						30
+					]
+				},
+				{
+					"build" : "example/websocket/server/coro",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 23,
+					"projectIndex" : 0,
+					"source" : "example/websocket/server/coro",
+					"targetIndexes" : 
+					[
+						35
+					]
+				},
+				{
+					"build" : "example/websocket/server/fast",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 23,
+					"projectIndex" : 0,
+					"source" : "example/websocket/server/fast",
+					"targetIndexes" : 
+					[
+						36
+					]
+				},
+				{
+					"build" : "example/websocket/server/stackless",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 23,
+					"projectIndex" : 0,
+					"source" : "example/websocket/server/stackless",
+					"targetIndexes" : 
+					[
+						37
+					]
+				},
+				{
+					"build" : "example/websocket/server/sync",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 23,
+					"projectIndex" : 0,
+					"source" : "example/websocket/server/sync",
+					"targetIndexes" : 
+					[
+						38
+					]
+				},
+				{
+					"build" : "example/echo-op",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 1,
+					"projectIndex" : 0,
+					"source" : "example/echo-op",
+					"targetIndexes" : 
+					[
+						6
+					]
+				},
+				{
+					"build" : "test",
+					"childIndexes" : 
+					[
+						32,
+						39,
+						45,
+						46
+					],
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "test",
+					"targetIndexes" : 
+					[
+						20
+					]
+				},
+				{
+					"build" : "test/beast",
+					"childIndexes" : 
+					[
+						33,
+						34,
+						35,
+						36,
+						37,
+						38
+					],
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 31,
+					"projectIndex" : 0,
+					"source" : "test/beast",
+					"targetIndexes" : 
+					[
+						21
+					]
+				},
+				{
+					"build" : "test/beast/_experimental",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 32,
+					"projectIndex" : 0,
+					"source" : "test/beast/_experimental",
+					"targetIndexes" : 
+					[
+						22
+					]
+				},
+				{
+					"build" : "test/beast/core",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 32,
+					"projectIndex" : 0,
+					"source" : "test/beast/core",
+					"targetIndexes" : 
+					[
+						23
+					]
+				},
+				{
+					"build" : "test/beast/http",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 32,
+					"projectIndex" : 0,
+					"source" : "test/beast/http",
+					"targetIndexes" : 
+					[
+						24
+					]
+				},
+				{
+					"build" : "test/beast/ssl",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 32,
+					"projectIndex" : 0,
+					"source" : "test/beast/ssl",
+					"targetIndexes" : 
+					[
+						25
+					]
+				},
+				{
+					"build" : "test/beast/websocket",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 32,
+					"projectIndex" : 0,
+					"source" : "test/beast/websocket",
+					"targetIndexes" : 
+					[
+						26
+					]
+				},
+				{
+					"build" : "test/beast/zlib",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 32,
+					"projectIndex" : 0,
+					"source" : "test/beast/zlib",
+					"targetIndexes" : 
+					[
+						27
+					]
+				},
+				{
+					"build" : "test/bench",
+					"childIndexes" : 
+					[
+						40,
+						41,
+						42,
+						43,
+						44
+					],
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 31,
+					"projectIndex" : 0,
+					"source" : "test/bench"
+				},
+				{
+					"build" : "test/bench/buffers",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 39,
+					"projectIndex" : 0,
+					"source" : "test/bench/buffers",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "test/bench/parser",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 39,
+					"projectIndex" : 0,
+					"source" : "test/bench/parser",
+					"targetIndexes" : 
+					[
+						2
+					]
+				},
+				{
+					"build" : "test/bench/utf8_checker",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 39,
+					"projectIndex" : 0,
+					"source" : "test/bench/utf8_checker",
+					"targetIndexes" : 
+					[
+						3
+					]
+				},
+				{
+					"build" : "test/bench/wsload",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 39,
+					"projectIndex" : 0,
+					"source" : "test/bench/wsload",
+					"targetIndexes" : 
+					[
+						4
+					]
+				},
+				{
+					"build" : "test/bench/zlib",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 39,
+					"projectIndex" : 0,
+					"source" : "test/bench/zlib",
+					"targetIndexes" : 
+					[
+						5
+					]
+				},
+				{
+					"build" : "test/doc",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 31,
+					"projectIndex" : 0,
+					"source" : "test/doc",
+					"targetIndexes" : 
+					[
+						28
+					]
+				},
+				{
+					"build" : "test/example",
+					"childIndexes" : 
+					[
+						47
+					],
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 31,
+					"projectIndex" : 0,
+					"source" : "test/example"
+				},
+				{
+					"build" : "test/example/common",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5.1"
+					},
+					"parentIndex" : 46,
+					"projectIndex" : 0,
+					"source" : "test/example/common",
+					"targetIndexes" : 
+					[
+						29
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19,
+						20,
+						21,
+						22,
+						23,
+						24,
+						25,
+						26,
+						27,
+						28,
+						29,
+						30,
+						31,
+						32,
+						33,
+						34,
+						35,
+						36,
+						37,
+						38,
+						39,
+						40,
+						41,
+						42,
+						43,
+						44,
+						45,
+						46,
+						47
+					],
+					"name" : "Beast",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19,
+						20,
+						21,
+						22,
+						23,
+						24,
+						25,
+						26,
+						27,
+						28,
+						29,
+						30,
+						31,
+						32,
+						33,
+						34,
+						35,
+						36,
+						37,
+						38
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 3,
+					"id" : "advanced-server::@2f94a823e2d6ecc584c1",
+					"jsonFile" : "target-advanced-server-Debug-86ede85ec06b10d8c99e.json",
+					"name" : "advanced-server",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 40,
+					"id" : "bench-buffers::@cc040e478d390fd88d08",
+					"jsonFile" : "target-bench-buffers-Debug-3a683fa3c978b9cd3a59.json",
+					"name" : "bench-buffers",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 41,
+					"id" : "bench-parser::@aadfcec5a09dc5370553",
+					"jsonFile" : "target-bench-parser-Debug-0302e67a1533a1624f0d.json",
+					"name" : "bench-parser",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 42,
+					"id" : "bench-utf8-checker::@ebf9564203f92f283cbe",
+					"jsonFile" : "target-bench-utf8-checker-Debug-a5040b90758786db8035.json",
+					"name" : "bench-utf8-checker",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 43,
+					"id" : "bench-wsload::@c4a8e561d6fba1945406",
+					"jsonFile" : "target-bench-wsload-Debug-02fee38f4550f656e1bc.json",
+					"name" : "bench-wsload",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 44,
+					"id" : "bench-zlib::@051069e8447f45ec9c13",
+					"jsonFile" : "target-bench-zlib-Debug-c2e00a7fe73b1564e4e8.json",
+					"name" : "bench-zlib",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 30,
+					"id" : "echo-op::@dc9b3c75aea85d9cdba7",
+					"jsonFile" : "target-echo-op-Debug-cf71378dd10908077080.json",
+					"name" : "echo-op",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 7,
+					"id" : "http-client-async::@b6d39f51956014226222",
+					"jsonFile" : "target-http-client-async-Debug-aa9374bdcdf3f910e5bf.json",
+					"name" : "http-client-async",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 8,
+					"id" : "http-client-coro::@a85a6ce221316f1f29b5",
+					"jsonFile" : "target-http-client-coro-Debug-ee6ecfdea77c0637372d.json",
+					"name" : "http-client-coro",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 10,
+					"id" : "http-client-sync::@9cfce98b6967bacd1195",
+					"jsonFile" : "target-http-client-sync-Debug-6c464f23f75c10a523bb.json",
+					"name" : "http-client-sync",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 9,
+					"id" : "http-crawl::@9ae5557f2ce6b2207c59",
+					"jsonFile" : "target-http-crawl-Debug-45830d748364818f3d61.json",
+					"name" : "http-crawl",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 12,
+					"id" : "http-server-async::@837a6a4845e1e582ce89",
+					"jsonFile" : "target-http-server-async-Debug-82e34a4671b15e2c7a8c.json",
+					"name" : "http-server-async",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 13,
+					"id" : "http-server-coro::@90f9b3a97493ec436fa9",
+					"jsonFile" : "target-http-server-coro-Debug-acd32a342de114826d42.json",
+					"name" : "http-server-coro",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 14,
+					"id" : "http-server-fast::@27aac1d3c9de1d2aa686",
+					"jsonFile" : "target-http-server-fast-Debug-6a1570526a55d3c8d0dd.json",
+					"name" : "http-server-fast",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 15,
+					"id" : "http-server-small::@5db518a4d81fede51ed2",
+					"jsonFile" : "target-http-server-small-Debug-59c83aff11bc418de23b.json",
+					"name" : "http-server-small",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 16,
+					"id" : "http-server-stackless::@a067038720259e8dfaec",
+					"jsonFile" : "target-http-server-stackless-Debug-d04f65241fcd1e572861.json",
+					"name" : "http-server-stackless",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 17,
+					"id" : "http-server-sync::@fb02691da3bddc1e11f1",
+					"jsonFile" : "target-http-server-sync-Debug-729a652e87b24ac67219.json",
+					"name" : "http-server-sync",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "lib-asio::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-lib-asio-Debug-74e7904fc79a3fd957a4.json",
+					"name" : "lib-asio",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "lib-asio-ssl::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-lib-asio-ssl-Debug-f28d7419bcdaf04f05bf.json",
+					"name" : "lib-asio-ssl",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "lib-beast::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-lib-beast-Debug-63a0af61881deb53a788.json",
+					"name" : "lib-beast",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 31,
+					"id" : "lib-test::@36f028580bb02cc8272a",
+					"jsonFile" : "target-lib-test-Debug-311b188453c73835e142.json",
+					"name" : "lib-test",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 32,
+					"id" : "tests-beast::@0e07be4e48d41d861767",
+					"jsonFile" : "target-tests-beast-Debug-4503cad7c26826c4204b.json",
+					"name" : "tests-beast",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 33,
+					"id" : "tests-beast-_experimental::@35c1790819dbe507710b",
+					"jsonFile" : "target-tests-beast-_experimental-Debug-ede975b5c4f0e8115c90.json",
+					"name" : "tests-beast-_experimental",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 34,
+					"id" : "tests-beast-core::@c7f68efc15994723d06b",
+					"jsonFile" : "target-tests-beast-core-Debug-cac826e5e1eaf12f7a66.json",
+					"name" : "tests-beast-core",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 35,
+					"id" : "tests-beast-http::@bfa7cddec3e57a68c1cb",
+					"jsonFile" : "target-tests-beast-http-Debug-975478d8f6009560fe64.json",
+					"name" : "tests-beast-http",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 36,
+					"id" : "tests-beast-ssl::@520c1bb3a89d0ac9f092",
+					"jsonFile" : "target-tests-beast-ssl-Debug-cdca367ea0dc19c1a9f9.json",
+					"name" : "tests-beast-ssl",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 37,
+					"id" : "tests-beast-websocket::@207eb827c2f3dff7890e",
+					"jsonFile" : "target-tests-beast-websocket-Debug-519fb961e9db3780455e.json",
+					"name" : "tests-beast-websocket",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 38,
+					"id" : "tests-beast-zlib::@fe9d358174f76e53dced",
+					"jsonFile" : "target-tests-beast-zlib-Debug-e58e8ef0fd2ba9c27020.json",
+					"name" : "tests-beast-zlib",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 45,
+					"id" : "tests-doc::@7cc34a2d2b25573f03c4",
+					"jsonFile" : "target-tests-doc-Debug-f77934b649c96b4521ae.json",
+					"name" : "tests-doc",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 47,
+					"id" : "tests-example-common::@2b2558592ecad24bb793",
+					"jsonFile" : "target-tests-example-common-Debug-7b4ac2bab539f2ecab29.json",
+					"name" : "tests-example-common",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 25,
+					"id" : "websocket-chat-multi::@4e33d0309864701b4597",
+					"jsonFile" : "target-websocket-chat-multi-Debug-bf23c382efba2b8dfbb9.json",
+					"name" : "websocket-chat-multi",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 20,
+					"id" : "websocket-client-async::@aa3b264215944dd3edcc",
+					"jsonFile" : "target-websocket-client-async-Debug-04b00e9488d7405e2d59.json",
+					"name" : "websocket-client-async",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 21,
+					"id" : "websocket-client-coro::@6efb4896117a28fdcc71",
+					"jsonFile" : "target-websocket-client-coro-Debug-27b853c351259e5bb70c.json",
+					"name" : "websocket-client-coro",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 22,
+					"id" : "websocket-client-sync::@08001aa5a4960cbd5c32",
+					"jsonFile" : "target-websocket-client-sync-Debug-d741dbe2bbbcbd6c56af.json",
+					"name" : "websocket-client-sync",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 24,
+					"id" : "websocket-server-async::@ac6d2a0b943f12559070",
+					"jsonFile" : "target-websocket-server-async-Debug-bced1bc5ff5c07cf5e86.json",
+					"name" : "websocket-server-async",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 26,
+					"id" : "websocket-server-coro::@fb0a9ac14e2655831e1c",
+					"jsonFile" : "target-websocket-server-coro-Debug-fd4f4dae68e2cfbacbd5.json",
+					"name" : "websocket-server-coro",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 27,
+					"id" : "websocket-server-fast::@01c4bb0d60a9861cee63",
+					"jsonFile" : "target-websocket-server-fast-Debug-85c632932f21f089ff5f.json",
+					"name" : "websocket-server-fast",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 28,
+					"id" : "websocket-server-stackless::@c5ccbdb2a36ba9964d89",
+					"jsonFile" : "target-websocket-server-stackless-Debug-a20386799ec7ed006207.json",
+					"name" : "websocket-server-stackless",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 29,
+					"id" : "websocket-server-sync::@1e1ac00353cd7c91ce98",
+					"jsonFile" : "target-websocket-server-sync-Debug-4cdbe7c2c4d17f544f5e.json",
+					"name" : "websocket-server-sync",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/weasel/deps/boost_1_76_0/libs/beast/out/build/x64-Debug",
+		"source" : "C:/weasel/deps/boost_1_76_0/libs/beast"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 2
+	}
+}

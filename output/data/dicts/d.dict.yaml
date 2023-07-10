@@ -1,0 +1,240 @@
+# Rime dictionary
+# encoding: utf-8
+#
+# https://github.com/iDvel/rime-settings/
+#
+
+---
+name: d
+version: "2021-04-29"
+sort: by_weight
+vocabulary: essay-zh-hans
+...
+# 平时顺手补充一些词汇
+
+# [英文、中英]，补充到 melt_eng 词典中，支持大小写，如「python」→「Python」
+# [符号]，补充到 `opencc/custom_symbols.txt` 中，支持超级简拼，如「hsd」→「华氏度 ℉」
+
+冇	mao
+
+# 方便词
+儿	r
+一	i
+这	zh
+
+
+# 容错词
+什么	sheme
+为什么	weisheme
+干什么	gansheme
+因为	yiwnei
+可以	keiy
+可以	kyie
+怎么	zemne
+
+
+# 叠字
+鑫	jinjinjin
+淼	shuishuishui
+垚	tututu
+焱	huohuohuo
+壵	shishishi
+掱	shoushoushou
+舙	shesheshe
+畾	tiantiantian
+孨	zizizi
+羴	yangyangyang
+矗	zhizhizhi
+尛	xiaoxiaoxiao
+毳	maomaomao
+麤	lululu
+鱻	yuyuyu
+猋	quanquanquan
+犇	niuniuniu
+驫	mamama
+骉	mamama
+㐂	qiqiqi
+龘	longlonglong
+# 其他拼字
+蟊	maochongchong
+飙	quanquanquanfeng
+飚	fenghuohuohuo
+
+
+# 扩展词语
+朙月拼音	mingyuepinyin
+放铳	fang chong
+荣和	rong hu
+天和	tian hu
+地和	di hu
+黯黮	an dan
+昭明	zhao ming
+瞬光斩黯黮	shun guang zhan an dan
+昭明破晦夜	zhao ming po hui ye
+锟斤拷	kun jin kao
+烫烫烫	tang tang tang
+锘锘锘	nuo nuo nuo
+屯屯屯	tun tun tun
+嘚瑟	de se
+帷幄	wei wo
+角色	jue se
+角色	jiao se
+哔哩	bi li
+黄栌	huang lu
+伽蓝	jia lan
+尼泊尔	ni bo er
+罢黜	ba chu
+吁气	xu qi
+家雀	jia qiao
+家雀儿	jia qiao er
+吗啡	ma fei
+永葆	yong bao
+黄鹂	huang li
+不可小觑	bu ke xiao qu
+咋舌	ze she
+咋呼	zha	hu
+磅礴	pang bo
+通臂拳	tong bei quan
+扁舟	pian zhou
+屏息	bing xi
+屏住	bing zhu
+迫击炮	pai ji pao
+朴刀	po dao
+滂沱	pang tuo
+模子	mu zi
+夏侯惇	xia hou dun
+大王	dai wang
+饼铛	bing cheng
+叨咕	dao gu
+建都	jian du
+镊子	nie zi
+很拗	hen niu
+弄堂	long tang
+落枕	lao zhen
+关卡	guan qia
+发卡	fa qia
+卡在	qia zai
+卡壳	qia ke
+恫吓	dong he
+降服	xiang fu
+亲家	qing jia
+扎辫子	za bian zi
+择菜	zhai cai
+禅让	shan rang
+嘎吱	ga zhi
+吱吱	zi zi
+吱吱	zhi zhi
+逶蛇	wei yi
+尉迟	yu chi
+啰唆	luo suo
+啰啰唆唆	luo luo suo suo
+啰哩啰唆	luo li luo suo
+锵锵	qiang qiang
+泱泱	yang yang
+馥郁	fu yu
+焙炒	bei chao
+焙烧	bei shao
+锦鲤	jin li
+降将	xiang jiang
+想起那	xiangqina
+扑哧	pu chi
+优渥	you wo
+说服	shui fu
+雾都	wu du
+参参差差	cen cen ci ci
+叨教	tao jiao
+扈家庄	hu jia zhuang
+钢鞭锏	gang bian jian
+清倌	qing guan
+坍圮	tan pi
+已臻化境	yi zhen hua jing
+蟊虫	mao chong
+世间安得双全法	shi jian an de shuang quan fa
+不负如来不负卿	bu fu ru lai bu fu qing
+吓阻	he zu
+背嵬	bei wei
+趟浑水	tang hun shui
+趟地	tang di
+趟水	tang shui
+兔起鹘落	tu qi hu luo
+低伏	di fu
+行拂乱其所为	xing fu luan qi suo wei
+半藏	ban zang
+奥丽莎	ao li sha
+西格玛	xi ge ma
+查莉娅	cha li ya
+巴蒂斯特	ba di si te
+布丽吉塔	bu li ji ta
+卢西奥	lu xi ao
+莫伊拉	mo yi la
+禅雅塔	chan ya ta
+瓦罐不离井上破	wa guan bu li jing shang po
+将军难免阵前亡	jiang jun nan mian zhen qian wang
+刑讯	xing xun
+锵的	qiang de
+锵的一声	qiang de yi sheng
+夺嫡	duo di
+完颜宗弼	wan yan zong bi
+宗弼	zong bi
+周雍	zhou yong
+厮斗	si dou
+挽狂澜于既倒	wan kuang lan yu ji dao
+扶大厦之将倾	fu da sha zhi jiang qing
+吕颐浩	lv yi hao
+上德不德	shang de bu de
+是以有德	shi yi you de
+下德不失德	xia de bu shi de
+是以无德	shi yi wu de
+上德无为而无以不为	shang de wu wei er wu yi bu wei
+下德为之而有以不为	xia de wei zhi er you yi bu wei
+上仁为之而无为	shang ren wei zhi er wu wei
+上义为之而有以为	shang yi wei zhi er you yi wei
+上礼为之而莫之应	shang li wei zhi er mo zhi ying
+则攘臂而扔之	ze rang bi er reng zhi
+攘臂而扔之	rang bi er reng zhi
+故失道而后德	gu shi dao er hou de
+失道而后德	shi dao er hou de
+失德而后仁	shi de er hou ren
+失仁而后义	shi li er hou yi
+失义而后礼	shi yi er hou li
+夫礼者	fu li zhe
+忠信之薄
+而乱之首	er luan zhi shou
+前识者
+道之华	dao zhi hua
+而愚之始	eryuzhishi
+是以大丈夫处其厚而不居其薄
+大丈夫处其厚而不居其薄
+处其厚而不居其薄
+处其实而不居其华	chu qi shi er bu ju qi hua
+故去彼取此	gu qu bi qu ci
+去彼取此	qu bi qu ci
+君子之泽	jun zi zhi ze
+五世而斩	wu shi er zhan
+矫枉必须过正	jiao wang bi xu guo zheng
+设想	she xiang
+雾霾	wu mai
+枢密	shu mi
+研表究明	yan biao jiu ming
+细思极恐	xi si ji kong
+细思恐极	xi si kong ji
+拉夫德鲁
+多弗朗明哥
+乌托邦
+高斯磁
+高斯磁定律
+姚期智
+尼弗迦德
+佛古斯
+篡位者
+白色火焰
+佛古斯
+叶奈法
+特莉丝
+梅利葛德
+欧米伽
+欧米伽红宝石
+霸凌
+田尻智
+杜嘉班纳
+噗呲

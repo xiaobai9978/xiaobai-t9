@@ -1,0 +1,55 @@
+# Rime dictionary
+# encoding: utf-8
+#
+# https://github.com/iDvel/rime-settings/
+#
+
+---
+name: punctuation
+version: "2021-04-29"
+sort: by_weight
+vocabulary: essay-zh-hans
+...
+
+，	7douhao
+。	7juhao
+？	7wenhao
+！	7gantanhao
+：	7maohao
+；	7fenhao
+‘	7yinhao
+’	7yinhao
+—	7pozhehao
+（	7kuohaozuo
+）	7kuohaoyou
+《	7shuminghaozuo
+》	7shuminghaoyou
+“	7shuangyinhao
+”	7shuangyinhao
+@	7quana
+^	7shangjianhao
+.	7juhao
+,	7douhao
+、	7dunhao
+:	7maohao
+?	7wenhao
+!	7gantanhao
+;	7fenhao
+'	7yinhao
+"	7shuangyinhao
+_	7xiahuaxian
++	7jiahao
+‐	7jianhao
+×	7chenghao
+÷	7chuhao
+\	7xiexian
+|	7shuxian
+∕	7fanxiexian
+(	7kuohaozuo
+)	7kuohaoyou
+#	7jinghao
+&	7and
+*	7xinghao
+$	7meiyuan
+%	7baifenhao
+￥	7renminbi

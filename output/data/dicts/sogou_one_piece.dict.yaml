@@ -1,0 +1,1377 @@
+# Rime dictionary
+# encoding: utf-8
+#
+# 海贼王，来源：https://pinyin.sogou.com/dict/detail/index/51436
+#
+
+---
+name: sogou_one_piece
+version: "2017-05-08"
+sort: by_weight
+vocabulary: essay-zh-hans
+...
+
+阿巴罗皮萨罗	a ba luo pi sa luo	1
+阿碧斯	a bi si	1
+阿比亚塔	a bi ya ta	1
+阿布撒罗姆	a bu sa luo mu	1
+阿布萨罗姆	a bu sa luo mu	1
+阿鹤	a he	1
+阿健	a jian	1
+阿键	a jian	1
+阿拉巴斯担王国公主	a la ba si dan wang guo gong zhu	1
+阿拉巴斯坦	a la ba si tan	1
+阿拉巴斯坦篇	a la ba si tan pian	1
+阿龙	a long	1
+阿龙海贼团	a long hai zei tuan	1
+阿普	a pu	1
+阿山	a shan	1
+阿修罗	a xiu luo	1
+爱德华纽盖特	ai de hua niu gai te	1
+爱德华纽歌特	ai de hua niu ge te	1
+爱德华纽捷特空岛	ai de hua niu jie te kong dao	1
+艾尔巴夫	ai er ba fu	1
+哀股	ai gu	1
+艾力克	ai li ke	1
+艾门	ai men	1
+艾尼路	ai ni lu	1
+艾涅尔	ai nie er	1
+爱枪拉丝	ai qiang la si	1
+爱纱	ai sha	1
+爱莎	ai sha	1
+艾斯	ai si	1
+艾斯巴古	ai si ba gu	1
+艾索普	ai suo pu	1
+安布里奥	an bu li ao	1
+安布里奥伊万科夫	an bu li ao yi wan ke fu	1
+暗雷	an lei	1
+奥比特号见习厨师	ao bi te hao jian xi chu shi	1
+奥哈拉	ao ha la	1
+奥隆布斯	ao long bu si	1
+奥姆	ao mu	1
+奥兹	ao zi	1
+靶靶果实	ba ba guo shi	1
+八重垣剣	ba chong yuan jian	1
+巴法罗	ba fa luo	1
+霸国	ba guo	1
+巴基	ba ji	1
+巴基尔霍金斯	ba ji er huo jin si	1
+巴基海贼团	ba ji hai zei tuan	1
+巴基海贼团参谋长	ba ji hai zei tuan can mou zhang	1
+巴克斯乔特	ba ke si qiao te	1
+巴拉	ba la	1
+巴拉巴特尔	ba la ba te er	1
+巴拉蒂二厨	ba la di er chu	1
+巴鲁巴鲁萨	ba lu ba lu sa	1
+巴洛克工作社	ba luo ke gong zuo she	1
+巴那罗岛	ba na luo dao	1
+巴其	ba qi	1
+八岐大蛇	ba qi da she	1
+巴沙洛缪罗伯茨	ba sha luo miu luo bo ci	1
+巴索洛米熊	ba suo luo mi xiong	1
+巴索罗米熊	ba suo luo mi xiong	1
+巴索罗缪大熊	ba suo luo miu da xiong	1
+巴托洛米奥	ba tuo luo mi ao	1
+巴托洛米奥海贼团	ba tuo luo mi ao hai zei tuan	1
+霸王龙啃噬	ba wang long ken shi	1
+霸王色	ba wang se	1
+霸王色霸气	ba wang se ba qi	1
+八仔	ba zai	1
+八爪鱼人	ba zhua yu ren	1
+巴兹尔霍金斯	ba zi er huo jin si	1
+百八烦恼凤	bai ba fan nao feng	1
+百八烦恼风	bai ba fan nao feng	1
+白胡子	bai hu zi	1
+白胡子海贼团	bai hu zi hai zei tuan	1
+百花缭乱	bai hua liao luan	1
+白雷	bai lei	1
+白猎	bai lie	1
+白马卡文迪许	bai ma ka wen di xu	1
+白色城镇	bai se cheng zhen	1
+白色疾风	bai se ji feng	1
+百兽之王	bai shou zhi wang	1
+白铁海贼团	bai tie hai zei tuan	1
+百万贝里	bai wan bei li	1
+白星	bai xing	1
+白星公主	bai xing gong zhu	1
+班巴克孟	ban ba ke meng	1
+班贝克曼	ban bei ke man	1
+斑纹猫	ban wen mao	1
+棒术	bang shu	1
+暴君巴索罗缪熊	bao jun ba suo luo miu xiong	1
+剥皮作业	bao pi zuo ye	1
+宝箱人	bao xiang ren	1
+宝箱人艾门	bao xiang ren ai men	1
+爆炸果实	bao zha guo shi	1
+贝尔	bei er	1
+贝尔梅尔	bei er mei er	1
+贝尔梅尔橘子园管理人	bei er mei er ju zi yuan guan li ren	1
+北方蓝	bei fang lan	1
+北海	bei hai	1
+贝加庞克	bei jia pang ke	1
+贝克曼	bei ke man	1
+贝拉密	bei la mi	1
+贝拉米	bei la mi	1
+贝拉米海贼团	bei la mi hai zei tuan	1
+贝里	bei li	1
+贝鲁梅伯	bei lu mei bo	1
+贝玛尔	bei ma er	1
+背肉	bei rou	1
+奔牛突进	ben niu tu jin	1
+比比	bi bi	1
+碧宾	bi bin	1
+比尔	bi er	1
+鼻歌三丁燕尾斩	bi ge san ding yan wei zhan	1
+比克路斯	bi ke lu si	1
+比隆阿摩托车	bi long a mo tuo che	1
+比拿美	bi na mei	1
+鞭竹林	bian zhu lin	1
+宾碧克曼	bin bi ke man	1
+宾治	bin zhi	1
+冰冻果实青雉	bing dong guo shi qing zhi	1
+冰火岛	bing huo dao	1
+冰人奥兹	bing ren ao zi	1
+冰山	bing shan	1
+冰山群	bing shan qun	1
+冰之果实	bing zhi guo shi	1
+波动肘击	bo dong zhou ji	1
+波尔蒂	bo er di	1
+博尔特遭飞铲	bo er te zao fei chan	1
+波尔雪	bo er xue	1
+波古丹	bo gu dan	1
+波克慕斯	bo ke mu si	1
+波鲁萨利诺	bo lu sa li nuo	1
+菠萝岛	bo luo dao	1
+波妮海贼团	bo ni hai zei tuan	1
+波琪	bo qi	1
+般若	bo re	1
+波塞冬	bo sai dong	1
+波特卡斯艾斯	bo te ka si ai si	1
+博雅汉库克	bo ya han ku ke	1
+波雅汉库克	bo ya han ku ke	1
+波雅玛丽哥尔德	bo ya ma li ge er de	1
+波雅桑达索尼亚	bo ya sang da suo ni ya	1
+部队爪鸭部队	bu dui zhao ya bu dui	1
+布拉哈姆	bu la ha mu	1
+布拉曼克	bu la man ke	1
+布兰纽	bu lan niu	1
+布兰奴	bu lan nu	1
+布利布利	bu li bu li	1
+布林布林	bu lin bu lin	1
+布鲁克	bu lu ke	1
+布鲁诺	bu lu nuo	1
+布论海姆	bu lun hai mu	1
+布洛基	bu luo ji	1
+不死鸟	bu si niao	1
+不死鸟果实	bu si niao guo shi	1
+不死鸟果实马尔科	bu si niao guo shi ma er ke	1
+不死鸟马尔科	bu si niao ma er ke	1
+不太甜的蛋糕	bu tai tian de dan gao	1
+布托路	bu tuo lu	1
+布咸	bu xian	1
+布治	bu zhi	1
+彩虹色的雾	cai hong se de wu	1
+苍天骑士	cang tian qi shi	1
+苍天术士	cang tian shu shi	1
+草帽	cao mao	1
+草帽海贼团	cao mao hai zei tuan	1
+草帽海贼团厨师	cao mao hai zei tuan chu shi	1
+草帽海贼团船医	cao mao hai zei tuan chuan yi	1
+草帽海贼团船长	cao mao hai zei tuan chuan zhang	1
+草帽海贼团航海士	cao mao hai zei tuan hang hai shi	1
+草帽海贼团剑士	cao mao hai zei tuan jian shi	1
+草帽海贼团狙击手	cao mao hai zei tuan ju ji shou	1
+草帽海贼团考古学家	cao mao hai zei tuan kao gu xue jia	1
+草帽路飞	cao mao lu fei	1
+草帽小子	cao mao xiao zi	1
+草那芸之大刀	cao na yun zhi da dao	1
+层层叠炮	ceng ceng die pao	1
+查宝	cha bao	1
+茶胡子	cha hu zi	1
+茶胡子海贼团	cha hu zi hai zei tuan	1
+长颈鹿炮台	chang jing lu pao tai	1
+长链岛	chang lian dao	1
+长枪	chang qiang	1
+长手族	chang shou zu	1
+长腿族	chang tui zu	1
+超击绞鞭	chao ji jiao bian	1
+超级战舰	chao ji zhan jian	1
+超巨大火鸟星	chao ju da huo niao xing	1
+超人系果实	chao ren xi guo shi	1
+超新星	chao xin xing	1
+超新星十一人	chao xin xing shi yi ren	1
+超音速	chao yin su	1
+超重双节棍	chao zhong shuang jie gun	1
+车轮果实	che lun guo shi	1
+车轮果实夏林库尔	che lun guo shi xia lin ku er	1
+陈婉衡	chen wan heng	1
+城堡果实卡彭贝基	cheng bao guo shi ka peng bei ji	1
+橙子镇	cheng zi zhen	1
+迟钝果实	chi dun guo shi	1
+迟钝果实福克西	chi dun guo shi fu ke xi	1
+赤鬼布洛基	chi gui bu luo ji	1
+迟缓果实	chi huan guo shi	1
+吃辣城市排行	chi la cheng shi pai hang	1
+赤魔鞭	chi mo bian	1
+赤犬	chi quan	1
+赤足卓夫	chi zu zhuo fu	1
+冲击波	chong ji bo	1
+处刑人罗斯奥	chu xing ren luo si ao	1
+传教士冈比亚	chuan jiao shi gang bi ya	1
+吹牛大王	chui niu da wang	1
+春岛	chun dao	1
+春人	chun ren	1
+磁场果实	ci chang guo shi	1
+刺蝶	ci die	1
+磁鼓岛	ci gu dao	1
+磁鼓王国	ci gu wang guo	1
+催眠曲轮舞	cui mian qu lun wu	1
+催眠师	cui mian shi	1
+催眠师赞高	cui mian shi zan gao	1
+催眠术	cui mian shu	1
+大白鲨鱼人	da bai sha yu ren	1
+打兵	da bing	1
+大残	da can	1
+大辰撼	da chen han	1
+大锤	da chui	1
+达迪	da di	1
+大兜海贼团	da dou hai zei tuan	1
+大佛斩	da fo zhan	1
+大佛战国	da fo zhan guo	1
+大海贼时代	da hai zei shi dai	1
+大和民族	da he min zu	1
+大击剑	da ji jian	1
+达伽马	da jia ma	1
+大将	da jiang	1
+大酒之巴斯科休特	da jiu zhi ba si ke xiu te	1
+打捞王	da lao wang	1
+打捞王人猿	da lao wang ren yuan	1
+大山	da shan	1
+达斯琪	da si qi	1
+大涡蜘蛛	da wo zhi zhu	1
+达兹波尼斯	da zi bo ni si	1
+蛋蛋男爵	dan dan nan jue	1
+蛋糕岛	dan gao dao	1
+丹马罗布拉克	dan ma luo bu la ke	1
+道化	dao hua	1
+刀狼流	dao lang liu	1
+德雷克	de lei ke	1
+德雷克海贼团	de lei ke hai zei tuan	1
+德雷斯罗萨岛	de lei si luo sa dao	1
+德雷斯罗萨国王	de lei si luo sa guo wang	1
+德雷斯罗萨原军队长	de lei si luo sa yuan jun dui chang	1
+德鲁通	de lu tong	1
+登楼	deng lou	1
+迪巴鲁	di ba lu	1
+迪布	di bu	1
+蒂菈歌妲	di la ge da	1
+狄拉加特	di la jia te	1
+帝奇	di qi	1
+第四番队队长	di si fan dui dui zhang	1
+迪亚曼蒂	di ya man di	1
+迪亚斯	di ya si	1
+地狱之花	di yu zhi hua	1
+电充能	dian chong neng	1
+颠倒山	dian dao shan	1
+电气泡	dian qi pao	1
+顶上战争	ding shang zhan zheng	1
+东方蓝	dong fang lan	1
+东海	dong hai	1
+东海城子镇镇长	dong hai cheng zi zhen zhen chang	1
+东海哥亚王国	dong hai ge ya wang guo	1
+东海哥雅王国	dong hai ge ya wang guo	1
+东海可可亚西村	dong hai ke ke ya xi cun	1
+东海霜月村	dong hai shuang yue cun	1
+东海西罗布村	dong hai xi luo bu cun	1
+东利	dong li	1
+东尼东尼索柏	dong ni dong ni suo bai	1
+动物系果实	dong wu xi guo shi	1
+豆豆果实	dou dou guo shi	1
+豆豆果实贝瑞古德	dou dou guo shi bei rui gu de	1
+都牟刈大刀	dou mou yi da dao	1
+都牟羽大刀	dou mou yu da dao	1
+豆子左手	dou zi zuo shou	1
+毒毒果实麦哲伦	du du guo shi mai zhe lun	1
+独角老太	du jiao lao tai	1
+杜兰德尔	du lan de er	1
+毒蛇绕颈	du she rao jing	1
+多尔顿	duo er dun	1
+多古	duo gu	1
+多拉格	duo la ge	1
+朵丽儿	duo li er	1
+朵丽儿医娘	duo li er yi niang	1
+多尼多尼乔巴	duo ni duo ni qiao ba	1
+多特	duo te	1
+多托	duo tuo	1
+厄港鸟	e gang niao	1
+恶龙	e long	1
+噩梦之岛	e meng zhi dao	1
+恶魔风脚	e mo feng jiao	1
+恶魔果实	e mo guo shi	1
+恶魔人海贼团	e mo ren hai zei tuan	1
+恶政王阿巴洛比萨隆	e zheng wang a ba luo bi sa long	1
+二番队队长	er fan dui dui zhang	1
+二刚力斩	er gang li zhan	1
+贰斩	er zhan	1
+法兰基	fa lan ji	1
+范奥卡	fan ao ka	1
+翻车星	fan che xing	1
+范德戴肯九世	fan de dai ken jiu shi	1
+范德戴肯世	fan de dai ken shi	1
+翻滚海贼团	fan gun hai zei tuan	1
+反击冲击	fan ji chong ji	1
+范克弗立德	fan ke fu li de	1
+范欧葛	fan ou ge	1
+防护盾	fang hu dun	1
+方块最高干	fang kuai zui gao gan	1
+芳香脚	fang xiang jiao	1
+方舟	fang zhou	1
+飞刀	fei dao	1
+飞龙火焰	fei long huo yan	1
+飞鸟果实	fei niao guo shi	1
+飞散蝙蝠	fei san bian fu	1
+费舍尔泰格	fei she er tai ge	1
+费舍泰格	fei she tai ge	1
+飞翔海贼团	fei xiang hai zei tuan	1
+飞行海贼团船长	fei xing hai zei tuan chuan zhang	1
+肥皂泡群岛	fei zao pao qun dao	1
+肥皂泡自行车	fei zao pao zi xing che	1
+芬布迪	fen bu di	1
+风暴果实	feng bao guo shi	1
+风车村	feng che cun	1
+风车村村长	feng che cun cun zhang	1
+冯克雷	feng ke lei	1
+风来炮	feng lai pao	1
+佛萨	fo sa	1
+佛之战国	fo zhi zhan guo	1
+佛之战国空	fo zhi zhan guo kong	1
+夫查盘腿	fu cha pan tui	1
+福克西	fu ke xi	1
+福克西海贼团	fu ke xi hai zei tuan	1
+弗兰克	fu lan ke	1
+弗兰奇	fu lan qi	1
+弗兰奇空中散步	fu lan qi kong zhong san bu	1
+弗朗基	fu lang ji	1
+弗雷凡斯	fu lei fan si	1
+俘虏之箭	fu lu zhi jian	1
+斧手	fu shou	1
+斧手蒙卡	fu shou meng ka	1
+斧手摩根	fu shou mo gen	1
+伽马刀	ga ma dao	1
+甘福尔	gan fu er	1
+钢贝	gang bei	1
+钢普	gang pu	1
+钢铁果实	gang tie guo shi	1
+高比	gao bi	1
+高利贷塞尼的岛	gao li dai sai ni de dao	1
+高频手术刀	gao pin shou shu dao	1
+格斗冠军	ge dou guan jun	1
+哥尔罗杰	ge er luo jie	1
+葛鲁多罗渣	ge lu duo luo zha	1
+革命军	ge ming jun	1
+革命军首领	ge ming jun shou ling	1
+革命舞曲突进击	ge ming wu qu tu jin ji	1
+歌妮斯	ge ni si	1
+格普	ge pu	1
+哥萨	ge sa	1
+攻城炮	gong cheng pao	1
+功夫海龟	gong fu hai gui	1
+功夫海牛	gong fu hai niu	1
+公斤果实	gong jin guo shi	1
+功力散尽	gong li san jin	1
+古拉迪乌斯	gu la di wu si	1
+古蕾娃	gu lei wa	1
+古雷娃	gu lei wa	1
+古利吉	gu li ji	1
+古洛卡斯	gu luo ka si	1
+古伊娜	gu yi na	1
+怪僧	guai seng	1
+怪僧乌鲁吉	guai seng wu lu ji	1
+拐杖剑	guai zhang jian	1
+冠军	guan jun	1
+广播海贼团	guang bo hai zei tuan	1
+光男	guang nan	1
+鬼彻	gui che	1
+鬼砍	gui kan	1
+鬼哭	gui ku	1
+鬼人阿坚	gui ren a jian	1
+鬼人阿金	gui ren a jin	1
+鬼仔	gui zai	1
+鬼斩	gui zhan	1
+鬼蜘蛛	gui zhi zhu	1
+果汁村	guo zhi cun	1
+哈德利	ha de li	1
+哈尔塔	ha er ta	1
+哈尼碧	ha ni bi	1
+海步行	hai bu xing	1
+海胆果实	hai dan guo shi	1
+海底探索王	hai di tan suo wang	1
+海尔丁	hai er ding	1
+海军本部	hai jun ben bu	1
+海军本部打杂	hai jun ben bu da za	1
+海军本部大佐	hai jun ben bu da zuo	1
+海军本部三等兵	hai jun ben bu san deng bing	1
+海军本部元帅	hai jun ben bu yuan shuai	1
+海军本部中将大参谋	hai jun ben bu zhong jiang da can mou	1
+海军分部打杂	hai jun fen bu da za	1
+海军基地	hai jun ji di	1
+海军基地上校	hai jun ji di shang xiao	1
+海军逃犯	hai jun tao fan	1
+海军总部大佐	hai jun zong bu da zuo	1
+海濑	hai lai	1
+海列车	hai lie che	1
+海流氓堂吉诃德杜夫拉明高	hai liu mang tang ji he de du fu la ming gao	1
+海楼石	hai lou shi	1
+海鸣阿普	hai ming a pu	1
+海鸟	hai niao	1
+海牛	hai niu	1
+海牛魔门	hai niu mo men	1
+海上餐厅	hai shang can ting	1
+海上乐园	hai shang le yuan	1
+海兽的肉	hai shou de rou	1
+海王	hai wang	1
+海王类	hai wang lei	1
+海侠	hai xia	1
+海侠吉贝尔	hai xia ji bei er	1
+海侠甚平	hai xia shen ping	1
+海星	hai xing	1
+海鼬内罗	hai you nei luo	1
+海贼猎人	hai zei lie ren	1
+海贼王	hai zei wang	1
+海贼王我当定了	hai zei wang wo dang ding le	1
+海贼小偷	hai zei xiao tou	1
+海猪肉荷尔蒙浓汤	hai zhu rou he er meng nong tang	1
+汉堡	han bao	1
+寒风聚集	han feng ju ji	1
+汉库克	han ku ke	1
+汉尼拔	han ni ba	1
+航海术	hang hai shu	1
+和道一文字	he dao yi wen zi	1
+河底墓葬	he di mu zang	1
+荷尔蒙果实	he er meng guo shi	1
+荷西	he xi	1
+黑暗果实	hei an guo shi	1
+黑带克罗欧比	hei dai ke luo ou bi	1
+黑刀秋水	hei dao qiu shui	1
+黑胡子	hei hu zi	1
+黑胡子海贼团	hei hu zi hai zei tuan	1
+黑胡子马歇尔	hei hu zi ma xie er	1
+黑舰缇娜	hei jian ti na	1
+黑脚香吉士	hei jiao xiang ji shi	1
+黑槛媞娜	hei kan ti na	1
+黒槛媞娜	hei kan ti na	1
+黑牢之希娜	hei lao zhi xi na	1
+黑猫海贼团	hei mao hai zei tuan	1
+黑木香	hei mu xiang	1
+黑桃最高干部琵卡	hei tao zui gao gan bu pi ka	1
+横纲	heng gang	1
+红鼻子	hong bi zi	1
+红鼻子悪政王	hong bi zi e zheng wang	1
+红发	hong fa	1
+红发的杰克	hong fa de jie ke	1
+红发海贼团	hong fa hai zei tuan	1
+红发海贼团狙击手	hong fa hai zei tuan ju ji shou	1
+红发撒古斯	hong fa sa gu si	1
+红发香吉士	hong fa xiang ji shi	1
+红发香克斯	hong fa xiang ke si	1
+红鬼	hong gui	1
+红脚哲普	hong jiao zhe pu	1
+轰雷果实	hong lei guo shi	1
+红莲地狱	hong lian di yu	1
+轰隆隆果实	hong long long guo shi	1
+红萝卜	hong luo bo	1
+红土大陆	hong tu da lu	1
+狐火锦卫门	hu huo jin wei men	1
+虎狩猎	hu shou lie	1
+弧月形沙丘	hu yue xing sha qiu	1
+花斑猫	hua ban mao	1
+滑滑果实	hua hua guo shi	1
+花花果实	hua hua guo shi	1
+花剑	hua jian	1
+花剑比斯塔	hua jian bi si ta	1
+滑溜溜果实	hua liu liu guo shi	1
+滑嫩喷射	hua nen pen she	1
+花州	hua zhou	1
+黄金杰克森	huang jin jie ke sen	1
+黄金梅丽号	huang jin mei li hao	1
+黄金梅利号	huang jin mei li hao	1
+黄金周	huang jin zhou	1
+黄泉果实	huang quan guo shi	1
+黄泉果实布鲁克	huang quan guo shi bu lu ke	1
+皇星	huang xing	1
+黄猿	huang yuan	1
+绘图歌一节斩	hui tu ge yi jie zhan	1
+回音果实	hui yin guo shi	1
+霍波狄	huo bo di	1
+霍波迪	huo bo di	1
+霍迪琼斯	huo di qiong si	1
+霍古巴克	huo gu ba ke	1
+火箭筒	huo jian tong	1
+霍金斯	huo jin si	1
+霍金斯海贼团	huo jin si hai zei tuan	1
+霍金斯海贼团船长	huo jin si hai zei tuan chuan zhang	1
+霍利圣洁	huo li sheng jie	1
+火拳	huo quan	1
+火拳艾斯	huo quan ai si	1
+霍斯	huo si	1
+火焰果实	huo yan guo shi	1
+火焰卡美	huo yan ka mei	1
+火焰坦克海贼团	huo yan tan ke hai zei tuan	1
+基德	ji de	1
+基德海贼团	ji de hai zei tuan	1
+基德尤斯塔斯	ji de you si ta si	1
+机动三轮车	ji dong san lun che	1
+饥饿地狱	ji e di yu	1
+机关岛	ji guan dao	1
+机关枪	ji guan qiang	1
+极寒地狱	ji han di yu	1
+极虎狩	ji hu shou	1
+基拉	ji la	1
+寄生线	ji sheng xian	1
+加保提	jia bao ti	1
+加布拉	jia bu la	1
+贾恩多	jia en duo	1
+加尔帝诺	jia er di nuo	1
+加尔根	jia er gen	1
+加卡	jia ka	1
+嘉路芙	jia lu fu	1
+加普	jia pu	1
+嘉雅	jia ya	1
+加雅岛	jia ya dao	1
+嘉雅家管家	jia ya jia guan jia	1
+坚布	jian bu	1
+剪刀果实	jian dao guo shi	1
+剪刀果实闪电	jian dao guo shi shan dian	1
+剑豪龙马	jian hao long ma	1
+监牢果实	jian lao guo shi	1
+肩肉	jian rou	1
+见闻色	jian wen se	1
+见闻色霸气	jian wen se ba qi	1
+见习船员	jian xi chuan yuan	1
+健助	jian zhu	1
+浆糊果实	jiang hu guo shi	1
+将军炮	jiang jun pao	1
+将军辗压	jiang jun zhan ya	1
+僵尸袋鼠	jiang shi dai shu	1
+降无赖线	jiang wu lai xian	1
+鲛肌掌底	jiao ji zhang di	1
+焦热地狱	jiao re di yu	1
+捷宝	jie bao	1
+杰克斯	jie ke si	1
+杰妮邦尼	jie ni bang ni	1
+捷斯	jie si	1
+杰斯	jie si	1
+捷斯马利莫	jie si ma li mo	1
+杰斯马利斯	jie si ma li si	1
+接吻鱼人	jie wen yu ren	1
+接吻鱼人啜	jie wen yu ren chuo	1
+金棒	jin bang	1
+金刚棒亚比达	jin gang bang ya bi da	1
+金钩	jin gou	1
+金古多	jin gu duo	1
+金狮子	jin shi zi	1
+金狮子史基	jin shi zi shi ji	1
+金鱼人鱼	jin yu ren yu	1
+荆棘果实	jing ji guo shi	1
+荆棘果实波拉	jing ji guo shi bo la	1
+鲸鲨鱼人	jing sha yu ren	1
+酒巴店主	jiu ba dian zhu	1
+九刀流	jiu dao liu	1
+九蛇海贼团	jiu she hai zei tuan	1
+酒樽舞曲连环击	jiu zun wu qu lian huan ji	1
+锯齿鲨鱼人	ju chi sha yu ren	1
+锯齿鲨鱼人阿朗	ju chi sha yu ren a lang	1
+巨大战舰圣胡安恶狼	ju da zhan jian sheng hu an e lang	1
+巨人海贼团	ju ren hai zei tuan	1
+巨人族	ju ren zu	1
+巨石新达	ju shi xin da	1
+橘子蛋包饭	ju zi dan bao fan	1
+军猴	jun hou	1
+菌菌果实姆休鲁	jun jun guo shi mu xiu lu	1
+俊美海贼团船长	jun mei hai zei tuan chuan zhang	1
+卡巴	ka ba	1
+卡巴吉	ka ba ji	1
+卡巴基	ka ba ji	1
+卡柏斯	ka bai si	1
+卡波帝	ka bo di	1
+卡尔	ka er	1
+卡尔贝鲁	ka er bei lu	1
+卡尔加拉卡尔葛拉	ka er jia la ka er ge la	1
+卡尔加拉之女姆丝	ka er jia la zhi nv mu si	1
+咖啡	ka fei	1
+卡库	ka ku	1
+卡里布	ka li bu	1
+卡里布海贼团	ka li bu hai zei tuan	1
+卡利法	ka li fa	1
+卡里法	ka li fa	1
+卡力佛	ka li fo	1
+卡鲁	ka lu	1
+卡鲁鸭	ka lu ya	1
+卡马奇利	ka ma qi li	1
+卡美	ka mei	1
+卡门	ka men	1
+卡蒙	ka meng	1
+卡彭贝基	ka peng bei ji	1
+卡普	ka pu	1
+卡特弗兰姆	ka te fu lan mu	1
+卡特琳娜戴彭	ka te lin na dai peng	1
+凯多	kai duo	1
+凯米	kai mi	1
+槛槛果实	kan kan guo shi	1
+槛槛果实媞娜	kan kan guo shi ti na	1
+考古学家	kao gu xue jia	1
+烤鱼	kao yu	1
+克比	ke bi	1
+可可罗	ke ke luo	1
+可可椰子村	ke ke ye zi cun	1
+克拉巴特尔	ke la ba te er	1
+柯拉松	ke la song	1
+克拉伊咖那岛	ke la yi ka na dao	1
+克里布	ke li bu	1
+克利克	ke li ke	1
+克力克	ke li ke	1
+克里克	ke li ke	1
+克利克海贼团	ke li ke hai zei tuan	1
+克洛	ke luo	1
+克洛船长	ke luo chuan zhang	1
+克洛克达尔	ke luo ke da er	1
+克罗马利蒙	ke luo ma li meng	1
+克洛马利莫	ke luo ma li mo	1
+克罗马利斯	ke luo ma li si	1
+克罗欧比	ke luo ou bi	1
+柯妮丝	ke ni si	1
+可雅	ke ya	1
+克伊娜	ke yi na	1
+恐怖三桅帆船	kong bu san wei fan chuan	1
+空岛	kong dao	1
+空岛冒险篇	kong dao mao xian pian	1
+空番长	kong fan chang	1
+空护卫长	kong hu wei chang	1
+空间转移	kong jian zhuan yi	1
+恐龙果实	kong long guo shi	1
+孔雀断木机	kong que duan mu ji	1
+空之骑士	kong zhi qi shi	1
+寇布拉	kou bu la	1
+寇沙	kou sha	1
+库蕾哈	ku lei ha	1
+库利艾尔	ku li ai er	1
+骷髅人	ku lou ren	1
+库洛库达尔	ku luo ku da er	1
+库玛西	ku ma xi	1
+库伊娜	ku yi na	1
+库赞	ku zan	1
+快投	kuai tou	1
+快斩果实	kuai zhan guo shi	1
+快斩果实达兹波尼斯	kuai zhan guo shi da zi bo ni si	1
+狂风果实	kuang feng guo shi	1
+狂飓	kuang ju	1
+昆贝	kun bei	1
+廓尔喀弯刀	kuo er ka wan dao	1
+拉奥	la ao	1
+拉拜	la bai	1
+拉布	la bu	1
+拉非特	la fei te	1
+拉夫特	la fu te	1
+辣海鲜意大利面	la hai xian yi da li mian	1
+拉基	la ji	1
+拉克约	la ke yue	1
+啦啦棒	la la bang	1
+蜡蜡果实	la la guo shi	1
+拉彭	la peng	1
+拉琪	la qi	1
+拉奇鲁	la qi lu	1
+拉撒	la sa	1
+拉苏	la su	1
+蜡烛果实	la zhu guo shi	1
+赖吉鲁	lai ji lu	1
+岚脚	lan jiao	1
+兰奇	lan qi	1
+狼牙铁棒	lang ya tie bang	1
+老爹	lao die	1
+老鼠	lao shu	1
+蕾贝卡	lei bei ka	1
+雷利	lei li	1
+雷鸣剑	lei ming jian	1
+雷尼雅村	lei ni ya cun	1
+镭射激光	lei she ji guang	1
+冷美	leng mei	1
+冷气泡	leng qi pao	1
+里奥	li ao	1
+利基	li ji	1
+莉嘉	li jia	1
+力克海贼舰队	li ke hai zei jian dui	1
+丽丽	li li	1
+黎明歌极光突	li ming ge ji guang tu	1
+利刃圆环	li ren yuan huan	1
+历史正文	li shi zheng wen	1
+李维斯山	li wei si shan	1
+力治	li zhi	1
+镰刀果实	lian dao guo shi	1
+炼狱鬼斩	lian yu gui zhan	1
+鬣狗	lie gou	1
+鬣狗贝拉米	lie gou bei la mi	1
+鬣狗比拿米	lie gou bi na mi	1
+灵魂出窍	ling hun chu qiao	1
+灵灵果实	ling ling guo shi	1
+零摩擦	ling mo ca	1
+六道之辻	liu dao zhi shi	1
+溜溜果实蝾螈	liu liu guo shi rong yuan	1
+六式	liu shi	1
+流星锤	liu xing chui	1
+流星火山	liu xing huo shan	1
+龙断	long duan	1
+龙宫城	long gong cheng	1
+龙宫王国	long gong wang guo	1
+龙卷风	long juan feng	1
+路飞	lu fei	1
+路飞海贼团	lu fei hai zei tuan	1
+鲁夫	lu fu	1
+露玖	lu jiu	1
+露露佳岛	lu lu jia dao	1
+鲁鲁佳岛	lu lu jia dao	1
+路奇	lu qi	1
+路斯高	lu si gao	1
+陆行鸭	lu xing ya	1
+掠之歌吹雪斩	lue zhi ge chui xue zhan	1
+罗宾	luo bin	1
+萝卜头	luo bo tou	1
+罗伯逊罗布森	luo bo xun luo bu sen	1
+罗布路奇	luo bu lu qi	1
+罗格镇	luo ge zhen	1
+罗杰	luo jie	1
+罗杰海贼团	luo jie hai zei tuan	1
+洛克	luo ke	1
+洛克船长	luo ke chuan zhang	1
+洛克斯达	luo ke si da	1
+洛克之星	luo ke zhi xing	1
+罗拉	luo la	1
+罗罗诺亚索隆	luo luo nuo ya suo long	1
+罗罗诺亚卓洛	luo luo nuo ya zhuo luo	1
+罗罗亚索隆	luo luo ya suo long	1
+罗洛亚卓洛	luo luo ya zhuo luo	1
+罗生门	luo sheng men	1
+罗西奥	luo xi ao	1
+螺旋白刃	luo xuan bai ren	1
+绿牛	lv niu	1
+绿星骷髅爆炸草	lv xing ku lou bao zha cao	1
+绿星人形草	lv xing ren xing cao	1
+绿藻头	lv zao tou	1
+马尔高	ma er gao	1
+马赫巴伊斯	ma he ba yi si	1
+玛姬	ma ji	1
+马坚尼	ma jian ni	1
+马里	ma li	1
+玛莉哥德	ma li ge de	1
+马马果实	ma ma guo shi	1
+马马果实皮耶鲁	ma ma guo shi pi ye lu	1
+马匹遭囚	ma pi zao qiu	1
+玛琪诺	ma qi nuo	1
+马沙尔	ma sha er	1
+马斯拉	ma si la	1
+玛西拉	ma xi la	1
+麥形大叔	mai xing da shu	1
+猫猫果实	mao mao guo shi	1
+猫猫果实罗布路奇	mao mao guo shi luo bu lu qi	1
+冒烟男	mao yan nan	1
+猫爪	mao zhua	1
+梅花最高干部	mei hua zui gao gan bu	1
+梅丽	mei li	1
+梅利	mei li	1
+门门果实	men men guo shi	1
+门门果实布鲁诺	men men guo shi bu lu nuo	1
+蒙布朗库力凯	meng bu lang ku li kai	1
+蒙布朗诺兰德	meng bu lang nuo lan de	1
+蒙卡	meng ka	1
+蒙奇	meng qi	1
+猛使	meng shi	1
+猛兽地狱	meng shou di yu	1
+猛兽师摩尔	meng shou shi mo er	1
+猛推压力炮	meng tui ya li pao	1
+猛竹林	meng zhu lin	1
+密佛格	mi fo ge	1
+米霍克	mi huo ke	1
+棉花糖	mian hua tang	1
+冥王	ming wang	1
+摩丹	mo dan	1
+摩尔	mo er	1
+模仿果实	mo fang guo shi	1
+魔谷镇	mo gu zhen	1
+魔鬼鱼鱼人黑带	mo gui yu yu ren hei dai	1
+莫里亚	mo li ya	1
+莫利亚僵尸军团	mo li ya jiang shi jun tuan	1
+摩奇	mo qi	1
+魔人	mo ren	1
+墨西哥辣椒弹	mo xi ge la jiao dan	1
+魔熊	mo xiong	1
+哞哞	mou mou	1
+那奥鲁	na ao lu	1
+拿巴隆	na ba long	1
+那吧隆要塞	na ba long yao sai	1
+拿宾	na bin	1
+娜菲鲁塔利薇薇	na fei lu ta li wei wei	1
+娜芙亚寇布拉	na fu ya kou bu la	1
+娜芙亚薇薇	na fu ya wei wei	1
+拿高	na gao	1
+娜美	na mei	1
+娜美布鲁克	na mei bu lu ke	1
+那谬尔	na miu er	1
+奈菲鲁塔丽	nai fei lu ta li	1
+奈菲鲁塔丽哥布拉	nai fei lu ta li ge bu la	1
+奈菲鲁塔丽薇薇	nai fei lu ta li wei wei	1
+奈美	nai mei	1
+南方蓝	nan fang lan	1
+南海	nan hai	1
+南海巴苔里拉岛	nan hai ba tai li la dao	1
+南海空手道岛	nan hai kong shou dao dao	1
+南南见鸟	nan nan jian niao	1
+脑袋夹子玩偶	nao dai jia zi wan ou	1
+能力者	neng li zhe	1
+尼尔森罗伊	ni er sen luo yi	1
+妮歌鲁宾	ni ge lu bin	1
+泥浆果实	ni jiang guo shi	1
+妮可罗宾	ni ke luo bin	1
+泥吞噬	ni tun shi	1
+年龄果实	nian ling guo shi	1
+黏黏糖果实	nian nian tang guo shi	1
+鸟尔基	niao er ji	1
+鸟鸟果实	niao niao guo shi	1
+鸟鸟果实贝尔	niao niao guo shi bei er	1
+鸟鸟果实瓦兹	niao niao guo shi wa zi	1
+涅槃	nie pan	1
+涅普顿	nie pu dun	1
+牛鬼勇爪	niu gui yong zhao	1
+牛牛果实	niu niu guo shi	1
+牛牛果实多尔顿	niu niu guo shi duo er dun	1
+牛牛果实卡库	niu niu guo shi ka ku	1
+诺琪高	nuo qi gao	1
+女儿岛	nv er dao	1
+女一	nv yi	1
+欧加	ou jia	1
+欧姆	ou mu	1
+帕迪	pa di	1
+帕加雅	pa jia ya	1
+帕里	pa li	1
+帕帕古	pa pa gu	1
+派迪	pai di	1
+拍飞	pai fei	1
+派葛亚	pai ge ya	1
+庞克哈萨德	pang ke ha sa de	1
+炮击手	pao ji shou	1
+泡沫果实卡莉法	pao mo guo shi ka li fa	1
+泡泡岛	pao pao dao	1
+泡泡果实	pao pao guo shi	1
+培波	pei bo	1
+佩罗娜	pei luo na	1
+彭恩空割	peng en kong ge	1
+碰撞机器	peng zhuang ji qi	1
+皮布里鲁鲁	pi bu li lu lu	1
+皮雅尔	pi ya er	1
+骗人布	pian ren bu	1
+漂流岛	piao liu dao	1
+飘飘果实	piao piao guo shi	1
+屏障屏障手枪	ping zhang ping zhang shou qiang	1
+屏障球	ping zhang qiu	1
+破戒僧海贼团	po jie seng hai zei tuan	1
+破戒僧海贼团船长	po jie seng hai zei tuan chuan zhang	1
+扑克牌占卜	pu ke pai zhan bu	1
+普罗甸斯王国国王	pu luo dian si wang guo guo wang	1
+普洛吉	pu luo ji	1
+菩提岛	pu ti dao	1
+奇布	qi bu	1
+奇基达	qi ji da	1
+麒麟万射橹	qi lin wan she lu	1
+琪姆妮	qi mu ni	1
+七水之都	qi shui zhi du	1
+七武海	qi wu hai	1
+七武海鹰眼米霍克	qi wu hai ying yan mi huo ke	1
+旗鱼鱼人	qi yu yu ren	1
+旗帜猎人	qi zhi lie ren	1
+千两小丑	qian liang xiao chou	1
+前任及新任神	qian ren ji xin ren shen	1
+千万桑尼号	qian wan sang ni hao	1
+前奏曲破兵	qian zou qu po bing	1
+强尼	qiang ni	1
+乔艾莉波妮	qiao ai li bo ni	1
+乔巴	qiao ba	1
+乔拉	qiao la	1
+乔拉可尔密佛格	qiao la ke er mi fo ge	1
+悄悄话果实	qiao qiao hua guo shi	1
+青鬼	qing gui	1
+青鬼东利	qing gui dong li	1
+青椒	qing jiao	1
+青椒头	qing jiao tou	1
+青龙吟流水	qing long yin liu shui	1
+青鸟	qing niao	1
+轻飘飘果实	qing piao piao guo shi	1
+情人节	qing ren jie	1
+晴天候	qing tian hou	1
+青雉	qing zhi	1
+秋岛	qiu dao	1
+秋岛的秋刀鱼	qiu dao de qiu dao yu	1
+球拍	qiu pai	1
+秋水	qiu shui	1
+趣趣	qu qu	1
+曲芸	qu yun	1
+趋之若鹜	qu zhi ruo wu	1
+犬啮红莲	quan nie hong lian	1
+犬犬果实	quan quan guo shi	1
+犬犬果实加布拉	quan quan guo shi jia bu la	1
+犬犬果实加卡	quan quan guo shi jia ka	1
+犬犬果实拉丝	quan quan guo shi la si	1
+拳头	quan tou	1
+燃烧岛	ran shao dao	1
+燃烧果实	ran shao guo shi	1
+热气泡	re qi pao	1
+热热果实	re re guo shi	1
+热热果实顿阿奇诺	re re guo shi dun a qi nuo	1
+热铁之泪目鲸	re tie zhi lei mu jing	1
+人偶果实	ren ou guo shi	1
+人人果实	ren ren guo shi	1
+人人果实佛之战国	ren ren guo shi fo zhi zhan guo	1
+人人果实乔巴	ren ren guo shi qiao ba	1
+人妖彭格列	ren yao peng ge lie	1
+人鱼具术	ren yu ju shu	1
+人鱼柔术	ren yu rou shu	1
+人猿海贼团	ren yuan hai zei tuan	1
+肉球果实	rou qiu guo shi	1
+肉球果实巴索罗缪熊	rou qiu guo shi ba suo luo miu xiong	1
+软骨鱼人	ruan gu yu ren	1
+软糖果实	ruan tang guo shi	1
+撒巴	sa ba	1
+萨博	sa bo	1
+萨迪	sa di	1
+撒古斯	sa gu si	1
+撒谎布	sa huang bu	1
+萨卡斯基	sa ka si ji	1
+萨奇	sa qi	1
+萨奇斯	sa qi si	1
+萨乌森桑尼号	sa wu sen sang ni hao	1
+赛尼奥尔皮克	sai ni ao er pi ke	1
+三城记	san cheng ji	1
+三大古代兵器	san da gu dai bing qi	1
+三代鬼彻	san dai gui che	1
+散弹枪	san dan qiang	1
+三刀流	san dao liu	1
+三明治	san ming zhi	1
+三千世界	san qian shi jie	1
+三日月	san ri yue	1
+桑吉士	sang ji shi	1
+桑尼号	sang ni hao	1
+色彩果实	se cai guo shi	1
+森林的阿悟	sen lin de a wu	1
+森之大悟	sen zhi da wu	1
+森之小悟	sen zhi xiao wu	1
+森之中悟	sen zhi zhong wu	1
+沙鳄	sha e	1
+沙鳄鱼克洛克达尔	sha e yu ke luo ke da er	1
+沙鳄鱼沙克洛克达尔	sha e yu sha ke luo ke da er	1
+沙克洛克达尔	sha ke luo ke da er	1
+沙漠宝刀	sha mo bao dao	1
+沙漠日光浴	sha mo ri guang yu	1
+沙漠向日葵	sha mo xiang ri kui	1
+沙沙果实	sha sha guo shi	1
+杀手波拉	sha shou bo la	1
+杀手达斯波利基	sha shou da si bo li ji	1
+砂糖	sha tang	1
+砂文	sha wen	1
+鲨星	sha xing	1
+鲨鱼	sha yu	1
+沙之果实	sha zhi guo shi	1
+闪电	shan dian	1
+山风	shan feng	1
+山风卡库	shan feng ka ku	1
+闪光果实	shan guang guo shi	1
+山吉士	shan ji shi	1
+山姆	shan mu	1
+闪闪果实黄猿	shan shan guo shi huang yuan	1
+山羊之岛	shan yang zhi dao	1
+闪耀爆破	shan yao bao po	1
+山治	shan zhi	1
+伤害转移	shang hai zhuan yi	1
+赏金猎人	shang jin lie ren	1
+烧鬼斩	shao gui zhan	1
+烧经	shao jing	1
+烧烧果实	shao shao guo shi	1
+芍姨	shao yi	1
+烧斩之剑	shao zhan zhi jian	1
+蛇姬	she ji	1
+蛇蛇果实	she she guo shi	1
+神艾涅尔	shen ai nie er	1
+神风炸弹	shen feng zha dan	1
+甚平	shen ping	1
+圣诞节	sheng dan jie	1
+圣地玛丽乔亚	sheng di ma li qiao ya	1
+圣地马力乔亚	sheng di ma li qiao ya	1
+圣胡安恶狼	sheng hu an e lang	1
+胜利猎人号	sheng li lie ren hao	1
+圣骑士罗兰	sheng qi shi luo lan	1
+食岛金鱼	shi dao jin yu	1
+时间果实	shi jian guo shi	1
+世界第一的大监狱	shi jie di yi de da jian yu	1
+世界第一的剑豪	shi jie di yi de jian hao	1
+世界政府	shi jie zheng fu	1
+史莫卡	shi mo ka	1
+食人魔奶奶	shi ren mo nai nai	1
+世特	shi te	1
+噬血症	shi xue zheng	1
+狮子歌歌	shi zi ge ge	1
+十字架刀	shi zi jia dao	1
+狮子千切谷	shi zi qian qie gu	1
+狮子威御所地卷	shi zi wei yu suo di juan	1
+首领	shou ling	1
+首肉	shou rou	1
+手术果实	shou shu guo shi	1
+兽严	shou yan	1
+双截棍	shuang jie gun	1
+双手指	shuang shou zhi	1
+双翼飞行	shuang yi fei xing	1
+水牛阿特摩斯	shui niu a te mo si	1
+水炮	shui pao	1
+水心海流过肩摔	shui xin hai liu guo jian shuai	1
+水之都	shui zhi du	1
+水之七岛	shui zhi qi dao	1
+斯比多基尔	si bi duo ji er	1
+四刀流逆鳞	si dao liu ni lin	1
+司法岛	si fa dao	1
+四分五裂果实	si fen wu lie guo shi	1
+四皇	si huang	1
+四皇凯多	si huang kai duo	1
+四皇夏洛特玲玲	si huang xia luo te ling ling	1
+斯库拉奇曼阿普	si ku la qi man a pu	1
+斯库亚德	si ku ya de	1
+斯摩格	si mo ge	1
+斯摩卡	si mo ka	1
+斯莫卡	si mo ka	1
+斯潘达姆	si pan da mu	1
+死神	si shen	1
+丝丝	si si	1
+斯托洛贝里	si tuo luo bei li	1
+死亡外科医生	si wang wai ke yi sheng	1
+四足冲刺奇人	si zu chong ci qi ren	1
+松鼠基兄弟	song shu ji xiong di	1
+苏拿	su na	1
+燧手枪	sui shou qiang	1
+索隆	suo long	1
+索隆的师傅	suo long de shi fu	1
+沓薙剣	ta ti jian	1
+台风天候	tai feng tian hou	1
+太阳海贼团	tai yang hai zei tuan	1
+弹簧果实	tan huang guo shi	1
+唐草瓦正拳	tang cao wa zheng quan	1
+唐吉诃德杜夫拉明高	tang ji he de du fu la ming gao	1
+唐吉诃德多佛朗明哥	tang ji he de duo fo lang ming ge	1
+堂吉诃德多弗朗明哥	tang ji he de duo fu lang ming ge	1
+唐吉诃德家族干部	tang ji he de jia zu gan bu	1
+螳螂	tang lang	1
+汤姆	tang mu	1
+淘卡网	tao ka wang	1
+饕餮女乔艾莉波妮	tao tie nv qiao ai li bo ni	1
+桃之助	tao zhi zhu	1
+特拉法尔加罗	te la fa er jia luo	1
+特制巴基弹	te zhi ba ji dan	1
+藤虎	teng hu	1
+疼痛手指	teng tong shou zhi	1
+薙刀	ti dao	1
+提督	ti du	1
+提督克利克	ti du ke li ke	1
+提督力克	ti du li ke	1
+踢击	ti ji	1
+天丛云剑	tian cong yun jian	1
+天鹅湖	tian e hu	1
+天空番长	tian kong fan chang	1
+天空骑士刚科尔	tian kong qi shi gang ke er	1
+天龙人	tian long ren	1
+天龙人事件	tian long ren shi jian	1
+天使岛	tian shi dao	1
+甜甜甘风	tian tian gan feng	1
+甜甜果实	tian tian guo shi	1
+甜甜果实波雅汉库克	tian tian guo shi bo ya han ku ke	1
+天王	tian wang	1
+田鹬	tian yu	1
+挑衅师母	tiao xin shi mu	1
+铁棒	tie bang	1
+铁壁柏路	tie bi bai lu	1
+铁壁路	tie bi lu	1
+铁块	tie kuai	1
+铁拳霍波迪	tie quan huo bo di	1
+铁拳卡普	tie quan ka pu	1
+童趣果实	tong qu guo shi	1
+透明果实	tou ming guo shi	1
+透明果实阿布萨罗姆	tou ming guo shi a bu sa luo mu	1
+偷术	tou shu	1
+秃鹰	tu ying	1
+推进城	tui jin cheng	1
+吞吞果实	tun tun guo shi	1
+吞吞食	tun tun shi	1
+托拉法尔加罗	tuo la fa er jia luo	1
+托雷波尔	tuo lei bo er	1
+陀里	tuo li	1
+托尼托尼乔巴	tuo ni tuo ni qiao ba	1
+瓦波尔	wa bo er	1
+瓦尔波	wa er bo	1
+瓦斯果实	wa si guo shi	1
+瓦夷帕	wa yi pa	1
+万里阳光号	wan li yang guang hao	1
+万轮花	wan lun hua	1
+万猩猩海贼团	wan xing xing hai zei tuan	1
+旺季鱼	wang ji yu	1
+网络支付新规	wang luo zhi fu xin gui	1
+网网果实	wang wang guo shi	1
+网网果实拉鲁克	wang wang guo shi la lu ke	1
+王下七武海	wang xia qi wu hai	1
+维奥莱特	wei ao lai te	1
+威霸	wei ba	1
+韦柏	wei bai	1
+伟大航道	wei da hang dao	1
+伟大航路	wei da hang lu	1
+偎取	wei qu	1
+威士忌山峰	wei shi ji shan feng	1
+尾田	wei tian	1
+微微	wei wei	1
+薇薇公主	wei wei gong zhu	1
+未知	wei zhi	1
+文布拉库力克	wen bu la ku li ke	1
+文布拉罗兰度	wen bu la luo lan du	1
+文布兰库力克	wen bu lan ku li ke	1
+吻枪	wen qiang	1
+乌尔基	wu er ji	1
+乌龟小胖	wu gui xiao pang	1
+五老星	wu lao xing	1
+雾里看花	wu li kan hua	1
+无名记忆岛	wu ming ji yi dao	1
+无名龙岛	wu ming long dao	1
+武器果实	wu qi guo shi	1
+五千枚瓦正拳	wu qian mei wa zheng quan	1
+无声步	wu sheng bu	1
+乌索普	wu suo pu	1
+乌索普铁锤	wu suo pu tie chui	1
+乌坦探测号	wu tan tan ce hao	1
+无限地狱	wu xian di yu	1
+无音	wu yin	1
+武装色	wu zhuang se	1
+武装色硬化	wu zhuang se ying hua	1
+西尔巴兹雷利	xi er ba zi lei li	1
+西尔尔克	xi er er ke	1
+西方蓝	xi fang lan	1
+西格	xi ge	1
+希古马	xi gu ma	1
+西海	xi hai	1
+犀回	xi hui	1
+希鲁鲁克	xi lu lu ke	1
+希鲁鲁克医生	xi lu lu ke yi sheng	1
+希路麦普	xi lu mai pu	1
+嘻芮	xi rui	1
+细悟	xi wu	1
+洗洗果实	xi xi guo shi	1
+洗洗果实鹤	xi xi guo shi he	1
+西洋剑	xi yang jian	1
+夏莉夫人	xia li fu ren	1
+夏洛特玲玲	xia luo te ling ling	1
+夏奇	xia qi	1
+暹罗猫	xian luo mao	1
+线线果实	xian xian guo shi	1
+香波地群岛	xiang bo di qun dao	1
+香吉士	xiang ji shi	1
+橡胶果实	xiang jiao guo shi	1
+橡胶巨人雷斧	xiang jiao ju ren lei fu	1
+橡胶三百烦恼攻城炮	xiang jiao san bai fan nao gong cheng pao	1
+香克斯	xiang ke si	1
+响雷果实	xiang lei guo shi	1
+响雷果实艾尼路	xiang lei guo shi ai ni lu	1
+降魔之相	xiang mo zhi xiang	1
+橡皮果实	xiang pi guo shi	1
+象象果实	xiang xiang guo shi	1
+想要我的财宝吗	xiang yao wo de cai bao ma	1
+小奥兹	xiao ao zi	1
+小八	xiao ba	1
+小丑巴基	xiao chou ba ji	1
+小丑巴其	xiao chou ba qi	1
+小花园	xiao hua yuan	1
+消极幽灵	xiao ji you ling	1
+小悟	xiao wu	1
+小熊玩具	xiao xiong wan ju	1
+小夜时雨	xiao ye shi yu	1
+小贼猫	xiao zei mao	1
+蝎毒针	xie du zhen	1
+邪恶黑暗磁鼓王国	xie e hei an ci gu wang guo	1
+蟹螫	xie shi	1
+蝎子男	xie zi nan	1
+新刀	xin dao	1
+辛朵莉	xin duo li	1
+心灵窥视	xin ling kui shi	1
+新奇士	xin qi shi	1
+新人妖乐园	xin ren yao le yuan	1
+新世界	xin shi jie	1
+新鲜第一蔬菜拳	xin xian di yi shu cai quan	1
+新鱼人海贼团	xin yu ren hai zei tuan	1
+心脏海贼团	xin zang hai zei tuan	1
+心脏海贼团船长	xin zang hai zei tuan chuan zhang	1
+新中小学生守则	xin zhong xiao xue sheng shou ze	1
+星屑王子	xing xie wang zi	1
+猩猩	xing xing	1
+星星盾牌	xing xing dun pai	1
+星学院	xing xue yuan	1
+熊猫人	xiong mao ren	1
+雄狮	xiong shi	1
+雄狮偎取	xiong shi wei qu	1
+熊掌冲击	xiong zhang chong ji	1
+修罗	xiu luo	1
+休休	xiu xiu	1
+修修	xiu xiu	1
+锈锈果实	xiu xiu guo shi	1
+锈锈果实修恩	xiu xiu guo shi xiu en	1
+悬崖后空翻	xuan ya hou kong fan	1
+炫装	xuan zhuang	1
+雪花果实	xue hua guo shi	1
+雪走	xue zou	1
+亚比达海贼团	ya bi da hai zei tuan	1
+亚比达海贼团打杂	ya bi da hai zei tuan da za	1
+亚尔丽塔	ya er li ta	1
+亚尔丽塔海贼团	ya er li ta hai zei tuan	1
+压力炮	ya li pao	1
+亚马逊	ya ma xun	1
+亚马逊百合	ya ma xun bai he	1
+亚马讯岛	ya ma xun dao	1
+鸦魔狩	ya mo shou	1
+岩浆果实	yan jiang guo shi	1
+岩浆果实赤犬	yan jiang guo shi chi quan	1
+鼹鼠果实	yan shu guo shi	1
+烟雾果实	yan wu guo shi	1
+烟雾果实斯摩格	yan wu guo shi si mo ge	1
+洋葱头	yang cong tou	1
+阳光万里号	yang guang wan li hao	1
+阳子	yang zi	1
+要塞	yao sai	1
+夜叉鸦	ye cha ya	1
+夜瑾	ye jin	1
+夜明曲直贯穿	ye ming qu zhi guan chuan	1
+耶酥伯吉斯	ye su bo ji si	1
+耶稣布	ye su bu	1
+耶酥布	ye su bu	1
+耶索普	ye suo pu	1
+一本松	yi ben song	1
+以藏	yi cang	1
+一击那缪尔	yi ji na miu er	1
+依加勒普	yi jia le pu	1
+一轮刺	yi lun ci	1
+依玛祖娜	yi ma zu na	1
+亿千万贝里	yi qian wan bei li	1
+伊藤蚯蚓	yi teng qiu yin	1
+伊万科夫	yi wan ke fu	1
+一雾银	yi wu yin	1
+伊肖	yi xiao	1
+伊扎克	yi zha ke	1
+音爆果实	yin bao guo shi	1
+音波果实	yin bo guo shi	1
+因果报应	yin guo bao ying	1
+银河弹弓	yin he dan gong	1
+银狐	yin hu	1
+银狐弗克斯	yin hu fu ke si	1
+银狐福克西	yin hu fu ke xi	1
+尹卡莱姆	yin ka lai mu	1
+因佩尔顿	yin pei er dun	1
+阴天候	yin tian hou	1
+音无猫头鹰	yin wu mao tou ying	1
+阴愈伤弹	yin yu shang dan	1
+音越	yin yue	1
+鹰波	ying bo	1
+应登楼	ying deng lou	1
+樱花王国	ying hua wang guo	1
+影骑线	ying qi xian	1
+影切	ying qie	1
+樱桃派	ying tao pai	1
+影武者	ying wu zhe	1
+鹰眼	ying yan	1
+鹰眼米霍克	ying yan mi huo ke	1
+鹰眼朱洛基尔米霍克	ying yan zhu luo ji er mi huo ke	1
+鹰眼朱诺基尔米霍克	ying yan zhu nuo ji er mi huo ke	1
+影影果实	ying ying guo shi	1
+影影果实月光莫利亚	ying ying guo shi yue guang mo li ya	1
+影子革命	ying zi ge ming	1
+影子果实	ying zi guo shi	1
+庸医	yong yi	1
+由巴	you ba	1
+尤格兹那	you ge zi na	1
+鼬镰果实	you lian guo shi	1
+幽灵果实佩罗娜	you ling guo shi pei luo na	1
+幽灵炸弹	you ling zha dan	1
+尤斯塔斯	you si ta si	1
+尤斯塔斯基德	you si ta si ji de	1
+御剑罗密欧	yu jian luo mi ou	1
+鱼巨人	yu ju ren	1
+鱼人岛	yu ren dao	1
+鱼人海贼团	yu ren hai zei tuan	1
+鱼人吉贝尔	yu ren ji bei er	1
+鱼人空手道	yu ren kong shou dao	1
+鱼人柔术	yu ren rou shu	1
+鱼人族	yu ren zu	1
+雨水果实	yu shui guo shi	1
+雨之希留	yu zhi xi liu	1
+原磁鼓王国事务官	yuan ci gu wang guo shi wu guan	1
+远古种暴龙果实德雷克	yuan gu zhong bao long guo shi de lei ke	1
+原巨兵海贼团船长	yuan ju bing hai zei tuan chuan zhang	1
+猿山联合军	yuan shan lian he jun	1
+元帅	yuan shuai	1
+原王下七武海	yuan wang xia qi wu hai	1
+月步	yue bu	1
+月光莫利亚	yue guang mo li ya	1
+月光莫里亚	yue guang mo li ya	1
+约翰	yue han	1
+约起	yue qi	1
+约撒	yue sa	1
+约瑟夫	yue se fu	1
+月牙猎人卡塔丽娜蒂彭	yue ya lie ren ka ta li na di peng	1
+云奥加	yun ao jia	1
+陨石流星雨	yun shi liu xing yu	1
+杂技卡柏斯	za ji ka bai si	1
+赞高	zan gao	1
+泽法	ze fa	1
+翟蓓蓓	zhai bei bei	1
+斩船侠	zhan chuan xia	1
+战斧	zhan fu	1
+战国	zhan guo	1
+斩时雨	zhan shi yu	1
+战桃丸	zhan tao wan	1
+招鬼	zhao gui	1
+照骗	zhao pian	1
+沼泽果实	zhao ze guo shi	1
+沼泽果实卡里布	zhao ze guo shi ka li bu	1
+沼泽镰	zhao ze lian	1
+哲夫	zhe fu	1
+哲普	zhe pu	1
+震动果实	zhen dong guo shi	1
+珍兽岛居民	zhen shou dao ju min	1
+震震果实	zhen zhen guo shi	1
+纸绘	zhi hui	1
+制面机	zhi mian ji	1
+指南鸟	zhi nan niao	1
+指枪	zhi qiang	1
+芝沙斯巴沙斯	zhi sha si ba sha si	1
+指统	zhi tong	1
+蜘蛛爆炸	zhi zhu bao zha	1
+中国哀股	zhong guo ai gu	1
+终极铁锤	zhong ji tie chui	1
+中将	zhong jiang	1
+周断	zhou duan	1
+周晓鹏	zhou xiao peng	1
+朱洛基尔米霍克	zhu luo ji er mi huo ke	1
+蛛网墙	zhu wang qiang	1
+竹子	zhu zi	1
+转转果实	zhuan zhuan guo shi	1
+壮尼	zhuang ni	1
+追击者梅纳德	zhui ji zhe mei na de	1
+准将	zhun jiang	1
+卓加	zhuo jia	1
+卓洛	zhuo luo	1
+卓洛的故乡	zhuo luo de gu xiang	1
+灼心	zhuo xin	1
+紫罗兰	zi luo lan	1
+自然系果实	zi ran xi guo shi	1
+总大将	zong da jiang	1
+诅咒果实	zu zhou guo shi	1
+钻石果实	zuan shi guo shi	1
+钻石果实乔兹	zuan shi guo shi qiao zi	1
+钻石乔兹	zuan shi qiao zi	1
+最后之海	zui hou zhi hai	1
+最心酸交班	zui xin suan jiao ban	1
+左手劈刀	zuo shou pi dao	1

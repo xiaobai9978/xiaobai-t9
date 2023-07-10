@@ -1,0 +1,6 @@
+Name: boost_hof
+Description: C++ function utility library
+URL: https://github.com/pfultz2/hof
+Version: .
+
+Cflags: -IC:/weasel/deps/boost_1_76_0/libs/hof/out/install/x64-Debug/include

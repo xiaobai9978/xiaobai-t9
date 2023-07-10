@@ -11,39 +11,20 @@
 #include <WeaselUtility.h>
 #include <winsparkle.h>
 #include <functional>
+#include <ShellScalingApi.h>
+#include <WinUser.h>
 #include <memory>
-
+#pragma comment(lib, "Shcore.lib")
 CAppModule _Module;
-
-typedef enum PROCESS_DPI_AWARENESS {
-	PROCESS_DPI_UNAWARE = 0,
-	PROCESS_SYSTEM_DPI_AWARE = 1,
-	PROCESS_PER_MONITOR_DPI_AWARE = 2
-} PROCESS_DPI_AWARENESS;
-
-typedef enum MONITOR_DPI_TYPE {
-	MDT_EFFECTIVE_DPI = 0,
-	MDT_ANGULAR_DPI = 1,
-	MDT_RAW_DPI = 2,
-	MDT_DEFAULT = MDT_EFFECTIVE_DPI
-} MONITOR_DPI_TYPE;
 
 int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lpstrCmdLine, int nCmdShow)
 {
-	InitVersion();
-
-	// Set DPI awareness (Windows 8.1+)
-	if (IsWindows8Point1OrGreater())
+	if( !IsWindowsBlueOrLaterEx() )
 	{
-		using PSPDA = HRESULT (WINAPI *)(PROCESS_DPI_AWARENESS);
-		HMODULE shcore_module = ::LoadLibrary(_T("shcore.dll"));
-		if (shcore_module != NULL)
-		{
-			PSPDA SetProcessDpiAwareness = (PSPDA)::GetProcAddress(shcore_module, "SetProcessDpiAwareness");
-			SetProcessDpiAwareness(PROCESS_SYSTEM_DPI_AWARE);
-			::FreeLibrary(shcore_module);
-		}
+		::MessageBox(NULL, L"僅支持Windows 8.1或更高版本系統", L"系統版本過低", MB_ICONERROR);
+		return 0;
 	}
+	SetProcessDpiAwareness(PROCESS_PER_MONITOR_DPI_AWARE);
 
 	// 防止服务进程开启输入法
 	ImmDisableIME(-1);
@@ -108,11 +89,7 @@ int WINAPI _tWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPTSTR lp
 	try
 	{
 		WeaselServerApp app;
-		if (IsWindowsVistaOrGreater())
-		{
-			PRAR RegisterApplicationRestart = (PRAR)::GetProcAddress(::GetModuleHandle(_T("kernel32.dll")), "RegisterApplicationRestart");
-			RegisterApplicationRestart(NULL, 0);
-		}
+		RegisterApplicationRestart(NULL, 0);
 		nRet = app.Run();
 	}
 	catch (...)

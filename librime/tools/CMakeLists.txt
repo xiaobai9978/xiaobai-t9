@@ -1,13 +1,15 @@
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 
-set(rime_api_console_src "rime_api_console.cc")
-add_executable(rime_api_console ${rime_api_console_src})
-target_link_libraries(rime_api_console
+set(rime_console_deps
   ${rime_library}
   ${rime_dict_library}
   ${rime_gears_library}
   ${rime_levers_library}
   ${rime_plugins_library})
+
+set(rime_api_console_src "rime_api_console.cc")
+add_executable(rime_api_console ${rime_api_console_src})
+target_link_libraries(rime_api_console ${rime_console_deps})
 
 set(rime_patch_src "rime_patch.cc")
 add_executable(rime_patch ${rime_patch_src})
@@ -20,12 +22,7 @@ if(NOT (WIN32 AND BUILD_SHARED_LIBS))
 
 set(rime_console_src "rime_console.cc")
 add_executable(rime_console ${rime_console_src})
-target_link_libraries(rime_console
-  ${rime_library}
-  ${rime_dict_library}
-  ${rime_gears_library}
-  ${rime_levers_library}
-  ${rime_plugins_library})
+target_link_libraries(rime_console ${rime_console_deps})
 
 set(rime_dict_manager_src "rime_dict_manager.cc")
 add_executable(rime_dict_manager ${rime_dict_manager_src})
@@ -41,10 +38,12 @@ target_link_libraries(rime_deployer
   ${rime_dict_library}
   ${rime_levers_library})
 
-install(TARGETS rime_dict_manager DESTINATION ${BIN_INSTALL_DIR})
 install(TARGETS rime_deployer DESTINATION ${BIN_INSTALL_DIR})
+install(TARGETS rime_dict_manager DESTINATION ${BIN_INSTALL_DIR})
 
 endif()
+
+install(TARGETS rime_patch DESTINATION ${BIN_INSTALL_DIR})
 
 file(COPY ${PROJECT_SOURCE_DIR}/data/minimal/default.yaml
      DESTINATION ${EXECUTABLE_OUTPUT_PATH})

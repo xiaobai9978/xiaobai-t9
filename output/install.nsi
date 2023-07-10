@@ -6,31 +6,35 @@
 
 Unicode true
 
+;--------------------------------
+; General
+
 !ifndef WEASEL_VERSION
-!define WEASEL_VERSION 2020.06.01
+!define WEASEL_VERSION 2023.06.14
 !endif
 
 !ifndef WEASEL_BUILD
 !define WEASEL_BUILD 0
 !endif
 
-!define WEASEL_ROOT $INSTDIR\weasel-${WEASEL_VERSION}
+!define WEASEL_ROOT $INSTDIR\xiaobait9-${WEASEL_VERSION}
+!define REG_UNINST_KEY "Software\Microsoft\Windows\CurrentVersion\Uninstall\Weasel"
 
 ; The name of the installer
 Name "小白T9输入法 ${WEASEL_VERSION}"
 
 ; The file to write
-OutFile "archives\weasel-${WEASEL_VERSION}.${WEASEL_BUILD}-installer.exe"
+OutFile "archives\xiaobait9-${WEASEL_VERSION}.${WEASEL_BUILD}-installer.exe"
 
 VIProductVersion "${WEASEL_VERSION}.${WEASEL_BUILD}"
 VIAddVersionKey /LANG=2052 "ProductName" "小白T9输入法"
-VIAddVersionKey /LANG=2052 "Comments" "Powered by RIME"
+VIAddVersionKey /LANG=2052 "Comments" "Powered by RIME | 中州韻輸入法引擎"
 VIAddVersionKey /LANG=2052 "CompanyName" "xiaobai.pro"
 VIAddVersionKey /LANG=2052 "LegalCopyright" "Copyleft RIME Developers"
 VIAddVersionKey /LANG=2052 "FileDescription" "小白T9输入法"
 VIAddVersionKey /LANG=2052 "FileVersion" "${WEASEL_VERSION}"
 
-!define MUI_ICON ..\resource\xiaobait9.ico
+!define MUI_ICON ..\resource\weasel.ico
 SetCompressor /SOLID lzma
 
 ; The default installation directory
@@ -38,7 +42,7 @@ InstallDir $PROGRAMFILES\xiaobait9
 
 ; Registry key to check for directory (so if you install again, it will
 ; overwrite the old one automatically)
-InstallDirRegKey HKLM "Software\Rime\xiaobait9" "InstallDir"
+InstallDirRegKey HKLM "Software\Rime\Weasel" "InstallDir"
 
 ; Request application privileges for Windows Vista
 RequestExecutionLevel admin
@@ -60,9 +64,56 @@ RequestExecutionLevel admin
 
 ; Languages
 
-!insertmacro MUI_LANGUAGE "SimpChinese"
 !insertmacro MUI_LANGUAGE "TradChinese"
+LangString DISPLAYNAME ${LANG_TRADCHINESE} "小白T9输入法"
+LangString LNKFORMANUAL ${LANG_TRADCHINESE} "【小白T9输入法】說明書"
+LangString LNKFORSETTING ${LANG_TRADCHINESE} "【小白T9输入法】輸入法設定"
+LangString LNKFORDICT ${LANG_TRADCHINESE} "【小白T9输入法】用戶詞典管理"
+LangString LNKFORSYNC ${LANG_TRADCHINESE} "【小白T9输入法】用戶資料同步"
+LangString LNKFORCONFIG ${LANG_TRADCHINESE} "【小白T9输入法】细节设置"
+LangString LNKFORT9SKIN ${LANG_TRADCHINESE} "【小白T9输入法】皮肤编辑器"
+LangString LNKFORT9keyboard ${LANG_TRADCHINESE} "【小白T9输入法】软键盘"
+LangString LNKFORDEPLOY ${LANG_TRADCHINESE} "【小白T9输入法】重新部署"
+LangString LNKFORSERVER ${LANG_TRADCHINESE} "小白T9输入法算法服務"
+LangString LNKFORUSERFOLDER ${LANG_TRADCHINESE} "【小白T9输入法】用戶文件夾"
+LangString LNKFORAPPFOLDER ${LANG_TRADCHINESE} "【小白T9输入法】程序文件夾"
+LangString LNKFORUPDATER ${LANG_TRADCHINESE} "【小白T9输入法】檢查新版本"
+LangString LNKFORSETUP ${LANG_TRADCHINESE} "【小白T9输入法】安裝選項"
+LangString LNKFORUNINSTALL ${LANG_TRADCHINESE} "卸載小白T9输入法"
 
+!insertmacro MUI_LANGUAGE "SimpChinese"
+LangString DISPLAYNAME ${LANG_SIMPCHINESE} "小白T9输入法"
+LangString LNKFORMANUAL ${LANG_SIMPCHINESE} "【小白T9输入法】说明书"
+LangString LNKFORSETTING ${LANG_SIMPCHINESE} "【小白T9输入法】输入法设定"
+LangString LNKFORDICT ${LANG_SIMPCHINESE} "【小白T9输入法】用户词典管理"
+LangString LNKFORSYNC ${LANG_SIMPCHINESE} "【小白T9输入法】用户资料同步"
+LangString LNKFORCONFIG ${LANG_SIMPCHINESE} "【小白T9输入法】细节设置"
+LangString LNKFORT9SKIN ${LANG_SIMPCHINESE} "【小白T9输入法】皮肤编辑器"
+LangString LNKFORT9keyboard ${LANG_SIMPCHINESE} "【小白T9输入法】软键盘"
+LangString LNKFORDEPLOY ${LANG_SIMPCHINESE} "【小白T9输入法】重新部署"
+LangString LNKFORSERVER ${LANG_SIMPCHINESE} "小白T9输入法算法服务"
+LangString LNKFORUSERFOLDER ${LANG_SIMPCHINESE} "【小白T9输入法】用户文件夹"
+LangString LNKFORAPPFOLDER ${LANG_SIMPCHINESE} "【小白T9输入法】程序文件夹"
+LangString LNKFORUPDATER ${LANG_SIMPCHINESE} "【小白T9输入法】检查新版本"
+LangString LNKFORSETUP ${LANG_SIMPCHINESE} "【小白T9输入法】安装选项"
+LangString LNKFORUNINSTALL ${LANG_SIMPCHINESE} "卸载小白T9输入法"
+
+!insertmacro MUI_LANGUAGE "English"
+LangString DISPLAYNAME ${LANG_ENGLISH} "xiaobaiT9"
+LangString LNKFORMANUAL ${LANG_ENGLISH} "[xiaobaiT9] Manual"
+LangString LNKFORSETTING ${LANG_ENGLISH} "[xiaobaiT9] Settings"
+LangString LNKFORDICT ${LANG_ENGLISH} "[xiaobaiT9] Dictionary Manager"
+LangString LNKFORSYNC ${LANG_ENGLISH} "[xiaobaiT9] Sync User Profile"
+LangString LNKFORCONFIG ${LANG_ENGLISH} "[xiaobaiT9] Config"
+LangString LNKFORT9SKIN ${LANG_ENGLISH} "[xiaobaiT9] T9 Skin"
+LangString LNKFORT9keyboard ${LANG_ENGLISH} "[xiaobaiT9] T9 keyboard"
+LangString LNKFORDEPLOY ${LANG_ENGLISH} "[xiaobaiT9] Deploy"
+LangString LNKFORSERVER ${LANG_ENGLISH} "xiaobaiT9 Server"
+LangString LNKFORUSERFOLDER ${LANG_ENGLISH} "[xiaobaiT9] User Folder"
+LangString LNKFORAPPFOLDER ${LANG_ENGLISH} "[xiaobaiT9] App Folder"
+LangString LNKFORUPDATER ${LANG_ENGLISH} "[xiaobaiT9] Check for Updates"
+LangString LNKFORSETUP ${LANG_ENGLISH} "[xiaobaiT9] Installation Preference"
+LangString LNKFORUNINSTALL ${LANG_ENGLISH} "Uninstall xiaobaiT9"
 ;--------------------------------
 
 Function .onInit
@@ -117,7 +168,11 @@ Section "xiaobait9"
   RMDir /r $TEMP\weasel-backup
 
 program_files:
+  File "t9keyboard.exe"
+  File "t9configui.exe"
+  File "t9skin.exe"
   File "LICENSE.txt"
+  File "README.txt"
   File "README.txt"
   File "7-zip-license.txt"
   File "7z.dll"
@@ -153,10 +208,24 @@ program_files:
   File "data\*.yaml"
   File /nonfatal "data\*.txt"
   File /nonfatal "data\*.gram"
+
+  SetOutPath $INSTDIR\data\dicts
+  File "data\dicts\*.yaml"
+
+  SetOutPath $APPDATA\Rime
+  File "*.lua"
+  File "data\weasel.custom.yaml"
+
+
+  SetOutPath $APPDATA\Rime\opencc
+;  File "data\opencc\biaodianfuhao.txt"
+  File "data\opencc\emoji*"
+
+
   ; opencc data files
   SetOutPath $INSTDIR\data\opencc
   File "data\opencc\*.json"
-  File "data\opencc\*.ocd"
+  File "data\opencc\*.ocd*"
   ; images
   SetOutPath $INSTDIR\data\preview
   File "data\preview\*.png"
@@ -176,15 +245,19 @@ program_files:
 
   ExecWait '"$INSTDIR\WeaselSetup.exe" $R2'
 
+  ; Write the uninstall keys for Windows
+  WriteRegStr HKLM "${REG_UNINST_KEY}" "DisplayName" "$(DISPLAYNAME)"
+  WriteRegStr HKLM "${REG_UNINST_KEY}" "UninstallString" '"$INSTDIR\uninstall.exe"'
+  WriteRegStr HKLM "${REG_UNINST_KEY}"  "DisplayVersion" "${WEASEL_VERSION}.${WEASEL_BUILD}"
+  WriteRegStr HKLM "${REG_UNINST_KEY}"  "Publisher" "小白T9输入法"
+  WriteRegStr HKLM "${REG_UNINST_KEY}"  "URLInfoAbout" "https://xiaobai.pro/"
+  WriteRegStr HKLM "${REG_UNINST_KEY}"  "HelpLink" "https://note.youdao.com/s/GFwBIBK2"
+  WriteRegDWORD HKLM "${REG_UNINST_KEY}" "NoModify" 1
+  WriteRegDWORD HKLM "${REG_UNINST_KEY}" "NoRepair" 1
+  WriteUninstaller "$INSTDIR\uninstall.exe"
+
   ; run as user...
   ExecWait "$INSTDIR\WeaselDeployer.exe /install"
-
-  ; Write the uninstall keys for Windows
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\xiaobait9" "DisplayName" "小白T9输入法"
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\xiaobait9" "UninstallString" '"$INSTDIR\uninstall.exe"'
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\xiaobait9" "NoModify" 1
-  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\xiaobait9" "NoRepair" 1
-  WriteUninstaller "$INSTDIR\uninstall.exe"
 
   ; Write autorun key
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Run" "WeaselServer" "$INSTDIR\WeaselServer.exe"
@@ -200,18 +273,21 @@ SectionEnd
 ; Optional section (can be disabled by the user)
 Section "Start Menu Shortcuts"
   SetShellVarContext all
-  CreateDirectory "$SMPROGRAMS\小白T9输入法"
-  CreateShortCut "$SMPROGRAMS\小白T9输入法\【小白T9输入法】说明书.lnk" "$INSTDIR\README.txt"
-  CreateShortCut "$SMPROGRAMS\小白T9输入法\【小白T9输入法】输入法设定.lnk" "$INSTDIR\WeaselDeployer.exe" "" "$SYSDIR\shell32.dll" 21
-  CreateShortCut "$SMPROGRAMS\小白T9输入法\【小白T9输入法】用户词典管理.lnk" "$INSTDIR\WeaselDeployer.exe" "/dict" "$SYSDIR\shell32.dll" 6
-  CreateShortCut "$SMPROGRAMS\小白T9输入法\【小白T9输入法】用户资料同步.lnk" "$INSTDIR\WeaselDeployer.exe" "/sync" "$SYSDIR\shell32.dll" 26
-  CreateShortCut "$SMPROGRAMS\小白T9输入法\【小白T9输入法】重新部署.lnk" "$INSTDIR\WeaselDeployer.exe" "/deploy" "$SYSDIR\shell32.dll" 144
-  CreateShortCut "$SMPROGRAMS\小白T9输入法\小白T9输入法算法服务.lnk" "$INSTDIR\WeaselServer.exe" "" "$INSTDIR\WeaselServer.exe" 0
-  CreateShortCut "$SMPROGRAMS\小白T9输入法\【小白T9输入法】用户文件夹.lnk" "$INSTDIR\WeaselServer.exe" "/userdir" "$SYSDIR\shell32.dll" 126
-  CreateShortCut "$SMPROGRAMS\小白T9输入法\【小白T9输入法】程序文件夹.lnk" "$INSTDIR\WeaselServer.exe" "/weaseldir" "$SYSDIR\shell32.dll" 19
-  CreateShortCut "$SMPROGRAMS\小白T9输入法\【小白T9输入法】检查新版本.lnk" "$INSTDIR\WeaselServer.exe" "/update" "$SYSDIR\shell32.dll" 13
-  CreateShortCut "$SMPROGRAMS\小白T9输入法\【小白T9输入法】安装选项.lnk" "$INSTDIR\WeaselSetup.exe" "" "$SYSDIR\shell32.dll" 162
-  CreateShortCut "$SMPROGRAMS\小白T9输入法\卸载小白T9输入法.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
+  CreateDirectory "$SMPROGRAMS\$(DISPLAYNAME)"
+  CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORMANUAL).lnk" "https://note.youdao.com/s/GFwBIBK2"
+  CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORSETTING).lnk" "$INSTDIR\WeaselDeployer.exe" "" "$SYSDIR\shell32.dll" 21
+  CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORDICT).lnk" "$INSTDIR\WeaselDeployer.exe" "/dict" "$SYSDIR\shell32.dll" 6
+  CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORSYNC).lnk" "$INSTDIR\WeaselDeployer.exe" "/sync" "$SYSDIR\shell32.dll" 26
+  CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORDEPLOY).lnk" "$INSTDIR\WeaselDeployer.exe" "/deploy" "$SYSDIR\shell32.dll" 144
+  CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORSERVER).lnk" "$INSTDIR\WeaselServer.exe" "" "$INSTDIR\WeaselServer.exe" 0
+  CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORCONFIG).lnk" "$INSTDIR\t9configui.exe" "" "$INSTDIR\t9configui.exe"
+  CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORT9SKIN).lnk" "$INSTDIR\t9skin.exe" "" "$INSTDIR\t9skin.exe"
+  CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORt9keyboard).lnk" "$INSTDIR\t9keyboard.exe" "" "$INSTDIR\t9keyboard.exe"
+  CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORUSERFOLDER).lnk" "$INSTDIR\WeaselServer.exe" "/userdir" "$SYSDIR\shell32.dll" 126
+  CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORAPPFOLDER).lnk" "$INSTDIR\WeaselServer.exe" "/weaseldir" "$SYSDIR\shell32.dll" 19
+  CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORUPDATER).lnk" "$INSTDIR\WeaselServer.exe" "/update" "$SYSDIR\shell32.dll" 13
+  CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORSETUP).lnk" "$INSTDIR\WeaselSetup.exe" "" "$SYSDIR\shell32.dll" 162
+  CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORUNINSTALL).lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
 
 SectionEnd
 
@@ -226,7 +302,7 @@ Section "Uninstall"
   ExecWait '"$INSTDIR\WeaselSetup.exe" /u'
 
   ; Remove registry keys
-  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\xiaobait9"
+  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Weasel"
   DeleteRegValue HKLM "Software\Microsoft\Windows\CurrentVersion\Run" "WeaselServer"
   DeleteRegKey HKLM SOFTWARE\Rime
 
@@ -241,11 +317,10 @@ Section "Uninstall"
   RMDir /REBOOTOK "$INSTDIR\data"
   RMDir /REBOOTOK "$INSTDIR"
   SetShellVarContext all
-  Delete /REBOOTOK "$SMPROGRAMS\小白T9输入法\*.*"
-  RMDir /REBOOTOK "$SMPROGRAMS\小白T9输入法"
+  Delete /REBOOTOK "$SMPROGRAMS\$(DISPLAYNAME)\*.*"
+  RMDir /REBOOTOK "$SMPROGRAMS\$(DISPLAYNAME)"
 
   ; Prompt reboot
   SetRebootFlag true
 
 SectionEnd
-

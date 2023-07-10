@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/google_benchmark-subbuild/CMakeFiles/google_benchmark-populate"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/google_benchmark-subbuild/CMakeFiles/google_benchmark-populate.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/google_benchmark-subbuild/CMakeFiles/google_benchmark-populate-complete.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/google_benchmark-subbuild/google_benchmark-populate-prefix/src/google_benchmark-populate-stamp/google_benchmark-populate-build.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/google_benchmark-subbuild/google_benchmark-populate-prefix/src/google_benchmark-populate-stamp/google_benchmark-populate-configure.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/google_benchmark-subbuild/google_benchmark-populate-prefix/src/google_benchmark-populate-stamp/google_benchmark-populate-download.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/google_benchmark-subbuild/google_benchmark-populate-prefix/src/google_benchmark-populate-stamp/google_benchmark-populate-install.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/google_benchmark-subbuild/google_benchmark-populate-prefix/src/google_benchmark-populate-stamp/google_benchmark-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/google_benchmark-subbuild/google_benchmark-populate-prefix/src/google_benchmark-populate-stamp/google_benchmark-populate-patch.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/google_benchmark-subbuild/google_benchmark-populate-prefix/src/google_benchmark-populate-stamp/google_benchmark-populate-test.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/histogram/out/build/x64-Debug/_deps/google_benchmark-subbuild/google_benchmark-populate-prefix/src/google_benchmark-populate-stamp/google_benchmark-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"google_benchmark-populate"
+		],
+		"name" : "google_benchmark-populate"
+	}
+}

@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/mp11/out/build/x64-Debug/_deps/boostorg_assert-subbuild/CMakeFiles/boostorg_assert-populate"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/mp11/out/build/x64-Debug/_deps/boostorg_assert-subbuild/CMakeFiles/boostorg_assert-populate.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/mp11/out/build/x64-Debug/_deps/boostorg_assert-subbuild/CMakeFiles/boostorg_assert-populate-complete.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/mp11/out/build/x64-Debug/_deps/boostorg_assert-subbuild/boostorg_assert-populate-prefix/src/boostorg_assert-populate-stamp/boostorg_assert-populate-build.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/mp11/out/build/x64-Debug/_deps/boostorg_assert-subbuild/boostorg_assert-populate-prefix/src/boostorg_assert-populate-stamp/boostorg_assert-populate-configure.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/mp11/out/build/x64-Debug/_deps/boostorg_assert-subbuild/boostorg_assert-populate-prefix/src/boostorg_assert-populate-stamp/boostorg_assert-populate-download.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/mp11/out/build/x64-Debug/_deps/boostorg_assert-subbuild/boostorg_assert-populate-prefix/src/boostorg_assert-populate-stamp/boostorg_assert-populate-install.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/mp11/out/build/x64-Debug/_deps/boostorg_assert-subbuild/boostorg_assert-populate-prefix/src/boostorg_assert-populate-stamp/boostorg_assert-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/mp11/out/build/x64-Debug/_deps/boostorg_assert-subbuild/boostorg_assert-populate-prefix/src/boostorg_assert-populate-stamp/boostorg_assert-populate-patch.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/mp11/out/build/x64-Debug/_deps/boostorg_assert-subbuild/boostorg_assert-populate-prefix/src/boostorg_assert-populate-stamp/boostorg_assert-populate-test.rule"
+		},
+		{
+			"file" : "C:/weasel/deps/boost_1_76_0/libs/mp11/out/build/x64-Debug/_deps/boostorg_assert-subbuild/boostorg_assert-populate-prefix/src/boostorg_assert-populate-stamp/boostorg_assert-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"boostorg_assert-populate"
+		],
+		"name" : "boostorg_assert-populate"
+	}
+}

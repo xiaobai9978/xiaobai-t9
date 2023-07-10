@@ -5,6 +5,9 @@ customization:
   modified_time: "Wed May 27 16:17:58 2020"
   rime_version: 1.5.3
 patch:
+  "style/color_scheme": xiaobai
+  "style/horizontal": false
   menu/page_size: 9
   schema_list:
     - {schema: xiaobai_simp}
+    

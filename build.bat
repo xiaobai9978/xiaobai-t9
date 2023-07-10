@@ -6,7 +6,7 @@ if not exist env.bat copy env.bat.template env.bat
 
 if exist env.bat call env.bat
 
-if not defined WEASEL_VERSION set WEASEL_VERSION=0.14.3
+if not defined WEASEL_VERSION set WEASEL_VERSION=0.15.0
 if not defined WEASEL_BUILD set WEASEL_BUILD=0
 if not defined WEASEL_ROOT set WEASEL_ROOT=%CD%
 
@@ -27,14 +27,14 @@ echo.
 
 if not defined BJAM_TOOLSET (
   rem the number actually means platform toolset, not %VisualStudioVersion%
-  set BJAM_TOOLSET=msvc-14.0
+  set BJAM_TOOLSET=msvc-14.2
 )
 
 if not defined PLATFORM_TOOLSET (
-  set PLATFORM_TOOLSET=v140_xp
+  set PLATFORM_TOOLSET=v142
 )
 
-if defined DEVTOOLS_PATH set PATH=C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140
+if defined DEVTOOLS_PATH set PATH=%DEVTOOLS_PATH%%PATH%
 
 set build_config=Release
 set build_option=/t:Build
@@ -109,7 +109,10 @@ if %build_rime% == 1 (
   )
 
   cd %WEASEL_ROOT%\librime
-  if not exist librime\thirdparty\lib\opencc.lib (
+  if not exist env.bat (
+    copy %WEASEL_ROOT%\env.bat env.bat
+  )
+  if not exist thirdparty\lib\opencc.lib (
     call build.bat thirdparty %rime_build_variant%
     if errorlevel 1 goto error
   )
@@ -129,7 +132,7 @@ if %build_weasel% == 1 (
   if not exist output\data\essay.txt (
     set build_data=1
   )
-  if not exist output\data\opencc\TSCharacters.ocd (
+  if not exist output\data\opencc\TSCharacters.ocd* (
     set build_opencc=1
   )
 )
@@ -200,12 +203,12 @@ set BJAM_OPTIONS_X64=%BJAM_OPTIONS_COMMON%^
  --stagedir=stage_x64
 
 cd /d %BOOST_ROOT%
-if not exist bjam.exe call bootstrap.bat
+if not exist b2.exe call bootstrap.bat
 if errorlevel 1 goto error
-bjam %BJAM_OPTIONS_X86% stage %BOOST_COMPILED_LIBS%
+b2 %BJAM_OPTIONS_X86% stage %BOOST_COMPILED_LIBS%
 if errorlevel 1 goto error
 if %build_x64% == 1 (
-  bjam %BJAM_OPTIONS_X64% stage %BOOST_COMPILED_LIBS%
+  b2 %BJAM_OPTIONS_X64% stage %BOOST_COMPILED_LIBS%
   if errorlevel 1 goto error
 )
 exit /b
@@ -216,6 +219,7 @@ copy %WEASEL_ROOT%\README.md output\README.txt
 copy %WEASEL_ROOT%\plum\rime-install.bat output\
 set plum_dir=plum
 set rime_dir=output/data
+set WSLENV=plum_dir:rime_dir
 bash plum/rime-install %WEASEL_BUNDLED_RECIPES%
 if errorlevel 1 goto error
 exit /b

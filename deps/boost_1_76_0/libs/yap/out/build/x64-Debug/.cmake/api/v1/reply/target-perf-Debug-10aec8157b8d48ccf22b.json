@@ -1,0 +1,101 @@
+{
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_custom_target"
+		],
+		"files" : 
+		[
+			"perf/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 51,
+				"parent" : 0
+			}
+		]
+	},
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 1,
+			"id" : "arithmetic_perf::@d72c7e748fae990589cb"
+		},
+		{
+			"id" : "disass_dump.update_v1_with_yap::@d72c7e748fae990589cb"
+		},
+		{
+			"id" : "disass_dump.eval_as_cpp_expr::@d72c7e748fae990589cb"
+		},
+		{
+			"id" : "disass_dump.eval_as_yap_expr::@d72c7e748fae990589cb"
+		},
+		{
+			"id" : "disass_dump.eval_as_cpp_expr_4x::@d72c7e748fae990589cb"
+		},
+		{
+			"id" : "disass_dump.get_d1_by_hand::@d72c7e748fae990589cb"
+		},
+		{
+			"backtrace" : 1,
+			"id" : "map_assign_perf::@d72c7e748fae990589cb"
+		},
+		{
+			"id" : "disass_dump.eval_as_yap_expr_4x::@d72c7e748fae990589cb"
+		},
+		{
+			"id" : "disass_dump.get_d1_with_yap::@d72c7e748fae990589cb"
+		},
+		{
+			"id" : "disass_dump.update_v1_by_hand::@d72c7e748fae990589cb"
+		}
+	],
+	"id" : "perf::@d72c7e748fae990589cb",
+	"name" : "perf",
+	"paths" : 
+	{
+		"build" : "perf",
+		"source" : "perf"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				1
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"isGenerated" : true,
+			"path" : "out/build/x64-Debug/perf/CMakeFiles/perf",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/x64-Debug/perf/CMakeFiles/perf.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "UTILITY"
+}

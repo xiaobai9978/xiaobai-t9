@@ -1,0 +1,4 @@
+C:/weasel/deps/boost_1_76_0/libs/test/doc/snippet/dataset_1/out/build/x64-Debug/CMakeFiles/test_executable.dir
+C:/weasel/deps/boost_1_76_0/libs/test/doc/snippet/dataset_1/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
+C:/weasel/deps/boost_1_76_0/libs/test/doc/snippet/dataset_1/out/build/x64-Debug/CMakeFiles/test.dir
+C:/weasel/deps/boost_1_76_0/libs/test/doc/snippet/dataset_1/out/build/x64-Debug/CMakeFiles/edit_cache.dir

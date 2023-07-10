@@ -1,0 +1,14 @@
+# Target labels
+ boostorg_config-populate
+# Source files and their labels
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_config-subbuild/CMakeFiles/boostorg_config-populate
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_config-subbuild/CMakeFiles/boostorg_config-populate.rule
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_config-subbuild/CMakeFiles/boostorg_config-populate-complete.rule
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_config-subbuild/boostorg_config-populate-prefix/src/boostorg_config-populate-stamp/boostorg_config-populate-build.rule
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_config-subbuild/boostorg_config-populate-prefix/src/boostorg_config-populate-stamp/boostorg_config-populate-configure.rule
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_config-subbuild/boostorg_config-populate-prefix/src/boostorg_config-populate-stamp/boostorg_config-populate-download.rule
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_config-subbuild/boostorg_config-populate-prefix/src/boostorg_config-populate-stamp/boostorg_config-populate-install.rule
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_config-subbuild/boostorg_config-populate-prefix/src/boostorg_config-populate-stamp/boostorg_config-populate-mkdir.rule
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_config-subbuild/boostorg_config-populate-prefix/src/boostorg_config-populate-stamp/boostorg_config-populate-patch.rule
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_config-subbuild/boostorg_config-populate-prefix/src/boostorg_config-populate-stamp/boostorg_config-populate-test.rule
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_config-subbuild/boostorg_config-populate-prefix/src/boostorg_config-populate-stamp/boostorg_config-populate-update.rule

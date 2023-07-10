@@ -1,32 +1,34 @@
-RIME_ROOT = $(CURDIR)
+RIME_ROOT ?= $(CURDIR)
 
-sharedir = $(DESTDIR)/usr/share
-bindir = $(DESTDIR)/usr/bin
+prefix ?= $(DESTDIR)/usr
 
-build = build
-librime-static: build = build-static
-debug install-debug uninstall-debug test-debug: build = debug
+debug install-debug uninstall-debug test-debug: build ?= debug
+build ?= build
 
-.PHONY: all thirdparty xcode clean \
+.PHONY: all deps thirdparty xcode clean \
 librime librime-static install-librime uninstall-librime \
 release debug test install uninstall install-debug uninstall-debug
 
 all: release
 
-thirdparty:
-	make -f thirdparty.mk
+# `thirdparty` is deprecated in favor of `deps`
+deps thirdparty:
+	$(MAKE) -f deps.mk
+
+deps/%:
+	$(MAKE) -f deps.mk $(@:deps/%=%)
 
 thirdparty/%:
-	make -f thirdparty.mk $(@:thirdparty/%=%)
+	$(MAKE) -f deps.mk $(@:thirdparty/%=%)
 
 xcode:
-	make -f xcode.mk
+	$(MAKE) -f xcode.mk
 
 xcode/%:
-	make -f xcode.mk $(@:xcode/%=%)
+	$(MAKE) -f xcode.mk $(@:xcode/%=%)
 
 clean:
-	rm -Rf build build-static debug
+	rm -Rf build debug
 
 librime: release
 install-librime: install
@@ -34,7 +36,7 @@ uninstall-librime: uninstall
 
 librime-static:
 	cmake . -B$(build) \
-	-DCMAKE_INSTALL_PREFIX=/usr \
+	-DCMAKE_INSTALL_PREFIX=$(prefix) \
 	-DCMAKE_BUILD_TYPE=Release \
 	-DBUILD_STATIC=ON \
 	-DBUILD_SHARED_LIBS=OFF
@@ -42,22 +44,26 @@ librime-static:
 
 release:
 	cmake . -B$(build) \
-	-DCMAKE_INSTALL_PREFIX=/usr \
+	-DCMAKE_INSTALL_PREFIX=$(prefix) \
 	-DCMAKE_BUILD_TYPE=Release \
-	-DBUILD_MERGED_PLUGINS=OFF
+	-DBUILD_MERGED_PLUGINS=OFF \
+	-DENABLE_EXTERNAL_PLUGINS=ON
 	cmake --build $(build)
 
 merged-plugins:
 	cmake . -B$(build) \
-	-DCMAKE_INSTALL_PREFIX=/usr \
+	-DCMAKE_INSTALL_PREFIX=$(prefix) \
 	-DCMAKE_BUILD_TYPE=Release \
-	-DBUILD_MERGED_PLUGINS=ON
+	-DBUILD_MERGED_PLUGINS=ON \
+	-DENABLE_EXTERNAL_PLUGINS=OFF
 	cmake --build $(build)
 
 debug:
 	cmake . -B$(build) \
-	-DCMAKE_INSTALL_PREFIX=/usr \
-	-DCMAKE_BUILD_TYPE=Debug
+	-DCMAKE_INSTALL_PREFIX=$(prefix) \
+	-DCMAKE_BUILD_TYPE=Debug \
+	-DBUILD_MERGED_PLUGINS=OFF \
+	-DENABLE_EXTERNAL_PLUGINS=ON
 	cmake --build $(build)
 
 install:

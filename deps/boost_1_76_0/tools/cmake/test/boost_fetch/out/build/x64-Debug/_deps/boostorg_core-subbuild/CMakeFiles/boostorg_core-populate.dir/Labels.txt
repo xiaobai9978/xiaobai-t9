@@ -1,0 +1,14 @@
+# Target labels
+ boostorg_core-populate
+# Source files and their labels
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_core-subbuild/CMakeFiles/boostorg_core-populate
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_core-subbuild/CMakeFiles/boostorg_core-populate.rule
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_core-subbuild/CMakeFiles/boostorg_core-populate-complete.rule
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_core-subbuild/boostorg_core-populate-prefix/src/boostorg_core-populate-stamp/boostorg_core-populate-build.rule
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_core-subbuild/boostorg_core-populate-prefix/src/boostorg_core-populate-stamp/boostorg_core-populate-configure.rule
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_core-subbuild/boostorg_core-populate-prefix/src/boostorg_core-populate-stamp/boostorg_core-populate-download.rule
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_core-subbuild/boostorg_core-populate-prefix/src/boostorg_core-populate-stamp/boostorg_core-populate-install.rule
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_core-subbuild/boostorg_core-populate-prefix/src/boostorg_core-populate-stamp/boostorg_core-populate-mkdir.rule
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_core-subbuild/boostorg_core-populate-prefix/src/boostorg_core-populate-stamp/boostorg_core-populate-patch.rule
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_core-subbuild/boostorg_core-populate-prefix/src/boostorg_core-populate-stamp/boostorg_core-populate-test.rule
+C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_fetch/out/build/x64-Debug/_deps/boostorg_core-subbuild/boostorg_core-populate-prefix/src/boostorg_core-populate-stamp/boostorg_core-populate-update.rule
