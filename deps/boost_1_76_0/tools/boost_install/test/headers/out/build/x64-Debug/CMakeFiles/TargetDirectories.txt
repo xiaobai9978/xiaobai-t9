@@ -1,0 +1,5 @@
+C:/weasel/deps/boost_1_76_0/tools/boost_install/test/headers/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+C:/weasel/deps/boost_1_76_0/tools/boost_install/test/headers/out/build/x64-Debug/CMakeFiles/main.dir
+C:/weasel/deps/boost_1_76_0/tools/boost_install/test/headers/out/build/x64-Debug/CMakeFiles/check.dir
+C:/weasel/deps/boost_1_76_0/tools/boost_install/test/headers/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
+C:/weasel/deps/boost_1_76_0/tools/boost_install/test/headers/out/build/x64-Debug/CMakeFiles/test.dir

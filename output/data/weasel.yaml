@@ -12,16 +12,28 @@ app_options:
 style:
   color_scheme: xiaobai
   font_face: Microsoft YaHei
+  label_font_face: Microsoft YaHei
+  comment_font_face: Microsoft YaHei
   font_point: 14
+  label_font_point: 14
+  comment_font_point: 14
   horizontal: false
   fullscreen: false
   inline_preedit: false
   preedit_type: composition
   display_tray_icon: false
   label_format: "%s."
+  mark_text: ""
+  vertical_auto_reverse: false
+  vertical_text: false
+  vertical_text_left_to_right: false
+  vertical_text_with_wrap: false
   layout:
+    align_type: center
+    max_width: 0	#set 0 to disable max width
     min_width: 160
     min_height: 0
+    max_height: 0	#set 0 to disable max height
     border_width: 3
     margin_x: 12
     margin_y: 12
@@ -29,20 +41,25 @@ style:
     candidate_spacing: 5
     hilite_spacing: 4
     hilite_padding: 2
-    round_corner: 4
+    round_corner: 4   #别名 hilited_corner_radius
+    corner_radius: 4
+    shadow_radius: 0
+    shadow_offset_x: 4
+    shadow_offset_y: 4
 
 preset_color_schemes:
   xiaobai:
     name: 小白输入法／xiaobai
-    label_color: 0x00FF80
-    back_color: 0xeceeee
-    border_color: 0xe0e0e0
-    text_color: 0x000000
-    hilited_text_color: 0x000000
-    hilited_back_color: 0xd4d4d4
-    hilited_candidate_text_color: 0xffffff
-    hilited_candidate_back_color: 0xfa3a0a
-    candidate_text_color: 0x000000
-    comment_text_color: 0x4f4f4f
-    hilited_comment_text_color: 0xfdbdad
-    label_color: 0x4f4f4f
+    text_color: 0xFF000000
+    back_color: 0xFFeceeee
+    shadow_color: 0xFF000000
+    border_color: 0xeFF0e0e0
+    hilited_text_color: 0xFF000000
+    hilited_back_color: 0xFFd4d4d4
+    hilited_shadow_color: 0xFF000000
+    hilited_candidate_text_color: 0xFFffffff
+    hilited_candidate_back_color: 0xFFfa3a0a
+    hilited_candidate_shadow_color: 0xFF000000
+    candidate_text_color: 0xFF000000
+    candidate_back_color: 0xFFeceeee
+    candidate_shadow_color: 0xFF000000

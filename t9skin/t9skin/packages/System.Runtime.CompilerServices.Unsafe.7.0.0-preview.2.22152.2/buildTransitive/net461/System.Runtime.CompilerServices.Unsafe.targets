@@ -1,0 +1,6 @@
+<Project InitialTargets="NETStandardCompatError_System_Runtime_CompilerServices_Unsafe_net462">
+  <Target Name="NETStandardCompatError_System_Runtime_CompilerServices_Unsafe_net462"
+          Condition="'$(SuppressTfmSupportBuildWarnings)' == ''">
+    <Error Text="System.Runtime.CompilerServices.Unsafe doesn't support $(TargetFramework). Consider updating your TargetFramework to net462 or later." />
+  </Target>
+</Project>

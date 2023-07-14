@@ -1,0 +1,575 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3
+					],
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19,
+						20,
+						21,
+						22,
+						23,
+						24,
+						25,
+						26,
+						27,
+						28,
+						29,
+						30,
+						31,
+						32,
+						33,
+						34,
+						35,
+						36,
+						37,
+						38,
+						39,
+						40,
+						41,
+						42,
+						43,
+						44,
+						45,
+						46,
+						47,
+						48,
+						49,
+						50
+					]
+				},
+				{
+					"build" : "boostorg/assert",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 1,
+					"source" : "C:/weasel/deps/boost_1_76_0/libs/assert"
+				},
+				{
+					"build" : "boostorg/config",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 2,
+					"source" : "C:/weasel/deps/boost_1_76_0/libs/config"
+				},
+				{
+					"build" : "boostorg/core",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.5"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 3,
+					"source" : "C:/weasel/deps/boost_1_76_0/libs/core"
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"childIndexes" : 
+					[
+						1,
+						2,
+						3
+					],
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "boost_cmake_test",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19,
+						20,
+						21,
+						22,
+						23,
+						24,
+						25,
+						26,
+						27,
+						28,
+						29,
+						30,
+						31,
+						32,
+						33,
+						34,
+						35,
+						36,
+						37,
+						38,
+						39,
+						40,
+						41,
+						42,
+						43,
+						44,
+						45,
+						46,
+						47,
+						48,
+						49,
+						50
+					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						1
+					],
+					"name" : "boost_assert",
+					"parentIndex" : 0
+				},
+				{
+					"directoryIndexes" : 
+					[
+						2
+					],
+					"name" : "boost_config",
+					"parentIndex" : 0
+				},
+				{
+					"directoryIndexes" : 
+					[
+						3
+					],
+					"name" : "boost_core",
+					"parentIndex" : 0
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Continuous::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Continuous-Debug-cf9a5be77b5bea8ddffb.json",
+					"name" : "Continuous",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ContinuousBuild::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ContinuousBuild-Debug-2f69a44ba2f61773839f.json",
+					"name" : "ContinuousBuild",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ContinuousConfigure::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ContinuousConfigure-Debug-0fbd3ba24d2bda9e2934.json",
+					"name" : "ContinuousConfigure",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ContinuousCoverage::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ContinuousCoverage-Debug-b54c34dfb86e8449ab85.json",
+					"name" : "ContinuousCoverage",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ContinuousMemCheck::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ContinuousMemCheck-Debug-10979d66146e8a3cbc9c.json",
+					"name" : "ContinuousMemCheck",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ContinuousStart::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ContinuousStart-Debug-54e18af97e7517080579.json",
+					"name" : "ContinuousStart",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ContinuousSubmit::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ContinuousSubmit-Debug-1547436745df7b5506d2.json",
+					"name" : "ContinuousSubmit",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ContinuousTest::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ContinuousTest-Debug-eedc3ab82fef0271cb96.json",
+					"name" : "ContinuousTest",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ContinuousUpdate::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ContinuousUpdate-Debug-516fa7176ef0202acd4f.json",
+					"name" : "ContinuousUpdate",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Experimental::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Experimental-Debug-5adc8e83f18abcca020e.json",
+					"name" : "Experimental",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ExperimentalBuild::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ExperimentalBuild-Debug-547891e1921908e5566d.json",
+					"name" : "ExperimentalBuild",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ExperimentalConfigure::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ExperimentalConfigure-Debug-c313f747deb5448de7a7.json",
+					"name" : "ExperimentalConfigure",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ExperimentalCoverage::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ExperimentalCoverage-Debug-f8cebe2e45b134c2a3dd.json",
+					"name" : "ExperimentalCoverage",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ExperimentalMemCheck::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ExperimentalMemCheck-Debug-be1ae4e93737f249c91b.json",
+					"name" : "ExperimentalMemCheck",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ExperimentalStart::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ExperimentalStart-Debug-7c9e7c8e2eb03dd259f2.json",
+					"name" : "ExperimentalStart",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ExperimentalSubmit::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ExperimentalSubmit-Debug-89c232343cfcac9a2832.json",
+					"name" : "ExperimentalSubmit",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ExperimentalTest::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ExperimentalTest-Debug-86666db00efa32124a0b.json",
+					"name" : "ExperimentalTest",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ExperimentalUpdate::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ExperimentalUpdate-Debug-ad0454ca851798be1560.json",
+					"name" : "ExperimentalUpdate",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Nightly::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Nightly-Debug-9ff4109d2e417ab945ee.json",
+					"name" : "Nightly",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "NightlyBuild::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-NightlyBuild-Debug-2a8271cd4cf20b8a946e.json",
+					"name" : "NightlyBuild",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "NightlyConfigure::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-NightlyConfigure-Debug-954838d3edb937f0c595.json",
+					"name" : "NightlyConfigure",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "NightlyCoverage::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-NightlyCoverage-Debug-368530d87801927b6ef4.json",
+					"name" : "NightlyCoverage",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "NightlyMemCheck::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-NightlyMemCheck-Debug-29d9af16426dcb3b0687.json",
+					"name" : "NightlyMemCheck",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "NightlyMemoryCheck::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-NightlyMemoryCheck-Debug-cfc116db3e07ea63f1d5.json",
+					"name" : "NightlyMemoryCheck",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "NightlyStart::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-NightlyStart-Debug-c6ee640eda309514f0fa.json",
+					"name" : "NightlyStart",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "NightlySubmit::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-NightlySubmit-Debug-7ebac2f1657d8f8beb9a.json",
+					"name" : "NightlySubmit",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "NightlyTest::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-NightlyTest-Debug-d83bb991d1aee93aeb7e.json",
+					"name" : "NightlyTest",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "NightlyUpdate::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-NightlyUpdate-Debug-d2ea8e4fb2c6ba336c80.json",
+					"name" : "NightlyUpdate",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boost_cmake_test-arguments_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boost_cmake_test-arguments_cpp-Debug-6aa86be8dfc0e1f6dea0.json",
+					"name" : "boost_cmake_test-arguments_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boost_cmake_test-compile_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boost_cmake_test-compile_cpp-Debug-d8a84d8f3ce9768c74c3.json",
+					"name" : "boost_cmake_test-compile_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boost_cmake_test-compile_fail_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boost_cmake_test-compile_fail_cpp-Debug-8e8c11150e1f38bb644a.json",
+					"name" : "boost_cmake_test-compile_fail_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boost_cmake_test-emits_warning_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boost_cmake_test-emits_warning_cpp-Debug-3731dead104661f55381.json",
+					"name" : "boost_cmake_test-emits_warning_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boost_cmake_test-link_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boost_cmake_test-link_cpp-Debug-a9a8cb6fd5b58023295f.json",
+					"name" : "boost_cmake_test-link_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boost_cmake_test-link_fail_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boost_cmake_test-link_fail_cpp-Debug-1c3669a83cf43bd39e7a.json",
+					"name" : "boost_cmake_test-link_fail_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boost_cmake_test-requires_no_exceptions_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boost_cmake_test-requires_no_exceptions_cpp-Debug-fac3c37273844105f630.json",
+					"name" : "boost_cmake_test-requires_no_exceptions_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boost_cmake_test-requires_no_rtti_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boost_cmake_test-requires_no_rtti_cpp-Debug-e8100640593566bb5dcf.json",
+					"name" : "boost_cmake_test-requires_no_rtti_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boost_cmake_test-requires_variadic_templates_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boost_cmake_test-requires_variadic_templates_cpp-Debug-bb40c3729e1213eac0d3.json",
+					"name" : "boost_cmake_test-requires_variadic_templates_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boost_cmake_test-return_exit_code_fail::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boost_cmake_test-return_exit_code_fail-Debug-d8161d655fbeed8dcee1.json",
+					"name" : "boost_cmake_test-return_exit_code_fail",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boost_cmake_test-return_exit_code_pass::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boost_cmake_test-return_exit_code_pass-Debug-e5eea1459e7cd4b5d149.json",
+					"name" : "boost_cmake_test-return_exit_code_pass",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boost_cmake_test-run_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boost_cmake_test-run_cpp-Debug-810f40981d7feae709e8.json",
+					"name" : "boost_cmake_test-run_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boost_cmake_test-run_fail_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boost_cmake_test-run_fail_cpp-Debug-5f80ac7c4c4a176f51ac.json",
+					"name" : "boost_cmake_test-run_fail_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boost_cmake_test_globals-requires_no_exceptions_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boost_cmake_test_globals-requires_no_exceptions_cpp-Debug-02c48479b3da280c163a.json",
+					"name" : "boost_cmake_test_globals-requires_no_exceptions_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boost_cmake_test_globals-requires_no_rtti_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boost_cmake_test_globals-requires_no_rtti_cpp-Debug-7d16421232a40ffd3d48.json",
+					"name" : "boost_cmake_test_globals-requires_no_rtti_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boost_cmake_test_jamfile-compile_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boost_cmake_test_jamfile-compile_cpp-Debug-2a6409bcc62a935568ed.json",
+					"name" : "boost_cmake_test_jamfile-compile_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boost_cmake_test_jamfile-compile_fail_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boost_cmake_test_jamfile-compile_fail_cpp-Debug-04e81c93ce795929ae29.json",
+					"name" : "boost_cmake_test_jamfile-compile_fail_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boost_cmake_test_jamfile-link_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boost_cmake_test_jamfile-link_cpp-Debug-5b64ec49114e7bdc9ef1.json",
+					"name" : "boost_cmake_test_jamfile-link_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boost_cmake_test_jamfile-link_fail_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boost_cmake_test_jamfile-link_fail_cpp-Debug-2e5865a0eab88edfa6a0.json",
+					"name" : "boost_cmake_test_jamfile-link_fail_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boost_cmake_test_jamfile-run_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boost_cmake_test_jamfile-run_cpp-Debug-3047e11767a876fdd239.json",
+					"name" : "boost_cmake_test_jamfile-run_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "boost_cmake_test_jamfile-run_fail_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-boost_cmake_test_jamfile-run_fail_cpp-Debug-b761b3a63bf71607ce95.json",
+					"name" : "boost_cmake_test_jamfile-run_fail_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "compile-boost_cmake_test-link_fail_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-compile-boost_cmake_test-link_fail_cpp-Debug-5d45754c0e9e0480f83f.json",
+					"name" : "compile-boost_cmake_test-link_fail_cpp",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "compile-boost_cmake_test_jamfile-link_fail_cpp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-compile-boost_cmake_test_jamfile-link_fail_cpp-Debug-c433af4e0c400b8324f8.json",
+					"name" : "compile-boost_cmake_test_jamfile-link_fail_cpp",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_test/out/build/x64-Debug",
+		"source" : "C:/weasel/deps/boost_1_76_0/tools/cmake/test/boost_test"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 2
+	}
+}

@@ -10,7 +10,7 @@ Unicode true
 ; General
 
 !ifndef WEASEL_VERSION
-!define WEASEL_VERSION 2023.06.14
+!define WEASEL_VERSION 2023.07.13
 !endif
 
 !ifndef WEASEL_BUILD
@@ -171,6 +171,7 @@ program_files:
   File "t9keyboard.exe"
   File "t9configui.exe"
   File "t9skin.exe"
+  File "Cyotek.Windows.Forms.ColorPicker.dll"
   File "LICENSE.txt"
   File "README.txt"
   File "README.txt"
