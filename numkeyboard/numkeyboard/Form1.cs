@@ -44,7 +44,7 @@ namespace NumKeyboardTray
         private const int VK_LAUNCH_MAIL = 0xB4;
         private const int VK_LAUNCH_APP2 = 0xB7;
         private const int HOTKEY_ID_FORCE_DISCONNECT = 1004;
-        private const int VK_C = 0x43;
+        private const int VK_V = 0x56;
         private const uint MOD_CONTROL_ALT = 0x0003;
         private bool isForceDisconnectMode = false;
 
@@ -230,7 +230,7 @@ namespace NumKeyboardTray
             comboBox0.SelectedIndexChanged += (s, e2) => { if (!CheckAndLaunchT9s2t(comboBox0, "Triple0Key")) return; SaveKeyMapping("Triple0Key", comboBox0.SelectedItem?.ToString() ?? "None"); };
             comboBoxDot.SelectedIndexChanged += (s, e2) => { if (!CheckAndLaunchT9s2t(comboBoxDot, "DotKey")) return; SaveKeyMapping("DotKey", comboBoxDot.SelectedItem?.ToString() ?? "None"); };
             RegisterMediaHotkeys();
-            RegisterHotKey(this.Handle, HOTKEY_ID_FORCE_DISCONNECT, MOD_CONTROL_ALT, VK_C);
+            RegisterHotKey(this.Handle, HOTKEY_ID_FORCE_DISCONNECT, MOD_CONTROL_ALT, VK_V);
 
             // 启动时：如果有按键配置为"语音输入"，检测 t9s2t 是否在运行
             CheckVoiceInputOnStartup();
@@ -326,7 +326,7 @@ namespace NumKeyboardTray
             return false;
         }
         /// <summary>
-        /// 切换强制断开小键盘检测模式（Ctrl+Alt+C）
+        /// 切换强制断开小键盘检测模式（Ctrl+Alt+V）
         /// </summary>
         private void ToggleForceDisconnectMode()
         {
@@ -336,14 +336,14 @@ namespace NumKeyboardTray
                 if (_hookID != IntPtr.Zero) { UnhookWindowsHookEx(_hookID); _hookID = IntPtr.Zero; }
                 monitorTimer.Stop();
                 ShowStatus("【强制断开模式】小键盘改键已禁用");
-                MessageBox.Show("已进入强制断开小键盘检测模式！\n\n在此模式下，即使连接了无线小键盘，也不会进行任何按键映射/改键操作。\n\n再次按下 Ctrl+Alt+C 可恢复正常改键功能。", "强制断开模式", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                notifyIcon.BalloonTipTitle = "强制断开模式"; notifyIcon.BalloonTipText = "已进入强制断开小键盘检测模式！即使连接小键盘也不会改键。再次按 Ctrl+Alt+V 恢复。"; notifyIcon.ShowBalloonTip(5000);
             }
             else
             {
                 monitorTimer.Start();
                 CheckKeyboardAndHook();
                 ShowStatus("【正常模式】小键盘改键已恢复");
-                MessageBox.Show("已退出强制断开模式！\n\n小键盘改键功能已恢复正常。", "恢复正常模式", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                notifyIcon.BalloonTipTitle = "恢复正常模式"; notifyIcon.BalloonTipText = "已退出强制断开模式！小键盘改键功能已恢复正常。"; notifyIcon.ShowBalloonTip(5000);
             }
         }
         #endregion
