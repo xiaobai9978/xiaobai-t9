@@ -43,6 +43,10 @@ namespace NumKeyboardTray
         private const int VK_BROWSER_HOME = 0xAC;
         private const int VK_LAUNCH_MAIL = 0xB4;
         private const int VK_LAUNCH_APP2 = 0xB7;
+        private const int HOTKEY_ID_FORCE_DISCONNECT = 1004;
+        private const int VK_C = 0x43;
+        private const uint MOD_CONTROL_ALT = 0x0003;
+        private bool isForceDisconnectMode = false;
 
         // 【新增修改】悬浮图片窗体变量
         private ImageTooltipForm imgTooltip;
@@ -101,6 +105,7 @@ namespace NumKeyboardTray
                 if (id == HOTKEY_ID_BROWSER_HOME) keyName = "BrowserHomeKey";
                 else if (id == HOTKEY_ID_MAIL) keyName = "LaunchMailKey";
                 else if (id == HOTKEY_ID_CALC) keyName = "LaunchApp2Key";
+                else if (id == HOTKEY_ID_FORCE_DISCONNECT) { ToggleForceDisconnectMode(); m.Result = (IntPtr)1; return; }
                 if (!string.IsNullOrEmpty(keyName))
                 {
                     string action = GetKeyMapping(keyName);
@@ -166,6 +171,7 @@ namespace NumKeyboardTray
             UnregisterHotKey(this.Handle, HOTKEY_ID_BROWSER_HOME);
             UnregisterHotKey(this.Handle, HOTKEY_ID_MAIL);
             UnregisterHotKey(this.Handle, HOTKEY_ID_CALC);
+            UnregisterHotKey(this.Handle, HOTKEY_ID_FORCE_DISCONNECT);
         }
 
         public void RestoreWindow()
@@ -224,6 +230,7 @@ namespace NumKeyboardTray
             comboBox0.SelectedIndexChanged += (s, e2) => { if (!CheckAndLaunchT9s2t(comboBox0, "Triple0Key")) return; SaveKeyMapping("Triple0Key", comboBox0.SelectedItem?.ToString() ?? "None"); };
             comboBoxDot.SelectedIndexChanged += (s, e2) => { if (!CheckAndLaunchT9s2t(comboBoxDot, "DotKey")) return; SaveKeyMapping("DotKey", comboBoxDot.SelectedItem?.ToString() ?? "None"); };
             RegisterMediaHotkeys();
+            RegisterHotKey(this.Handle, HOTKEY_ID_FORCE_DISCONNECT, MOD_CONTROL_ALT, VK_C);
 
             // 启动时：如果有按键配置为"语音输入"，检测 t9s2t 是否在运行
             CheckVoiceInputOnStartup();
@@ -294,6 +301,12 @@ namespace NumKeyboardTray
         #region 小键盘检测
         private void CheckKeyboardAndHook()
         {
+            // 强制断开模式下不安装钩子
+            if (isForceDisconnectMode)
+            {
+                if (_hookID != IntPtr.Zero) { UnhookWindowsHookEx(_hookID); _hookID = IntPtr.Zero; }
+                return;
+            }
             if (IsKeyboardInsertedByVIDPID()) { if (_hookID == IntPtr.Zero) { _hookID = SetHook(_proc); ShowStatus("小白T9键盘已插入！"); } }
             else { if (_hookID != IntPtr.Zero) { UnhookWindowsHookEx(_hookID); _hookID = IntPtr.Zero; ShowStatus("未检测到键盘！"); } }
         }
@@ -311,6 +324,27 @@ namespace NumKeyboardTray
             }
             catch { }
             return false;
+        }
+        /// <summary>
+        /// 切换强制断开小键盘检测模式（Ctrl+Alt+C）
+        /// </summary>
+        private void ToggleForceDisconnectMode()
+        {
+            isForceDisconnectMode = !isForceDisconnectMode;
+            if (isForceDisconnectMode)
+            {
+                if (_hookID != IntPtr.Zero) { UnhookWindowsHookEx(_hookID); _hookID = IntPtr.Zero; }
+                monitorTimer.Stop();
+                ShowStatus("【强制断开模式】小键盘改键已禁用");
+                MessageBox.Show("已进入强制断开小键盘检测模式！\n\n在此模式下，即使连接了无线小键盘，也不会进行任何按键映射/改键操作。\n\n再次按下 Ctrl+Alt+C 可恢复正常改键功能。", "强制断开模式", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                monitorTimer.Start();
+                CheckKeyboardAndHook();
+                ShowStatus("【正常模式】小键盘改键已恢复");
+                MessageBox.Show("已退出强制断开模式！\n\n小键盘改键功能已恢复正常。", "恢复正常模式", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
         #endregion
 
