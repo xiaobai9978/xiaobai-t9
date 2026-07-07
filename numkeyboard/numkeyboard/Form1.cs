@@ -230,7 +230,6 @@ namespace NumKeyboardTray
             comboBoxCtrl.SelectedIndexChanged += (s, e2) => { if (!CheckAndLaunchT9s2t(comboBoxCtrl, "Single0Key")) return; SaveKeyMapping("Single0Key", comboBoxCtrl.SelectedItem?.ToString() ?? "None"); };
             comboBox0.SelectedIndexChanged += (s, e2) => { if (!CheckAndLaunchT9s2t(comboBox0, "Triple0Key")) return; SaveKeyMapping("Triple0Key", comboBox0.SelectedItem?.ToString() ?? "None"); };
             comboBoxDot.SelectedIndexChanged += (s, e2) => { if (!CheckAndLaunchT9s2t(comboBoxDot, "DotKey")) return; SaveKeyMapping("DotKey", comboBoxDot.SelectedItem?.ToString() ?? "None"); };
-            RegisterMediaHotkeys();
 
             // 启动时：如果有按键配置为"语音输入"，检测 t9s2t 是否在运行
             CheckVoiceInputOnStartup();
@@ -247,7 +246,7 @@ namespace NumKeyboardTray
             this.ShowInTaskbar = false;
 
 
-            this.BeginInvoke(new Action(() => { this.Hide(); }));
+            this.BeginInvoke(new Action(() => { this.Hide(); RegisterMediaHotkeys(); }));
 
 
 
