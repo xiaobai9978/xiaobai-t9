@@ -180,21 +180,57 @@ namespace t9s2t
             chkAutoStart.CheckedChanged += ChkAutoStart_CheckedChanged;
             this.Controls.Add(chkAutoStart);
             chkAutoStart.BringToFront();
-
             await Task.Delay(200);
 
-            this.WindowState = FormWindowState.Minimized;
-            this.Hide();
-            this.ShowInTaskbar = false;
-            trayIcon.ShowBalloonTip(3000, "t9s2t 已就绪", "程序已在后台运行，按 Ctrl+Alt+D 说话", ToolTipIcon.Info);
-
-            // 检查引擎 DLL，设置按钮状态
+            // 检查引擎 DLL 和模型是否就绪
             UpdateEngineButtonState();
-            await AutoCheckModel();
+            bool engineReady = AreEngineDllsReady();
+            bool modelReady = false;
+
+            if (engineReady)
+            {
+                currentEngineType = EngineDetector.Detect(modelPath);
+                modelReady = (currentEngineType != EngineType.None);
+            }
+
+            if (engineReady && modelReady)
+            {
+                // 一切就绪：隐藏到托盘后台运行
+                this.WindowState = FormWindowState.Minimized;
+                this.Hide();
+                this.ShowInTaskbar = false;
+                trayIcon.ShowBalloonTip(3000, "t9s2t 已就绪", "程序已在后台运行，按 Ctrl+Alt+D 说话", ToolTipIcon.Info);
+                await LoadEngine();
+            }
+            else
+            {
+                // 组件或模型未就绪：保持窗口可见，让用户操作
+                if (!engineReady)
+                    lblStatus.Text = "⚠️ 缺少引擎组件，请点击上方按钮下载";
+                else
+                    lblStatus.Text = "❌ 模型未找到，请点击下载按钮";
+                this.Show();
+                this.BringToFront();
+            }
 
             _proc = HookCallback;
             _hookID = SetHook(_proc);
             InitMicrophone();
+            SetupDynamicResources();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             SetupDynamicResources();
         }
 

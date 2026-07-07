@@ -1,0 +1,6 @@
+C:\weasel\numkeyboard\DeviceTest\obj\Debug\DeviceTest.csproj.AssemblyReference.cache
+C:\weasel\numkeyboard\DeviceTest\obj\Debug\DeviceTest.csproj.CoreCompileInputs.cache
+C:\weasel\numkeyboard\DeviceTest\bin\Debug\DeviceTest.exe
+C:\weasel\numkeyboard\DeviceTest\bin\Debug\DeviceTest.pdb
+C:\weasel\numkeyboard\DeviceTest\obj\Debug\DeviceTest.exe
+C:\weasel\numkeyboard\DeviceTest\obj\Debug\DeviceTest.pdb

@@ -87,10 +87,10 @@ namespace NumKeyboardTray
             // 解决开机时系统托盘还没准备好，导致图标丢失的问题
             if (m.Msg == wmTaskbarCreated)
             {
-                if (notifyIcon != null)
+                if (notifyIcon != null && this.Visible)
                 {
                     notifyIcon.Visible = false;
-                    notifyIcon.Visible = true; // 重新刷出托盘图标
+                    notifyIcon.Visible = true; // 只在窗口可见时刷新托盘图标
                 }
             }
 
@@ -117,6 +117,40 @@ namespace NumKeyboardTray
             if (m.Msg == WM_SHOWME) { RestoreWindow(); }
             base.WndProc(ref m);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         #endregion
 
         private void RegisterMediaHotkeys()
@@ -141,6 +175,7 @@ namespace NumKeyboardTray
             this.ShowInTaskbar = true; // 允许在任务栏显示
             this.BringToFront();
             this.Activate();
+            if (notifyIcon != null) notifyIcon.Visible = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -204,21 +239,21 @@ namespace NumKeyboardTray
             this.WindowState = FormWindowState.Minimized;
             this.ShowInTaskbar = false;
 
-            // 投递一个延迟隐藏指令
-            this.BeginInvoke(new Action(() => {
-                this.Hide();
 
-                // 弹出系统托盘气泡提示
-                if (notifyIcon != null)
-                {
-                    notifyIcon.ShowBalloonTip(2000, "小白T9键盘驱动", "程序已静默运行，已为您最小化到系统托盘", ToolTipIcon.Info);
-                }
-            }));
+            this.BeginInvoke(new Action(() => { this.Hide(); }));
+
+
+
+
+
+
+
+
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (e.CloseReason == CloseReason.UserClosing) { e.Cancel = true; this.Hide(); notifyIcon.ShowBalloonTip(1000, "提示", "程序已最小化到托盘", ToolTipIcon.Info); return; }
+            if (e.CloseReason == CloseReason.UserClosing) { e.Cancel = true; this.Hide(); if (notifyIcon != null) notifyIcon.Visible = false; return; }
             UnregisterAllHotkeys();
             if (isProgramShiftPressed) keybd_event((byte)Keys.ShiftKey, 0, KEYEVENTF_KEYUP, IntPtr.Zero);
             if (isProgramCtrlPressed) keybd_event((byte)Keys.ControlKey, 0, KEYEVENTF_KEYUP, IntPtr.Zero);
@@ -237,7 +272,7 @@ namespace NumKeyboardTray
         #region 托盘和自启
         private void InitializeNotifyIcon()
         {
-            notifyIcon = new NotifyIcon { Icon = numkeyboard.Properties.Resources.xiaobait9, Visible = true, Text = "小白T9键盘驱动 - 未检测到键盘" };
+            notifyIcon = new NotifyIcon { Icon = numkeyboard.Properties.Resources.xiaobait9, Visible = false, Text = "小白T9键盘驱动 - 未检测到键盘" };
             var menu = new ContextMenuStrip();
             menu.Items.Add("打开设置", null, (s, e) => RestoreWindow());
             menu.Items.Add("退出", null, (s, e) => Application.Exit());
