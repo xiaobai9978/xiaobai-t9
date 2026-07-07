@@ -164,6 +164,7 @@ namespace NumKeyboardTray
             if (GetKeyMapping("BrowserHomeKey") != "None") RegisterHotKey(this.Handle, HOTKEY_ID_BROWSER_HOME, 0, VK_BROWSER_HOME);
             if (GetKeyMapping("LaunchMailKey") != "None") RegisterHotKey(this.Handle, HOTKEY_ID_MAIL, 0, VK_LAUNCH_MAIL);
             if (GetKeyMapping("LaunchApp2Key") != "None") RegisterHotKey(this.Handle, HOTKEY_ID_CALC, 0, VK_LAUNCH_APP2);
+            RegisterHotKey(this.Handle, HOTKEY_ID_FORCE_DISCONNECT, MOD_CONTROL_ALT, VK_V);
         }
 
         private void UnregisterAllHotkeys()
@@ -230,7 +231,6 @@ namespace NumKeyboardTray
             comboBox0.SelectedIndexChanged += (s, e2) => { if (!CheckAndLaunchT9s2t(comboBox0, "Triple0Key")) return; SaveKeyMapping("Triple0Key", comboBox0.SelectedItem?.ToString() ?? "None"); };
             comboBoxDot.SelectedIndexChanged += (s, e2) => { if (!CheckAndLaunchT9s2t(comboBoxDot, "DotKey")) return; SaveKeyMapping("DotKey", comboBoxDot.SelectedItem?.ToString() ?? "None"); };
             RegisterMediaHotkeys();
-            RegisterHotKey(this.Handle, HOTKEY_ID_FORCE_DISCONNECT, MOD_CONTROL_ALT, VK_V);
 
             // 启动时：如果有按键配置为"语音输入"，检测 t9s2t 是否在运行
             CheckVoiceInputOnStartup();
