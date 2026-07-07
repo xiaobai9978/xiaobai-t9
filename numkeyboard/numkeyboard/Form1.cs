@@ -45,7 +45,7 @@ namespace NumKeyboardTray
         private const int VK_LAUNCH_APP2 = 0xB7;
         private const int HOTKEY_ID_FORCE_DISCONNECT = 1004;
         private const int VK_V = 0x56;
-        private const uint MOD_CONTROL_ALT = 0x0003;
+        private const uint MOD_CONTROL_ALT_SHIFT = 0x0007; // MOD_CONTROL|MOD_ALT|MOD_SHIFT
         private bool isForceDisconnectMode = false;
         private bool _formInitialized = false;
 
@@ -171,8 +171,7 @@ namespace NumKeyboardTray
             if (GetKeyMapping("BrowserHomeKey") != "None") RegisterHotKey(this.Handle, HOTKEY_ID_BROWSER_HOME, 0, VK_BROWSER_HOME);
             if (GetKeyMapping("LaunchMailKey") != "None") RegisterHotKey(this.Handle, HOTKEY_ID_MAIL, 0, VK_LAUNCH_MAIL);
             if (GetKeyMapping("LaunchApp2Key") != "None") RegisterHotKey(this.Handle, HOTKEY_ID_CALC, 0, VK_LAUNCH_APP2);
-            bool hotkeyOk = RegisterHotKey(this.Handle, HOTKEY_ID_FORCE_DISCONNECT, MOD_CONTROL_ALT, VK_V);
-            System.IO.File.AppendAllText("numkeyboard_debug.log", DateTime.Now.ToString() + " - RegisterHotKey=" + hotkeyOk + Environment.NewLine);
+            RegisterHotKey(this.Handle, HOTKEY_ID_FORCE_DISCONNECT, MOD_CONTROL_ALT_SHIFT, VK_V);
         }
 
         private void UnregisterAllHotkeys()
@@ -335,25 +334,24 @@ namespace NumKeyboardTray
             return false;
         }
         /// <summary>
-        /// 切换强制断开小键盘检测模式（Ctrl+Alt+V）
+        /// 切换强制断开小键盘检测模式（Ctrl+Alt+Shift+V）
         /// </summary>
         private void ToggleForceDisconnectMode()
         {
-            System.IO.File.AppendAllText("numkeyboard_debug.log", DateTime.Now.ToString() + " - ToggleForceDisconnectMode called" + Environment.NewLine);
             isForceDisconnectMode = !isForceDisconnectMode;
             if (isForceDisconnectMode)
             {
                 if (_hookID != IntPtr.Zero) { UnhookWindowsHookEx(_hookID); _hookID = IntPtr.Zero; }
                 monitorTimer.Stop();
-                notifyIcon.Visible = true; ShowStatus("【强制断开模式】小键盘改键已禁用");
-                notifyIcon.BalloonTipTitle = "强制断开模式"; notifyIcon.BalloonTipText = "已进入强制断开小键盘检测模式！即使连接小键盘也不会改键。再次按 Ctrl+Alt+V 恢复。"; notifyIcon.ShowBalloonTip(5000);
+                notifyIcon.Visible = true;
+                notifyIcon.BalloonTipTitle = "强制断开模式"; notifyIcon.BalloonTipText = "已进入强制断开小键盘检测模式！即使连接小键盘也不会改键。再次按 Ctrl+Alt+Shift+V 恢复。"; notifyIcon.ShowBalloonTip(3000);
             }
             else
             {
                 monitorTimer.Start();
                 CheckKeyboardAndHook();
-                notifyIcon.Visible = true; ShowStatus("【正常模式】小键盘改键已恢复");
-                notifyIcon.BalloonTipTitle = "恢复正常模式"; notifyIcon.BalloonTipText = "已退出强制断开模式！小键盘改键功能已恢复正常。"; notifyIcon.ShowBalloonTip(5000);
+                notifyIcon.Visible = true;
+                notifyIcon.BalloonTipTitle = "恢复正常模式"; notifyIcon.BalloonTipText = "已退出强制断开模式！小键盘改键功能已恢复正常。"; notifyIcon.ShowBalloonTip(3000);
             }
         }
         #endregion
