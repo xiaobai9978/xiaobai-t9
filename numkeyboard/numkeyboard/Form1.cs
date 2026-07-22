@@ -26,6 +26,7 @@ namespace NumKeyboardTray
         private NotifyIcon notifyIcon;
         private static bool isAltPressed = false;
         private static bool isVoiceInputPressed = false;
+        private static System.Timers.Timer single0Timer;
         private static Timer altReleaseTimer;
         private static readonly string dataFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data");
         private static readonly string configFile = Path.Combine(dataFolder, "numkeyboard.txt");
@@ -241,6 +242,13 @@ namespace NumKeyboardTray
             // 启动时：如果有按键配置为"语音输入"，检测 t9s2t 是否在运行
             CheckVoiceInputOnStartup();
 
+            single0Timer = new System.Timers.Timer(300);
+            single0Timer.AutoReset = false;
+            single0Timer.Elapsed += (s, ev) => {
+                string act = GetKeyMapping("Single0Key");
+                if (act != "Ctrl" && act != "Shift" && act != "语音输入" && act != "None") HandleCustomKeyByType("Single0Key");
+            };
+
             monitorTimer = new Timer { Interval = 3000 };
             monitorTimer.Tick += (s, ev) => CheckKeyboardAndHook();
             monitorTimer.Start();
@@ -279,6 +287,7 @@ namespace NumKeyboardTray
                 keybd_event((byte)Keys.ControlKey, 0, KEYEVENTF_KEYUP, IntPtr.Zero);
                 isVoiceInputPressed = false;
             }
+            single0Timer?.Stop(); single0Timer?.Dispose();
             if (_hookID != IntPtr.Zero) UnhookWindowsHookEx(_hookID);
             monitorTimer?.Stop();
             notifyIcon?.Dispose();
@@ -376,17 +385,21 @@ namespace NumKeyboardTray
                     if (wParam == (IntPtr)WM_KEYDOWN)
                     {
                         var now = DateTime.Now;
-                        if ((now - lastNumPad0Time).TotalMilliseconds < 50) repeatCount++; else repeatCount = 1;
+                        if ((now - lastNumPad0Time).TotalMilliseconds < 200) repeatCount++; else repeatCount = 1;
                         lastNumPad0Time = now;
-                        if (repeatCount == 3) { HandleCustomKeyByType("Triple0Key"); repeatCount = 0; return (IntPtr)1; }
+                        if (repeatCount == 3) { single0Timer.Stop(); HandleCustomKeyByType("Triple0Key"); repeatCount = 0; return (IntPtr)1; }
                         else if (repeatCount == 1)
                         {
                             string action = GetKeyMapping("Single0Key");
                             if (action == "Ctrl" && !isProgramCtrlPressed) { keybd_event((byte)Keys.ControlKey, 0, 0, IntPtr.Zero); isProgramCtrlPressed = true; }
                             else if (action == "语音输入" && !isVoiceInputPressed) { keybd_event((byte)Keys.ControlKey, 0, 0, IntPtr.Zero); keybd_event((byte)Keys.Menu, 0, 0, IntPtr.Zero); keybd_event(0x44, 0, 0, IntPtr.Zero); isVoiceInputPressed = true; }
+                            else if (action != "None" && action != "Shift") { single0Timer.Stop(); single0Timer.Start(); }
                         }
-                        return (IntPtr)1;
-                    }
+                        else if (repeatCount == 2)
+                        {
+                            single0Timer.Stop(); single0Timer.Start();
+                        }
+                        return (IntPtr)1;                    }
                     else if (wParam == (IntPtr)WM_KEYUP)
                     {
                         if (repeatCount < 3)
@@ -394,9 +407,9 @@ namespace NumKeyboardTray
                             string action = GetKeyMapping("Single0Key");
                             if (action == "Ctrl" && isProgramCtrlPressed) { keybd_event((byte)Keys.ControlKey, 0, KEYEVENTF_KEYUP, IntPtr.Zero); isProgramCtrlPressed = false; }
                             else if (action == "语音输入" && isVoiceInputPressed) { keybd_event(0x44, 0, KEYEVENTF_KEYUP, IntPtr.Zero); keybd_event((byte)Keys.Menu, 0, KEYEVENTF_KEYUP, IntPtr.Zero); keybd_event((byte)Keys.ControlKey, 0, KEYEVENTF_KEYUP, IntPtr.Zero); isVoiceInputPressed = false; }
-                            else if (action != "Ctrl" && action != "Shift" && action != "语音输入" && action != "None" && repeatCount == 1) HandleCustomKeyByType("Single0Key");
+                            // Single0Key delayed by single0Timer
                         }
-                        if ((DateTime.Now - lastNumPad0Time).TotalMilliseconds >= 50) repeatCount = 0;
+                        if ((DateTime.Now - lastNumPad0Time).TotalMilliseconds >= 200) repeatCount = 0;
                         return (IntPtr)1;
                     }
                 }
