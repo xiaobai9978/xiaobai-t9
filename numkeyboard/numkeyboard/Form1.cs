@@ -504,7 +504,7 @@ namespace NumKeyboardTray
 
         /// <summary>
         /// 启动时检测：如果配置文件中有任何按键设为"语音输入"，
-        /// 检查 t9s2t.exe 是否在运行，未运行则提示用户。
+        /// 检查 t9s2t.exe 是否在运行，未运行则静默自动启动。
         /// </summary>
         private void CheckVoiceInputOnStartup()
         {
@@ -521,101 +521,77 @@ namespace NumKeyboardTray
             }
             if (!hasVoiceInput) return;  // 没有按键设为语音输入，跳过检测
 
-            // 检测 t9s2t.exe 是否在运行
+            // 检测 t9s2t.exe 是否已在运行，已在运行则跳过，避免重复启动
             if (Process.GetProcessesByName("t9s2t").Length > 0) return;
 
-            // 未运行，询问用户是否启动
+            // 未运行，静默自动启动（不再弹窗询问用户）
             string exePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "t9s2t", "t9s2t.exe");
-            DialogResult result = MessageBox.Show(
-                "检测到有按键设置为\"语音输入\"，但 t9s2t.exe 未在运行。\n\n是否立即启动 t9s2t.exe？",
-                "语音输入提示",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
+            if (File.Exists(exePath))
             {
-                if (File.Exists(exePath))
+                try
                 {
-                    try
+                    Process.Start(new ProcessStartInfo
                     {
-                        Process.Start(new ProcessStartInfo
-                        {
-                            FileName = exePath,
-                            WorkingDirectory = Path.GetDirectoryName(exePath),
-                            UseShellExecute = true
-                        });
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("启动 t9s2t.exe 失败：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                        FileName = exePath,
+                        WorkingDirectory = Path.GetDirectoryName(exePath),
+                        UseShellExecute = true
+                    });
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show(
-                        "未找到文件：" + exePath + "\n\n请确认 t9s2t 文件夹和 t9s2t.exe 存在于程序目录下。",
-                        "文件不存在",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
+                    MessageBox.Show("启动 t9s2t.exe 失败：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+            else
+            {
+                MessageBox.Show(
+                    "未找到文件：" + exePath + "\n\n请确认 t9s2t 文件夹和 t9s2t.exe 存在于程序目录下。",
+                    "文件不存在",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
             }
         }
 
         /// <summary>
         /// 当用户在下拉菜单选择"语音输入"时，检测t9s2t.exe是否在运行，
-        /// 如果没有运行则询问是否启动。返回true表示允许保存，false表示需要回退选择。
+        /// 如果没有运行则静默自动启动。返回true表示允许保存，false表示需要回退选择。
         /// </summary>
         private bool CheckAndLaunchT9s2t(ComboBox comboBox, string keyName)
         {
             if (comboBox.SelectedItem?.ToString() != "语音输入") return true;
 
-            // 检测t9s2t.exe是否在运行
+            // 检测t9s2t.exe是否在运行，已在运行则直接允许保存
             var running = Process.GetProcessesByName("t9s2t");
             if (running.Length > 0) return true;
 
-            // 没在运行，询问用户
+            // 没在运行，静默自动启动（不再弹窗询问用户）
             string exePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "t9s2t", "t9s2t.exe");
-            DialogResult result = MessageBox.Show(
-                "检测到 t9s2t.exe 未在后台运行，语音输入功能需要该程序支持。\n\n是否立即启动 t9s2t.exe？",
-                "语音输入提示",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
+            if (File.Exists(exePath))
             {
-                if (File.Exists(exePath))
+                try
                 {
-                    try
+                    Process.Start(new ProcessStartInfo
                     {
-                        Process.Start(new ProcessStartInfo
-                        {
-                            FileName = exePath,
-                            WorkingDirectory = Path.GetDirectoryName(exePath),
-                            UseShellExecute = true
-                        });
-                        return true; // 允许保存"语音输入"选择
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("启动 t9s2t.exe 失败：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        RevertComboBox(comboBox, keyName);
-                        return false;
-                    }
+                        FileName = exePath,
+                        WorkingDirectory = Path.GetDirectoryName(exePath),
+                        UseShellExecute = true
+                    });
+                    return true; // 允许保存"语音输入"选择
                 }
-                else
+                catch (Exception ex)
                 {
-                    MessageBox.Show(
-                        "未找到文件：" + exePath + "\n\n请确认 t9s2t 文件夹和 t9s2t.exe 存在于程序目录下。",
-                        "文件不存在",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning);
+                    MessageBox.Show("启动 t9s2t.exe 失败：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     RevertComboBox(comboBox, keyName);
                     return false;
                 }
             }
             else
             {
-                // 用户选择"否"，回退到之前的选项
+                MessageBox.Show(
+                    "未找到文件：" + exePath + "\n\n请确认 t9s2t 文件夹和 t9s2t.exe 存在于程序目录下。",
+                    "文件不存在",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
                 RevertComboBox(comboBox, keyName);
                 return false;
             }

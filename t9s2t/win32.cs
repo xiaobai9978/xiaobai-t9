@@ -1,0 +1,20 @@
+using System;
+using System.Runtime.InteropServices;
+using System.Text;
+public class Win32Helper {
+    [DllImport("user32.dll",CharSet=CharSet.Auto)]
+    public static extern IntPtr SendMessage(IntPtr h,uint m,IntPtr w,IntPtr l);
+    [DllImport("user32.dll",CharSet=CharSet.Auto)]
+    public static extern IntPtr SendMessage(IntPtr h,uint m,IntPtr w,StringBuilder l);
+    [DllImport("user32.dll",CharSet=CharSet.Auto)]
+    public static extern int GetWindowText(IntPtr h,StringBuilder s,int n);
+    [DllImport("user32.dll",CharSet=CharSet.Auto)]
+    public static extern int GetClassName(IntPtr h,StringBuilder s,int n);
+    [DllImport("user32.dll")]
+    public static extern bool EnumChildWindows(IntPtr h,EnumChildProc f,IntPtr l);
+    [DllImport("user32.dll")]
+    public static extern bool GetWindowRect(IntPtr h,out RECT r);
+    public delegate bool EnumChildProc(IntPtr h,IntPtr l);
+    [StructLayout(LayoutKind.Sequential)]
+    public struct RECT { public int Left,Top,Right,Bottom; }
+}

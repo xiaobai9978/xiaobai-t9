@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -195,7 +195,9 @@ namespace t9s2t
 
             if (engineReady && modelReady)
             {
-                // 一切就绪：隐藏到托盘后台运行
+                // 一切就绪：下载按钮禁用（模型已安装，不允许重复下载），删除按钮可用
+                SetModelReadyButtonState();
+                // 隐藏到托盘后台运行
                 this.WindowState = FormWindowState.Minimized;
                 this.Hide();
                 this.ShowInTaskbar = false;
@@ -204,13 +206,15 @@ namespace t9s2t
             }
             else
             {
-                // 组件或模型未就绪：保持窗口可见，让用户操作
+                // 组件或模型未就绪：保持窗口可见，首次启动自动下载
                 if (!engineReady)
-                    lblStatus.Text = "⚠️ 缺少引擎组件，请点击上方按钮下载";
+                    lblStatus.Text = "⚙️ 检测到缺少引擎组件，即将自动下载...";
                 else
-                    lblStatus.Text = "❌ 模型未找到，请点击下载按钮";
+                    lblStatus.Text = "📦 检测到缺少语音模型，即将自动下载...";
                 this.Show();
                 this.BringToFront();
+                // 自动下载引擎组件与模型（默认行为，手动按钮仍保留作为兜底）
+                await AutoSetupComponentsAsync();
             }
 
             _proc = HookCallback;
@@ -505,9 +509,9 @@ namespace t9s2t
         }
 
         /// <summary>
-        /// 从服务器下载引擎 DLL 文件
+        /// 从服务器下载引擎 DLL 文件。silent 模式下成功后不刷新按钮状态（由自动下载流程接管）。
         /// </summary>
-        private async Task<bool> DownloadEngineDllsAsync()
+        private async Task<bool> DownloadEngineDllsAsync(bool silent = false)
         {
             string appDir = AppDomain.CurrentDomain.BaseDirectory;
             btnDownloadModel.Enabled = false;
@@ -517,7 +521,7 @@ namespace t9s2t
             if (engineDlls == null || engineDlls.Count == 0)
             {
                 lblStatus.Text = "❌ 无法获取引擎组件下载地址"; lblStatus.Refresh();
-                btnDownloadModel.Enabled = true;
+                if (!silent) btnDownloadModel.Enabled = true;
                 return false;
             }
 
@@ -541,13 +545,13 @@ namespace t9s2t
                 if (AreEngineDllsReady())
                 {
                     lblStatus.Text = "✅ 引擎组件下载完成"; lblStatus.Refresh();
-                    UpdateEngineButtonState();
+                    if (!silent) UpdateEngineButtonState(); // 自动下载流程由 AutoSetupComponentsAsync 接管后续状态
                     return true;
                 }
                 else
                 {
                     lblStatus.Text = "❌ 引擎组件下载不完整"; lblStatus.Refresh();
-                    btnDownloadModel.Enabled = true;
+                    if (!silent) btnDownloadModel.Enabled = true;
                     return false;
                 }
             }
@@ -561,7 +565,7 @@ namespace t9s2t
                         try { File.Delete(dllPath); } catch { }
                 }
                 lblStatus.Text = $"❌ 下载失败: {ex.Message}"; lblStatus.Refresh();
-                btnDownloadModel.Enabled = true;
+                if (!silent) btnDownloadModel.Enabled = true;
                 return false;
             }
         }
@@ -605,6 +609,157 @@ namespace t9s2t
             public string description { get; set; }
         }
 
+        // ==================== 首次启动自动下载 ====================
+        private bool _autoSetupInProgress = false;   // 防止自动下载流程被重复触发
+        private const int AutoDownloadMaxRetries = 3; // 自动下载最大重试次数
+        private const int AutoDownloadRetryDelayMs = 3000; // 重试间隔
+
+        /// <summary>
+        /// 首次启动时自动补齐缺失组件：先下载引擎 DLL，再自动下载推荐模型。
+        /// 每一步带重试；全部失败时回退到手动按钮。
+        /// </summary>
+        private async Task AutoSetupComponentsAsync()
+        {
+            if (_autoSetupInProgress) return;
+            _autoSetupInProgress = true;
+            btnDownloadModel.Enabled = false;
+            try
+            {
+                // 第一步：引擎 DLL 缺失则自动下载（带重试）
+                if (!AreEngineDllsReady())
+                {
+                    bool engineOk = false;
+                    for (int attempt = 1; attempt <= AutoDownloadMaxRetries && !engineOk; attempt++)
+                    {
+                        if (attempt > 1)
+                        {
+                            lblStatus.Text = $"⏳ 引擎组件下载失败，{AutoDownloadRetryDelayMs / 1000} 秒后第 {attempt}/{AutoDownloadMaxRetries} 次重试...";
+                            lblStatus.Refresh();
+                            await Task.Delay(AutoDownloadRetryDelayMs);
+                        }
+                        engineOk = await DownloadEngineDllsAsync(silent: true) && VerifyEngineDllsIntegrity();
+                    }
+                    if (!engineOk)
+                    {
+                        lblStatus.Text = "❌ 引擎组件自动下载失败，请检查网络后点击上方按钮手动重试";
+                        lblStatus.ForeColor = Color.FromArgb(200, 100, 0);
+                        UpdateEngineButtonState();
+                        return; // 回退到手动下载
+                    }
+                }
+
+                // 第二步：模型缺失则获取列表并自动下载第一个（推荐）模型
+                currentEngineType = EngineDetector.Detect(modelPath);
+                if (currentEngineType != EngineType.None)
+                {
+                    await AutoCheckModel();
+                    return;
+                }
+
+                for (int attempt = 1; attempt <= AutoDownloadMaxRetries; attempt++)
+                {
+                    lblStatus.Text = "🔄 正在获取最新模型列表..."; lblStatus.Refresh();
+                    List<ModelInfo> models = await FetchModelsAsync();
+                    if (models == null || models.Count == 0)
+                    {
+                        lblStatus.Text = $"❌ 获取模型列表失败，{AutoDownloadRetryDelayMs / 1000} 秒后第 {attempt}/{AutoDownloadMaxRetries} 次重试...";
+                        lblStatus.Refresh();
+                        await Task.Delay(AutoDownloadRetryDelayMs);
+                        continue;
+                    }
+
+                    ModelInfo selected = models[0]; // 列表第一个为推荐模型
+                    if (string.IsNullOrWhiteSpace(selected?.url) || string.IsNullOrWhiteSpace(selected.folder))
+                    {
+                        lblStatus.Text = "❌ 模型配置无效（缺少下载地址），无法自动下载";
+                        lblStatus.Refresh();
+                        break;
+                    }
+
+                    lblStatus.Text = $"⬇️ 首次运行，正在自动下载 {selected.name}（{selected.size_hint}），请耐心等待...";
+                    lblStatus.Refresh();
+                    bool ok = await StartDownloadProcess(selected, silent: true);
+                    if (ok && EngineDetector.Detect(modelPath) != EngineType.None)
+                        return; // 下载并安装成功，AutoCheckModel 已完成引擎加载
+
+                    if (attempt < AutoDownloadMaxRetries)
+                    {
+                        lblStatus.Text = $"⏳ 模型下载失败，{AutoDownloadRetryDelayMs / 1000} 秒后第 {attempt + 1}/{AutoDownloadMaxRetries} 次重试...";
+                        lblStatus.Refresh();
+                        await Task.Delay(AutoDownloadRetryDelayMs);
+                    }
+                }
+
+                // 全部重试失败：回退到手动下载
+                lblStatus.Text = "❌ 模型自动下载失败，请检查网络后点击下方按钮手动重试";
+                lblStatus.ForeColor = Color.FromArgb(200, 100, 0);
+                btnDownloadModel.Enabled = true;
+                btnDownloadModel.Text = "⬇️ 下载模型";
+                btnDownloadModel.BackColor = SystemColors.Control;
+                btnDownloadModel.ForeColor = SystemColors.ControlText;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[t9s2t] 自动下载流程异常: {ex.Message}");
+                lblStatus.Text = "❌ 自动下载异常: " + ex.Message;
+                btnDownloadModel.Enabled = true;
+            }
+            finally
+            {
+                _autoSetupInProgress = false;
+            }
+        }
+
+        /// <summary>
+        /// 校验已下载的引擎 DLL 完整性：文件非空且带有 PE 文件头（"MZ"魔数）
+        /// </summary>
+        private bool VerifyEngineDllsIntegrity()
+        {
+            string appDir = AppDomain.CurrentDomain.BaseDirectory;
+            foreach (var dll in RequiredEngineDlls)
+            {
+                string dllPath = Path.Combine(appDir, dll);
+                try
+                {
+                    if (!File.Exists(dllPath) || new FileInfo(dllPath).Length == 0) return false;
+                    using (var fs = File.OpenRead(dllPath))
+                    {
+                        if (fs.Length < 2) return false;
+                        int b1 = fs.ReadByte(), b2 = fs.ReadByte();
+                        if (b1 != 'M' || b2 != 'Z')
+                        {
+                            Debug.WriteLine($"[t9s2t] {dll} 不是有效的 DLL 文件（缺少 MZ 头），删除后重新下载");
+                            fs.Close();
+                            File.Delete(dllPath);
+                            return false;
+                        }
+                    }
+                }
+                catch { return false; }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// 模型已就绪时的统一按钮状态：下载按钮禁用（不允许再次下载），删除按钮可用
+        /// </summary>
+        private void SetModelReadyButtonState()
+        {
+            btnDownloadModel.Enabled = false;
+            btnDownloadModel.Text = "✅ 模型已就绪";
+            btnDownloadModel.BackColor = SystemColors.Control;
+            btnDownloadModel.ForeColor = SystemColors.ControlText;
+            btnDeleteModel.Enabled = true;
+        }
+
+        /// <summary>
+        /// 判断本地模型目录是否已安装有效模型
+        /// </summary>
+        private bool IsModelInstalled()
+        {
+            return EngineDetector.Detect(modelPath) != EngineType.None;
+        }
+
         private async Task AutoCheckModel()
         {
             // 先检查引擎 DLL
@@ -621,10 +776,7 @@ namespace t9s2t
 
             if (currentEngineType != EngineType.None)
             {
-                btnDownloadModel.Enabled = false; btnDownloadModel.Text = "✅ 模型已就绪";
-                btnDownloadModel.BackColor = SystemColors.Control;
-                btnDownloadModel.ForeColor = SystemColors.ControlText;
-                btnDeleteModel.Enabled = true;
+                SetModelReadyButtonState();
                 lblEngine.Text = $"引擎: {EngineDetector.GetDisplayName(currentEngineType)}";
                 lblStatus.Text = $"✅ {EngineDetector.GetDisplayName(currentEngineType)} 模型已存在，正在加载..."; lblStatus.Refresh();
                 await LoadEngine();
@@ -712,6 +864,9 @@ namespace t9s2t
             catch (Exception ex)
             {
                 Debug.WriteLine($"[LoadEngine Error] {ex}");
+                // 加载失败：释放引擎实例，允许用户通过"重新下载模型"按钮修复
+                try { engine?.Dispose(); } catch { }
+                engine = null;
                 this.Invoke((MethodInvoker)delegate {
                     lblStatus.Text = "❌ 加载失败: " + ex.Message;
                     btnDownloadModel.Enabled = true;
@@ -723,6 +878,14 @@ namespace t9s2t
         // ==================== 核心：动态获取模型列表并弹窗选择 ====================
         private async void btnDownloadModel_Click(object sender, EventArgs e)
         {
+            // 纵深防御：模型已安装且引擎加载成功时，禁止再次下载（正常情况按钮已禁用）
+            if (engine != null && IsModelInstalled())
+            {
+                SetModelReadyButtonState();
+                lblStatus.Text = "✅ 模型已就绪，无需重复下载。如需更换请先删除模型";
+                return;
+            }
+
             // 如果引擎组件未就绪，先下载引擎组件
             if (!AreEngineDllsReady())
             {
@@ -850,7 +1013,7 @@ namespace t9s2t
             }
         }
 
-        private async Task StartDownloadProcess(ModelInfo selectedModel)
+        private async Task<bool> StartDownloadProcess(ModelInfo selectedModel, bool silent = false)
         {
             btnDownloadModel.Enabled = false;
             btnDeleteModel.Enabled = false;
@@ -867,14 +1030,16 @@ namespace t9s2t
             progressBar.BringToFront();
 
             lblStatus.Text = $"⬇️ 正在下载 {selectedModel.name}...";
-            await DownloadWithProgress(progressBar, selectedModel.url, selectedModel.folder);
+            bool success = await DownloadWithProgress(progressBar, selectedModel.url, selectedModel.folder, silent);
 
             this.Controls.Remove(progressBar);
             await AutoCheckModel();
+            return success;
         }
 
-        private async Task DownloadWithProgress(ProgressBar progressBar, string url, string targetFolder)
+        private async Task<bool> DownloadWithProgress(ProgressBar progressBar, string url, string targetFolder, bool silent = false)
         {
+            string archivePath = null;
             try
             {
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
@@ -905,8 +1070,13 @@ namespace t9s2t
                     if (Directory.Exists(targetFolder)) Directory.Delete(targetFolder, true);
 
                     // 下载文件
-                    string archivePath = Path.Combine(Path.GetTempPath(), "model_temp_" + Guid.NewGuid().ToString("N") + ".bin");
+                    archivePath = Path.Combine(Path.GetTempPath(), "model_temp_" + Guid.NewGuid().ToString("N") + ".bin");
                     await client.DownloadFileTaskAsync(new Uri(url), archivePath);
+
+                    // 完整性校验：文件过小（<1MB）说明下载到的是错误页而不是模型压缩包
+                    long archiveSize = new FileInfo(archivePath).Length;
+                    if (archiveSize < 1048576)
+                        throw new InvalidDataException($"下载的文件异常（仅 {archiveSize} 字节），可能是错误页面而非模型文件。");
 
                     progressBar.Style = ProgressBarStyle.Blocks;
                     progressBar.Value = 100;
@@ -924,6 +1094,7 @@ namespace t9s2t
                         ZipFile.ExtractToDirectory(archivePath, ".");
                     }
                     File.Delete(archivePath);
+                    archivePath = null;
 
                     // 3. 智能查找解压后的模型目录
                     string extractedFolder = null;
@@ -948,6 +1119,7 @@ namespace t9s2t
                     {
                         Directory.Move(extractedFolder, modelPath);
                         lblStatus.Text = "✅ 模型安装完成！";
+                        return true;
                     }
                     else
                     {
@@ -957,11 +1129,25 @@ namespace t9s2t
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"下载或解压失败: {ex.Message}\n\n排查建议：\n1. 检查链接是否已过期\n2. .tar.bz2 需要 Windows 10+ 自带 tar.exe 或安装 7-Zip", "错误",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                lblStatus.Text = "❌ 下载失败";
-                btnDownloadModel.Enabled = true;
-                btnDownloadModel.Text = "⬇️ 重新下载模型";
+                // 清理未完成的临时下载文件
+                if (archivePath != null && File.Exists(archivePath))
+                    try { File.Delete(archivePath); } catch { }
+
+                if (silent)
+                {
+                    // 自动下载模式：不弹窗打断重试流程，仅在状态栏提示，按钮状态由调用方控制
+                    Debug.WriteLine($"[t9s2t] 自动下载失败: {ex.Message}");
+                    lblStatus.Text = "❌ 下载失败: " + ex.Message;
+                }
+                else
+                {
+                    MessageBox.Show($"下载或解压失败: {ex.Message}\n\n排查建议：\n1. 检查链接是否已过期\n2. .tar.bz2 需要 Windows 10+ 自带 tar.exe 或安装 7-Zip", "错误",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblStatus.Text = "❌ 下载失败";
+                    btnDownloadModel.Enabled = true;
+                    btnDownloadModel.Text = "⬇️ 重新下载模型";
+                }
+                return false;
             }
         }
 

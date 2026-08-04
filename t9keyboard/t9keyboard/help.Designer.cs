@@ -87,6 +87,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.chkAutoStart = new System.Windows.Forms.CheckBox();
             this.adPanel = new System.Windows.Forms.Panel();
             this.qrPdd = new System.Windows.Forms.PictureBox();
             this.qrAlipay = new System.Windows.Forms.PictureBox();
@@ -610,6 +611,17 @@
             this.checkBox3.Text = ".键为退格";
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
+            // chkAutoStart
+            // 
+            this.chkAutoStart.AutoSize = true;
+            this.chkAutoStart.Location = new System.Drawing.Point(341, 348);
+            this.chkAutoStart.Name = "chkAutoStart";
+            this.chkAutoStart.Size = new System.Drawing.Size(72, 16);
+            this.chkAutoStart.TabIndex = 78;
+            this.chkAutoStart.Text = "开机自启";
+            this.chkAutoStart.UseVisualStyleBackColor = true;
+            this.chkAutoStart.CheckedChanged += new System.EventHandler(this.chkAutoStart_CheckedChanged);
+            // 
             // adPanel
             // 
             this.adPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(250)))), ((int)(((byte)(240)))));
@@ -683,6 +695,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(954, 454);
+            this.Controls.Add(this.chkAutoStart);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.label9);
@@ -816,6 +829,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox chkAutoStart;
         private System.Windows.Forms.Panel adPanel;
         private System.Windows.Forms.Button btnToggleAd;
         private System.Windows.Forms.PictureBox qrWechat;

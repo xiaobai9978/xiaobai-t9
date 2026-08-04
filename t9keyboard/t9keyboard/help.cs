@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using Microsoft.Win32;
 namespace t9keyboard
 {
     public partial class help : Form
@@ -22,6 +23,10 @@ namespace t9keyboard
         private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
         private bool _adCollapsed = false;
         private readonly string _adStateFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "t9keyboard_ad_state.txt");
+        // 开机自启：注册表项与值名称
+        private const string AutoStartRegKeyPath = "Software\\Microsoft\\Windows\\CurrentVersion\\Run";
+        private const string AutoStartRegValueName = "t9keyboard";
+        private bool _autoStartInitializing = false;
 
         public help()
         {
@@ -333,6 +338,93 @@ namespace t9keyboard
             this.adPanel.Paint += adPanel_Paint;
             this.btnToggleAd.Click += btnToggleAd_Click;
             ApplyAdState();
+
+            // 初始化开机自启勾选框状态（读取注册表，避免触发事件）
+            _autoStartInitializing = true;
+            try
+            {
+                chkAutoStart.Checked = IsAutoStartEnabled();
+            }
+            catch (Exception ex)
+            {
+                chkAutoStart.Checked = false;
+                MessageBox.Show("读取开机自启设置失败：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            finally
+            {
+                _autoStartInitializing = false;
+            }
+        }
+        // 读取注册表，判断当前是否已设置开机自启
+        private bool IsAutoStartEnabled()
+        {
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(AutoStartRegKeyPath, false))
+            {
+                if (key != null)
+                {
+                    object value = key.GetValue(AutoStartRegValueName);
+                    if (value != null)
+                    {
+                        string exePath = "\"" + Application.ExecutablePath + "\"";
+                        return value.ToString().Trim() == exePath.Trim();
+                    }
+                }
+            }
+            return false;
+        }
+        // 设置/取消开机自启
+        private void SetAutoStart(bool enable)
+        {
+            using (RegistryKey key = Registry.CurrentUser.OpenSubKey(AutoStartRegKeyPath, true))
+            {
+                if (key == null)
+                {
+                    throw new Exception("无法打开注册表启动项。");
+                }
+                if (enable)
+                {
+                    // 带引号写入，防止路径含空格时启动失败
+                    key.SetValue(AutoStartRegValueName, "\"" + Application.ExecutablePath + "\"");
+                }
+                else
+                {
+                    if (key.GetValue(AutoStartRegValueName) != null)
+                    {
+                        key.DeleteValue(AutoStartRegValueName, false);
+                    }
+                }
+            }
+        }
+        // 开机自启勾选框状态改变事件
+        private void chkAutoStart_CheckedChanged(object sender, EventArgs e)
+        {
+            // 初始化阶段仅同步状态，不写注册表
+            if (_autoStartInitializing)
+            {
+                return;
+            }
+            try
+            {
+                SetAutoStart(chkAutoStart.Checked);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("设置开机自启失败：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                // 写入失败时回滚勾选框状态，避免界面与实际不一致
+                _autoStartInitializing = true;
+                try
+                {
+                    chkAutoStart.Checked = IsAutoStartEnabled();
+                }
+                catch
+                {
+                    chkAutoStart.Checked = false;
+                }
+                finally
+                {
+                    _autoStartInitializing = false;
+                }
+            }
         }
         //写回txt
         private void SaveValuesToFile()

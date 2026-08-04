@@ -372,7 +372,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(69, 16);
             this.label7.TabIndex = 4;
-            this.label7.Text = "| 版本：V2.1";
+            this.label7.Text = "| 版本：V2.2";
             // 
             // Form1
             // 
