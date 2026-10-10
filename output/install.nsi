@@ -9,7 +9,7 @@ Unicode true
 ;--------------------------------
 ; General
 !ifndef WEASEL_VERSION
-!define WEASEL_VERSION 2026.06.19
+!define WEASEL_VERSION 2026.10.10
 !endif
 !ifndef WEASEL_BUILD
 !define WEASEL_BUILD 0
@@ -32,9 +32,13 @@ SetCompressor lzma
 ; Request application privileges for Windows Vista
 RequestExecutionLevel admin
 ;--------------------------------
+; 安装成功标志：由 .onInstSuccess 置 "1"，.onGUIEnd 据此决定是否自动打开使用教程
+Var HelpMeFlag
+;--------------------------------
 ; Pages
 !insertmacro MUI_PAGE_LICENSE "LICENSE.txt"
 !insertmacro MUI_PAGE_INSTFILES
+; 完成页：不加“运行”复选框，安装成功后由 .onGUIEnd 自动打开桌面上的 helpme 教程（零点击）
 !insertmacro MUI_PAGE_FINISH
 !insertmacro MUI_UNPAGE_CONFIRM
 !insertmacro MUI_UNPAGE_INSTFILES
@@ -254,7 +258,12 @@ program_files:
 
   ; ==================== 新增：复制 t9s2t 文件夹 ====================
   SetOutPath $INSTDIR
-  File /r "t9s2t"
+  ; 只复制「语音转文字本体」：t9s2t.exe + 它的托管依赖 DLL（合计约 3.8MB）
+  ; 下面三项是【运行时按需下载】的，绝不能进安装包，否则包体积会从 ~45MB 暴涨到 300MB+：
+  ;   model\                  ~290MB  语音模型（首启自动下载并解压到该目录）
+  ;   onnxruntime.dll         ~15MB   推理引擎（由 engine.json 在线分发）
+  ;   sherpa-onnx-c-api.dll   ~4MB    sherpa C API（同上）
+  File /r /x "model" /x "onnxruntime.dll" /x "sherpa-onnx-c-api.dll" "t9s2t"
   ; ============================================================
 
   ; shared data files
@@ -320,7 +329,9 @@ program_files:
   ${Else}
     SetRegView 32
   ${EndIf}
-  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Run" "WeaselServer" '"$INSTDIR\WeaselServer.exe"'
+  ; 算法服务开机自启：注册计划任务，并把原 Run 启动项改为触发同一个任务
+  ; （直接启 exe 会与任务抢进程，详见 RegisterWeaselServerTask 的说明）
+  Call RegisterWeaselServerTask
 
   ; ===== 新增：自动勾选“以管理员身份运行此程序”兼容性选项 =====
   ; 处理 64/32 位注册表视图
@@ -366,7 +377,8 @@ Section "Start Menu Shortcuts"
   CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORDICT).lnk" "$INSTDIR\WeaselDeployer.exe" "/dict" "$SYSDIR\shell32.dll" 6
   CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORSYNC).lnk" "$INSTDIR\WeaselDeployer.exe" "/sync" "$SYSDIR\shell32.dll" 26
   CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORDEPLOY).lnk" "$INSTDIR\WeaselDeployer.exe" "/deploy" "$SYSDIR\shell32.dll" 144
-  CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORSERVER).lnk" "$INSTDIR\WeaselServer.exe" "" "$INSTDIR\WeaselServer.exe" 0
+  ; 算法服务快捷方式：改为触发已批准的计划任务，双击不再弹 UAC；服务在跑时不会重复启动
+  CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORSERVER).lnk" "$SYSDIR\schtasks.exe" `/run /tn "XiaoBaiT9\WeaselServer"` "$INSTDIR\WeaselServer.exe" 0 SW_SHOWMINIMIZED
   CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORNUMKEYBOARD).lnk" "$INSTDIR\numkeyboard.exe" "" "$INSTDIR\numkeyboard.exe"
   CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORCONFIG).lnk" "$INSTDIR\t9configui.exe" "" "$INSTDIR\t9configui.exe"
   CreateShortCut "$SMPROGRAMS\$(DISPLAYNAME)\$(LNKFORT9SKIN).lnk" "$INSTDIR\t9skin.exe" "" "$INSTDIR\t9skin.exe"
@@ -384,6 +396,155 @@ Section "Start Menu Shortcuts"
   ; 参数说明：快捷方式路径、目标程序、参数、图标资源、图标索引
   CreateShortCut "$DESKTOP\小白T9输入法HelpMe.lnk" "$INSTDIR\helpme.exe" "" "$INSTDIR\helpme.exe" 0
 SectionEnd
+
+;--------------------------------
+; 安装成功（用户未取消）时置标志，供 .onGUIEnd 判断
+Function .onInstSuccess
+  StrCpy $HelpMeFlag "1"
+FunctionEnd
+
+;--------------------------------
+; 安装结束、GUI 关闭时：安装成功则自动打开桌面上的 helpme 使用教程（零点击）
+; 注意：.onGUIEnd 在「完成」和「取消」时都会被调用，所以必须用 $HelpMeFlag 区分
+Function .onGUIEnd
+  ; 静默安装不弹教程
+  IfSilent helpme_done
+  ; 只有安装真正成功（.onInstSuccess 已执行）才弹
+  StrCmp $HelpMeFlag "1" 0 helpme_done
+  ; 与创建快捷方式时保持一致：公共桌面
+  SetShellVarContext all
+  ; 快捷方式不存在则不启动（例如安装时未勾选「Start Menu Shortcuts」）
+  IfFileExists "$DESKTOP\小白T9输入法HelpMe.lnk" 0 helpme_done
+  ; ExecShell 走 ShellExecute，可直接运行 .lnk；Exec 只能运行 exe
+  ExecShell "open" "$DESKTOP\小白T9输入法HelpMe.lnk"
+helpme_done:
+FunctionEnd
+
+;--------------------------------
+; 算法服务（WeaselServer）开机自启：计划任务方案
+;
+; 背景：WeaselServer.exe 自身清单是 asInvoker，但本安装程序给它写了 RUNASADMIN
+;       兼容标记（见上面 AppCompatFlags\Layers 段），因此它需要管理员令牌。
+;       放在 Run 键里由外壳启动时，登录阶段弹不出 UAC 同意窗口，会被静默阻止
+;       （只有 UAC 关闭的机器才碰巧能起）。
+;
+; 方案：1) 注册计划任务 XiaoBaiT9\WeaselServer：
+;          登录时触发 + 延迟 30 秒 + 最高权限 HighestAvailable（静默提权，不弹 UAC）
+;          + 失败重启 3 次 + 执行时长不限（默认 3 天会把常驻服务杀掉）；
+;       2) 原 Run 启动项保留为兜底保险丝，但改为触发同一个任务；
+;       3) 开始菜单里的"算法服务"快捷方式同样改为触发该任务。
+;
+;       两个入口都指向同一个任务，任务自带 IgnoreNew，绝不会启动出第二份服务。
+;       （WeaselServer 检测到已有实例时会先关掉旧实例再接管，直接双入口启动
+;         会造成服务中断，极端情况下两个进程都退出。）
+;
+; 注意：任务 XML 必须写成 UTF-16LE 且带 BOM，否则 schtasks 会报
+;       "任务 XML 格式不正确"。（BOM 用 FileWriteByte 255/254 写入，已实测）
+;       路径若含 & < > 等 XML 特殊字符，需要另行转义（默认安装路径不含）。
+;--------------------------------
+Function TrimTail
+  Exch $R0
+  Push $R1
+tt_loop:
+  StrCmp $R0 "" tt_end
+  StrCpy $R1 $R0 1 -1
+  StrCmp $R1 "$\r" tt_strip
+  StrCmp $R1 "$\n" tt_strip
+  StrCmp $R1 " " tt_strip
+  StrCmp $R1 "$\t" tt_strip
+  Goto tt_end
+tt_strip:
+  StrCpy $R0 $R0 -1
+  Goto tt_loop
+tt_end:
+  Pop $R1
+  Exch $R0
+FunctionEnd
+
+Function RegisterWeaselServerTask
+  Push $R0
+  Push $R1
+  Push $R2
+  Push $R3
+  Push $R4
+
+  ; 1) 取“计算机名\用户名”，作为任务 XML 里的 UserId
+  nsExec::ExecToStack '"$SYSDIR\whoami.exe"'
+  Pop $R0
+  Pop $R1
+  Push $R1
+  Call TrimTail
+  Pop $R2
+  StrCmp $R2 "" wst_end
+
+  ; 2) 生成任务 XML（UTF-16LE + BOM）
+  StrCpy $R3 "$TEMP\xiaobait9-weaselserver.task.xml"
+  ClearErrors
+  FileOpen $R4 $R3 w
+  IfErrors wst_end
+  FileWriteByte $R4 "255"
+  FileWriteByte $R4 "254"
+  FileWriteUTF16LE $R4 '<?xml version="1.0" encoding="UTF-16"?>$\r$\n'
+  FileWriteUTF16LE $R4 '<Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">$\r$\n'
+  FileWriteUTF16LE $R4 '  <RegistrationInfo><Author>xiaobai.pro</Author><Description>小白T9输入法 - 算法服务开机自启：登录后延迟 30 秒，以最高权限静默启动</Description></RegistrationInfo>$\r$\n'
+  FileWriteUTF16LE $R4 '  <Triggers><LogonTrigger><Enabled>true</Enabled><UserId>$R2</UserId><Delay>PT30S</Delay></LogonTrigger></Triggers>$\r$\n'
+  FileWriteUTF16LE $R4 '  <Principals><Principal id="Author"><UserId>$R2</UserId><LogonType>InteractiveToken</LogonType><RunLevel>HighestAvailable</RunLevel></Principal></Principals>$\r$\n'
+  FileWriteUTF16LE $R4 '  <Settings>$\r$\n'
+  FileWriteUTF16LE $R4 '    <MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy>$\r$\n'
+  FileWriteUTF16LE $R4 '    <DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries>$\r$\n'
+  FileWriteUTF16LE $R4 '    <StopIfGoingOnBatteries>false</StopIfGoingOnBatteries>$\r$\n'
+  FileWriteUTF16LE $R4 '    <AllowHardTerminate>true</AllowHardTerminate>$\r$\n'
+  FileWriteUTF16LE $R4 '    <StartWhenAvailable>true</StartWhenAvailable>$\r$\n'
+  FileWriteUTF16LE $R4 '    <RunOnlyIfNetworkAvailable>false</RunOnlyIfNetworkAvailable>$\r$\n'
+  FileWriteUTF16LE $R4 '    <IdleSettings><StopOnIdleEnd>false</StopOnIdleEnd><RestartOnIdle>false</RestartOnIdle></IdleSettings>$\r$\n'
+  FileWriteUTF16LE $R4 '    <AllowStartOnDemand>true</AllowStartOnDemand>$\r$\n'
+  FileWriteUTF16LE $R4 '    <Enabled>true</Enabled><Hidden>false</Hidden><RunOnlyIfIdle>false</RunOnlyIfIdle><WakeToRun>false</WakeToRun>$\r$\n'
+  FileWriteUTF16LE $R4 '    <ExecutionTimeLimit>PT0S</ExecutionTimeLimit>$\r$\n'
+  FileWriteUTF16LE $R4 '    <Priority>7</Priority>$\r$\n'
+  FileWriteUTF16LE $R4 '    <RestartOnFailure><Interval>PT1M</Interval><Count>3</Count></RestartOnFailure>$\r$\n'
+  FileWriteUTF16LE $R4 '  </Settings>$\r$\n'
+  FileWriteUTF16LE $R4 '  <Actions Context="Author"><Exec><Command>$INSTDIR\WeaselServer.exe</Command><WorkingDirectory>$INSTDIR</WorkingDirectory></Exec></Actions>$\r$\n'
+  FileWriteUTF16LE $R4 '</Task>$\r$\n'
+  FileClose $R4
+
+  ; 3) 注册任务（/F 覆盖：升级换安装目录后路径自动同步刷新）
+  nsExec::ExecToLog '"$SYSDIR\schtasks.exe" /Create /TN "XiaoBaiT9\WeaselServer" /XML "$R3" /F'
+  Pop $R0
+  Delete "$R3"
+
+  ; 4) 兜底脚本：Run 启动项到点后触发同一个任务；任务不可用时直接拉起 exe
+  ClearErrors
+  FileOpen $R4 "$INSTDIR\weasel-autostart.vbs" w
+  IfErrors wst_run
+  FileWrite $R4 'WScript.Sleep 60000$\r$\n'
+  FileWrite $R4 'Set sh = CreateObject("WScript.Shell")$\r$\n'
+  FileWrite $R4 'If sh.Run("cmd /c tasklist /FI ""IMAGENAME eq WeaselServer.exe"" | find /I ""WeaselServer.exe""", 0, True) <> 0 Then$\r$\n'
+  FileWrite $R4 '  If sh.Run("schtasks.exe /run /tn ""XiaoBaiT9\WeaselServer""", 0, True) <> 0 Then$\r$\n'
+  FileWrite $R4 '    sh.Run """$INSTDIR\WeaselServer.exe""", 0, False$\r$\n'
+  FileWrite $R4 '  End If$\r$\n'
+  FileWrite $R4 'End If$\r$\n'
+  FileClose $R4
+
+wst_run:
+  ; 5) Run 键：保留原启动项，但改为触发上面的任务（避免与任务抢进程）
+  ${If} ${IsNativeARM64}
+    SetRegView 64
+  ${ElseIf} ${IsNativeAMD64}
+    SetRegView 64
+  ${Else}
+    SetRegView 32
+  ${EndIf}
+  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Run" "WeaselServer" '"$SYSDIR\wscript.exe" //B "$INSTDIR\weasel-autostart.vbs"'
+  SetRegView lastused
+
+wst_end:
+  Pop $R4
+  Pop $R3
+  Pop $R2
+  Pop $R1
+  Pop $R0
+FunctionEnd
+
 
 ;--------------------------------
 ; Uninstaller
@@ -426,6 +587,8 @@ Section "Uninstall"
     SetRegView 64
   ${EndIf}
   DeleteRegValue HKLM "Software\Microsoft\Windows\CurrentVersion\Run" "WeaselServer"
+  ; 删除算法服务的开机自启计划任务
+  nsExec::ExecToLog '"$SYSDIR\schtasks.exe" /Delete /TN "XiaoBaiT9\WeaselServer" /F'
   SetRegView 32
 
   ; ===== 修改二：清理文件逻辑优化，避免硬编码路径 =====

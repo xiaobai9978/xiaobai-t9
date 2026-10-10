@@ -42,7 +42,7 @@ namespace t9configui
             string appDir = AppDomain.CurrentDomain.BaseDirectory;
             try { string p = Path.Combine(appDir, "wechat_qr.png"); if (System.IO.File.Exists(p)) qrWechat.Image = Image.FromFile(p); } catch { }
             try { string p = Path.Combine(appDir, "alipay_qr.png"); if (System.IO.File.Exists(p)) qrAlipay.Image = Image.FromFile(p); } catch { }
-            try { string p = Path.Combine(appDir, "pdd_qrcode.png"); if (System.IO.File.Exists(p)) qrPdd.Image = Image.FromFile(p); } catch { }
+            try { string p = Path.Combine(appDir, "taobao_qrcode.png"); if (System.IO.File.Exists(p)) qrTaobao.Image = Image.FromFile(p); } catch { }
 
             // Restore ad panel state
             try { if (System.IO.File.Exists(_adStateFile) && System.IO.File.ReadAllText(_adStateFile).Trim() == "1") _adCollapsed = true; } catch { }
@@ -1462,8 +1462,8 @@ namespace t9configui
                 var w2d = g.MeasureString("感谢支持小白输入法", sf).Width;
                 g.DrawString("感谢支持小白输入法", sf, gb, (190 - w2d) / 2, 378);
                 g.DrawLine(pen, 20, 418, 170, 418);
-                var w3 = g.MeasureString("拼多多店铺", lf).Width;
-                g.DrawString("拼多多店铺", lf, db, (190 - w3) / 2, 578);
+                var w3 = g.MeasureString("淘宝店铺", lf).Width;
+                g.DrawString("淘宝店铺", lf, db, (190 - w3) / 2, 578);
                 var w3a = g.MeasureString("捐助98元可赠送", sf).Width;
                 g.DrawString("捐助98元可赠送", sf, gb, (190 - w3a) / 2, 598);
                 var w3b = g.MeasureString("小白T9无线键盘一台!", sf).Width;

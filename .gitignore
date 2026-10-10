@@ -61,3 +61,23 @@ arm64x_wrapper/*.exp
 **/model/*.onnx
 **/model/*.bin
 
+# ===== t9s2t 运行时下载物：语音模型 + 原生引擎（合计约 310MB，绝不入库）=====
+# 模型由 t9s2t 首次运行时自动下载到 exe 同目录；
+# onnxruntime.dll / sherpa-onnx-c-api.dll 由 engine.json 在线分发。
+# 注意：打包源目录 output/t9s2t/ 下也会出现这些文件（在 output/ 下跑过 t9s2t 就会有），
+#       install.nsi 已用 /x 把它们排除出安装包，这里再排除出仓库。
+**/model/
+/output/t9s2t/onnxruntime.dll
+/output/t9s2t/sherpa-onnx-c-api.dll
+/output/t9s2t/ad_state.txt
+
+# ===== 待上传的分发文件（二进制，非源码）=====
+/t9s2t/server_upload/
+
+# ===== 本地回滚备份：改动前的快照，不入库 =====
+*.bak-*
+
+# ===== 工具 / 工作目录 =====
+.workbuddy/
+_resx_dump/
+

@@ -51,7 +51,7 @@ namespace helpme
         // ================= 广告面板状态 =================
         private bool _adCollapsed = false;
         private readonly string _adStateFile = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "helpme_ad_state.txt");
-        private Image _imgWechat, _imgAlipay, _imgPdd;
+        private Image _imgWechat, _imgAlipay, _imgTaobao;
 
         public Form1()
         {
@@ -75,7 +75,7 @@ namespace helpme
             var asm = System.Reflection.Assembly.GetExecutingAssembly();
             try { using (var s = asm.GetManifestResourceStream("helpme.Properties.wechat_qr.png")) { if (s != null) _imgWechat = Image.FromStream(s); } } catch { }
             try { using (var s = asm.GetManifestResourceStream("helpme.Properties.alipay_qr.png")) { if (s != null) _imgAlipay = Image.FromStream(s); } } catch { }
-            try { using (var s = asm.GetManifestResourceStream("helpme.Properties.pdd_qrcode.png")) { if (s != null) _imgPdd = Image.FromStream(s); } } catch { }
+            try { using (var s = asm.GetManifestResourceStream("helpme.Properties.taobao_qrcode.png")) { if (s != null) _imgTaobao = Image.FromStream(s); } } catch { }
 
             try { if (File.Exists(_adStateFile) && File.ReadAllText(_adStateFile).Trim() == "1") _adCollapsed = true; } catch { }
             ApplyAdState();
@@ -125,12 +125,12 @@ namespace helpme
                 g.DrawString("支付宝打赏", lf, db, (pw - w2) / 2, y2txt);
                 g.DrawLine(pen, pw * 0.1f, secH * 1.97f, pw * 0.9f, secH * 1.97f);
 
-                // 区块3: 拼多多
+                // 区块3: 淘宝
                 int y3img = (int)(secH * 2 + secH * 0.1f);
                 int y3txt = y3img + imgSize + 2;
-                if (_imgPdd != null) g.DrawImage(_imgPdd, imgX, y3img, imgSize, imgSize);
-                var w3 = g.MeasureString("拼多多店铺", lf).Width;
-                g.DrawString("拼多多店铺", lf, db, (pw - w3) / 2, y3txt);
+                if (_imgTaobao != null) g.DrawImage(_imgTaobao, imgX, y3img, imgSize, imgSize);
+                var w3 = g.MeasureString("淘宝店铺", lf).Width;
+                g.DrawString("淘宝店铺", lf, db, (pw - w3) / 2, y3txt);
                 var w3a = g.MeasureString("捐助98元送小白T9无线键盘一台", sf).Width;
                 g.DrawString("捐助98元送小白T9无线键盘一台", sf, rb, (pw - w3a) / 2, y3txt + 16);
             }
@@ -454,7 +454,7 @@ namespace helpme
             blinkTimer?.Stop();
             _imgWechat?.Dispose(); _imgWechat = null;
             _imgAlipay?.Dispose(); _imgAlipay = null;
-            _imgPdd?.Dispose(); _imgPdd = null;
+            _imgTaobao?.Dispose(); _imgTaobao = null;
         }
 
         private void CurrentDomain_ProcessExit(object sender, EventArgs e)

@@ -105,8 +105,12 @@ namespace t9keyboard
                 {
                     _keyboardHook.Dispose();
                     //MessageBox.Show("KeyboardHook 已释放");
+                    // 这里切换的是键盘钩子的启停（改键功能的开/关），不是热键本身；
+                    // 原来写成"快捷键已释放"容易被理解成热键失效，改为直说改键状态。
+                    string hkText = string.IsNullOrWhiteSpace(textBox1.Text) ? "热键" : textBox1.Text.Trim();
                     notifyIcon.BalloonTipTitle = "小白T9输入法软键盘";
-                    notifyIcon.BalloonTipText = "快捷键已释放。";
+                    notifyIcon.BalloonTipText = $"改键功能已暂停（再按一次 {hkText} 恢复）";
+                    notifyIcon.Text = "小白T9软键盘 - 改键已暂停";
                     notifyIcon.ShowBalloonTip(3000);
                     _keyboardHook.Dispose();
                 }
@@ -115,7 +119,8 @@ namespace t9keyboard
                     _keyboardHook = new KeyboardHook(_checkBox1, _checkBox2, _checkBox3, _num7t, _num8t, _num9t, _num4t, _num5t, _num6t, _num1t, _num2t, _num3t, _num0t, _numlockt, _numchut, _numchengt, _numjiant, _numjiat, _numdiant, _numentert, _homet, _shangt, _pgupt, _zuot, _cleart, _yout, _endt, _xiat, _pgdnt, _inst, _delt);
                     //MessageBox.Show("KeyboardHook 已初始化");
                     notifyIcon.BalloonTipTitle = "小白T9输入法软键盘";
-                    notifyIcon.BalloonTipText = "快捷键已注册！！";
+                    notifyIcon.BalloonTipText = "改键功能已恢复";
+                    notifyIcon.Text = "小白T9软键盘 - 改键运行中";
                     notifyIcon.ShowBalloonTip(3000);
                 }
                 isHookActive = !isHookActive;
@@ -188,9 +193,28 @@ namespace t9keyboard
         //public static Color sc = Color.FromArgb(Convert.ToInt32("-5460293"));
         //public static Color qc = Color.FromArgb(Convert.ToInt32("-1"));
         //public static Color bc = Color.FromArgb(Convert.ToInt32("-3618616"));
-        public static Color sc = Color.FromArgb(Convert.ToInt32(System.IO.File.ReadAllLines(System.Windows.Forms.Application.StartupPath + "\\data\\t9keyboard.txt")[System.IO.File.ReadAllLines(System.Windows.Forms.Application.StartupPath + "\\data\\t9keyboard.txt").Length - 5]));
-        public static Color qc = Color.FromArgb(Convert.ToInt32(System.IO.File.ReadAllLines(System.Windows.Forms.Application.StartupPath + "\\data\\t9keyboard.txt")[System.IO.File.ReadAllLines(System.Windows.Forms.Application.StartupPath + "\\data\\t9keyboard.txt").Length - 4]));
-        public static Color bc = Color.FromArgb(Convert.ToInt32(System.IO.File.ReadAllLines(System.Windows.Forms.Application.StartupPath + "\\data\\t9keyboard.txt")[System.IO.File.ReadAllLines(System.Windows.Forms.Application.StartupPath + "\\data\\t9keyboard.txt").Length - 3]));
+        // ==== 颜色配置读取（设计期安全）====
+        // 这些静态字段的初始化在设计期也会执行：VS 打开窗体设计器时会创建窗体实例，
+        // 而 Form1/Form3/Form4 的字段初始化器里有 "Color sc = help.sc;" 之类语句，
+        // 会触发 help 的类型初始化。设计期 Application.StartupPath 指向 devenv.exe
+        // 所在目录，那里没有 data\t9keyboard.txt，原先直接 ReadAllLines 会抛
+        // FileNotFoundException，使 help 的类型初始化失败（TypeInitializationException），
+        // 结果 Form1 / Form3 / Form4 / help 的窗体设计器全都打不开。
+        // 改为容错读取 + 默认值兜底：文件存在时取值与原来完全一致，运行时行为不变。
+        private static Color ReadConfigColor(int indexFromEnd, Color fallback)
+        {
+            try
+            {
+                string[] lines = System.IO.File.ReadAllLines(System.Windows.Forms.Application.StartupPath + "\\data\\t9keyboard.txt");
+                if (lines.Length >= indexFromEnd)
+                    return Color.FromArgb(Convert.ToInt32(lines[lines.Length - indexFromEnd]));
+            }
+            catch { }
+            return fallback;
+        }
+        public static Color sc = ReadConfigColor(5, Color.FromArgb(172, 174, 187));
+        public static Color qc = ReadConfigColor(4, Color.FromArgb(255, 255, 255));
+        public static Color bc = ReadConfigColor(3, Color.FromArgb(200, 200, 200));
         private bool isCheckBoxChecked;
         private void help_Load(object sender, EventArgs e)
         {
@@ -199,6 +223,9 @@ namespace t9keyboard
             bc1.BackColor = sc;
             bc2.BackColor = qc;
             bc3.BackColor = bc;
+
+            // 托盘图标补上右键菜单（原来只能弹气泡，右键毫无反应）
+            InitializeTrayMenu();
             //读取txt改键
             string filePath = Path.Combine(Application.StartupPath, "data", "t9keyboard01.txt");
             if (File.Exists(filePath))
@@ -330,7 +357,7 @@ namespace t9keyboard
             string appDir = AppDomain.CurrentDomain.BaseDirectory;
             try { string p = Path.Combine(appDir, "wechat_qr.png"); if (System.IO.File.Exists(p)) qrWechat.Image = Image.FromFile(p); } catch { }
             try { string p = Path.Combine(appDir, "alipay_qr.png"); if (System.IO.File.Exists(p)) qrAlipay.Image = Image.FromFile(p); } catch { }
-            try { string p = Path.Combine(appDir, "pdd_qrcode.png"); if (System.IO.File.Exists(p)) qrPdd.Image = Image.FromFile(p); } catch { }
+            try { string p = Path.Combine(appDir, "taobao_qrcode.png"); if (System.IO.File.Exists(p)) qrTaobao.Image = Image.FromFile(p); } catch { }
 
             // Restore ad panel state
             try { if (System.IO.File.Exists(_adStateFile) && System.IO.File.ReadAllText(_adStateFile).Trim() == "1") _adCollapsed = true; } catch { }
@@ -471,6 +498,58 @@ namespace t9keyboard
                 }
             }
         }
+        // ==================== 托盘图标右键菜单（2026-10-10 新增）====================
+
+        /// <summary>
+        /// 给托盘图标补上右键菜单。
+        /// 这个图标原来的唯一用途是在切换键盘钩子时弹一个气泡，右键它什么都不发生；
+        /// 而它恰恰是程序唯一「常驻可见」的入口——软键盘可以隐藏、悬浮按钮可以贴边收起成 6px，
+        /// 一旦两者都看不见，用户就没有别的办法操作这个程序了。
+        /// </summary>
+        private void InitializeTrayMenu()
+        {
+            var menu = new ContextMenuStrip();
+
+            // ① 把悬浮按钮找回来：悬浮窗支持贴边收起（缩成 6px 窄条），
+            //    收起来之后很难再点到它，这里是唯一的救援入口。
+            menu.Items.Add("显示悬浮按钮", null, (s, e) => RestoreFloatingIcon());
+
+            // ② 直接打开这个设置窗口（双击托盘图标同效）
+            menu.Items.Add("帮助与设置", null, (s, e) => ShowSettingsWindow());
+
+            menu.Items.Add(new ToolStripSeparator());
+
+            // ③ 退出：托盘图标最该有的功能，也是用户唯一能确定「程序真的退出了」的地方
+            menu.Items.Add("退出软键盘", null, (s, e) =>
+            {
+                DialogResult r = MessageBox.Show(
+                    "确定退出小白T9软键盘吗？\n\n退出后软键盘和悬浮按钮都会消失。",
+                    "退出软键盘", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                if (r == DialogResult.Yes) Environment.Exit(0);
+            });
+
+            notifyIcon.ContextMenuStrip = menu;
+            notifyIcon.DoubleClick += (s, e) => ShowSettingsWindow();
+        }
+
+        /// <summary>把设置窗口自己显示到前台</summary>
+        private void ShowSettingsWindow()
+        {
+            this.Show();
+            if (this.WindowState == FormWindowState.Minimized) this.WindowState = FormWindowState.Normal;
+            try { this.BringToFront(); this.Activate(); } catch { }
+        }
+
+        /// <summary>把悬浮按钮完整显示出来（若处于贴边收起状态会先展开）</summary>
+        private static void RestoreFloatingIcon()
+        {
+            foreach (Form f in Application.OpenForms)
+            {
+                Form2 f2 = f as Form2;
+                if (f2 != null) { f2.RestoreFloatingIcon(); return; }
+            }
+        }
+
         public void yes_Click(object sender, EventArgs e)
         {
             sc = bc1.BackColor;
@@ -648,9 +727,9 @@ namespace t9keyboard
                 g.DrawString("感谢支持小白输入法", sf, gb, (190 - w2d) / 2, 288);
                 g.DrawLine(pen, 20, 280, 170, 280);
 
-                // ==================== 修改后的拼多多部分 ====================
-                var w3 = g.MeasureString("拼多多店铺", lf).Width;
-                g.DrawString("拼多多店铺", lf, db, (190 - w3) / 2, 412);
+                // ==================== 修改后的淘宝部分 ====================
+                var w3 = g.MeasureString("淘宝店铺", lf).Width;
+                g.DrawString("淘宝店铺", lf, db, (190 - w3) / 2, 412);
 
                 string secondLine = "捐助98元获赠小白T9无线键盘一台";
                 var w3d = g.MeasureString(secondLine, sf).Width;

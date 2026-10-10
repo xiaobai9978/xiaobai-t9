@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -23,7 +23,9 @@ namespace t9s2t
         private VadStreamProcessor vadProcessor;
         private WaveInEvent waveIn;
         private bool isRecording = false;
-        private readonly string modelPath = "model";
+        // 模型目录固定到程序所在目录：用相对路径会随工作目录变化（如注册表自启动），
+        // 导致已下好的模型检测不到、每次启动都重新下载 258MB。
+        private readonly string modelPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "model");
         private NotifyIcon trayIcon;
         private EngineType currentEngineType = EngineType.None;
 
@@ -63,18 +65,23 @@ namespace t9s2t
         ]";
 
         // 引擎运行时 DLL 备用配置
+        // 注意：wp.xiaobai.pro:1111 是非标准端口，容易被企业网/防火墙拦截，
+        // 因此每个组件都配 mirrors（走 443 的 t9.xiaobai.pro）。服务器上对应的
+        // engine.json 也请同步补上 mirrors 字段。
         private readonly string fallbackEngineJson = @"
         {
             ""engine_runtimes"": [
                 {
                     ""name"": ""onnxruntime.dll"",
                     ""url"": ""https://wp.xiaobai.pro:1111/d/%E8%BE%93%E5%85%A5%E6%B3%95/models/onnxruntime.dll"",
-                    ""description"": ""ONNX 推理引擎 (15MB)""
+                    ""description"": ""ONNX 推理引擎 (15MB)"",
+                    ""mirrors"": [ ""https://t9.xiaobai.pro/models/onnxruntime.dll"" ]
                 },
                 {
                     ""name"": ""sherpa-onnx-c-api.dll"",
                     ""url"": ""https://wp.xiaobai.pro:1111/d/%E8%BE%93%E5%85%A5%E6%B3%95/models/sherpa-onnx-c-api.dll"",
-                    ""description"": ""sherpa-onnx C API (4MB)""
+                    ""description"": ""sherpa-onnx C API (4MB)"",
+                    ""mirrors"": [ ""https://t9.xiaobai.pro/models/sherpa-onnx-c-api.dll"" ]
                 }
             ]
         }";
@@ -104,6 +111,12 @@ namespace t9s2t
         [DllImport("user32.dll")] private static extern IntPtr GetForegroundWindow();
         [DllImport("user32.dll")] private static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint lpdwProcessId);
         [DllImport("user32.dll")] private static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, bool fAttach);
+        // UIPI 放行：本程序清单是 requireAdministrator（High 完整性），普通权限进程（如 t9keyboard，Medium）
+        // 发来的自定义消息默认会被系统拦截（RegisterWindowMessage 的返回值 ≥ WM_USER）。
+        // 必须显式放行这一条消息，"从 t9keyboard 唤起模型面板"才可能成功。
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern bool ChangeWindowMessageFilterEx(IntPtr hwnd, uint message, uint action, IntPtr pChangeFilterStruct);
+        private const uint MSGFLT_ALLOW = 1;   // ChangeWindowMessageFilterEx 的 action 取值
 
         private const int WH_KEYBOARD_LL = 13;
         private const int WM_KEYDOWN = 0x0100;
@@ -117,6 +130,17 @@ namespace t9s2t
         private const int SW_SHOW = 5;
 
         private static readonly int WM_SHOWAPP = RegisterWindowMessage("WM_SHOWAPP_T9S2T_UNIQUE");
+
+        /// <summary>
+        /// 打开「引擎 / 模型」面板的意图。跨进程唤起时放在 WM_SHOWAPP 的 wParam 里传送；
+        /// 0 = ShowOnly 与旧版本兼容（旧版发出的消息 wParam 恒为 0）。
+        /// </summary>
+        internal enum ModelPanelIntent { ShowOnly = 0, Install = 1, Manage = 2 }
+
+        /// <summary>由启动参数决定的意图（由 Program.Main 赋值）</summary>
+        internal static ModelPanelIntent StartupIntent = ModelPanelIntent.ShowOnly;
+        /// <summary>启动参数是否明确要求「立刻开始下载」（只有显式带 /install 才为 true）</summary>
+        internal static bool StartupAutoDownload = false;
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         private static extern int RegisterWindowMessage(string lpString);
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
@@ -155,15 +179,22 @@ namespace t9s2t
 
             if (!createdNew)
             {
+                // 已有实例：把「要打开哪块面板」的意图转交给它（wParam = 意图枚举）
                 IntPtr existingHandle = FindWindow(null, this.Text);
-                if (existingHandle != IntPtr.Zero) SendMessage(existingHandle, WM_SHOWAPP, IntPtr.Zero, IntPtr.Zero);
+                if (existingHandle != IntPtr.Zero)
+                    SendMessage(existingHandle, WM_SHOWAPP, (IntPtr)(int)StartupIntent, IntPtr.Zero);
                 Environment.Exit(0);
                 return;
             }
 
+            // UIPI 放行：让普通权限的进程（t9keyboard）也能把本窗口唤到前台
+            try { ChangeWindowMessageFilterEx(this.Handle, (uint)WM_SHOWAPP, MSGFLT_ALLOW, IntPtr.Zero); }
+            catch { }
+
             trayIcon = new NotifyIcon { Icon = this.Icon, Visible = true, Text = "t9s2t 启动中..." };
             var menu = new ContextMenuStrip();
             menu.Items.Add("显示主界面", null, (s, ev) => ForceShowMainWindow());
+            menu.Items.Add("管理语音模型…", null, (s, ev) => ShowModelPanel(ModelPanelIntent.Manage));
             menu.Items.Add("退出", null, (s, ev) => Application.Exit());
             trayIcon.ContextMenuStrip = menu;
             trayIcon.DoubleClick += (s, ev) => ForceShowMainWindow();
@@ -180,6 +211,13 @@ namespace t9s2t
             chkAutoStart.CheckedChanged += ChkAutoStart_CheckedChanged;
             this.Controls.Add(chkAutoStart);
             chkAutoStart.BringToFront();
+
+            // 尽早装好键盘钩子与麦克风：首启要下载 258MB 模型，如果等下载完再装钩子，
+            // 整个下载过程 Ctrl+Alt+D 都不响应。StartRecording 内部已判空 engine，提前装是安全的。
+            _proc = HookCallback;
+            _hookID = SetHook(_proc);
+            InitMicrophone();
+
             await Task.Delay(200);
 
             // 检查引擎 DLL 和模型是否就绪
@@ -193,54 +231,64 @@ namespace t9s2t
                 modelReady = (currentEngineType != EngineType.None);
             }
 
+            // 把「引擎 / 模型到底能不能用」写到注册表，供 t9keyboard 判断（不再只看进程在不在）
+            SyncModelStateToRegistry();
+
             if (engineReady && modelReady)
             {
                 // 一切就绪：下载按钮禁用（模型已安装，不允许重复下载），删除按钮可用
                 SetModelReadyButtonState();
-                // 隐藏到托盘后台运行
-                this.WindowState = FormWindowState.Minimized;
-                this.Hide();
-                this.ShowInTaskbar = false;
-                trayIcon.ShowBalloonTip(3000, "t9s2t 已就绪", "程序已在后台运行，按 Ctrl+Alt+D 说话", ToolTipIcon.Info);
-                await LoadEngine();
+
+                if (StartupIntent == ModelPanelIntent.Manage)
+                {
+                    // 外部明确要求「管理模型」：即使已就绪也要把界面摆出来
+                    ShowModelPanel(ModelPanelIntent.Manage);
+                    await LoadEngine();
+                }
+                else
+                {
+                    // 隐藏到托盘后台运行
+                    this.WindowState = FormWindowState.Minimized;
+                    this.Hide();
+                    this.ShowInTaskbar = false;
+                    trayIcon.ShowBalloonTip(3000, "t9s2t 已就绪", "程序已在后台运行，按 Ctrl+Alt+D 说话", ToolTipIcon.Info);
+                    await LoadEngine();
+                }
             }
             else
             {
-                // 组件或模型未就绪：保持窗口可见，首次启动自动下载
-                if (!engineReady)
-                    lblStatus.Text = "⚙️ 检测到缺少引擎组件，即将自动下载...";
-                else
-                    lblStatus.Text = "📦 检测到缺少语音模型，即将自动下载...";
-                this.Show();
-                this.BringToFront();
-                // 自动下载引擎组件与模型（默认行为，手动按钮仍保留作为兜底）
-                await AutoSetupComponentsAsync();
+                // 三种情况要分开说：缺引擎 / 目录在但模型损坏 / 完全没装（具体文案由 RefreshInstallReasonText 决定）
+                // 自动下载只在「用户主动启动」时发生；被外部唤起（/model）一律先展示，等用户点
+                bool autoDownload = (StartupIntent == ModelPanelIntent.ShowOnly) || StartupAutoDownload;
+
+                ShowModelPanel(ModelPanelIntent.Install);   // 先把界面摆好（内部会设置原因文案）
+
+                if (autoDownload)
+                {
+                    if (engineReady && Directory.Exists(modelPath))
+                    {   // 上次没装完 → 先把残骸挪走，避免「下了还是坏的」
+                        lblStatus.Text = "⚠️ 检测到上次模型安装未完成，正在清理后重新下载...";
+                        lblStatus.Refresh();
+                        QuarantineBrokenModel();
+                    }
+                    // 自动下载引擎组件与模型（默认行为，手动按钮仍保留作为兜底）
+                    await AutoSetupComponentsAsync();
+                }
             }
 
-            _proc = HookCallback;
-            _hookID = SetHook(_proc);
-            InitMicrophone();
-            SetupDynamicResources();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            // 键盘钩子与麦克风已在上面提前初始化，这里只恢复界面资源
             SetupDynamicResources();
         }
 
         protected override void WndProc(ref Message m)
         {
-            if (m.Msg == WM_SHOWAPP) ForceShowMainWindow();
+            if (m.Msg == WM_SHOWAPP)
+            {
+                // wParam = 意图（0 = 旧版本的「只显示」）
+                ModelPanelIntent intent = ModelPanelIntent.ShowOnly;
+                try { intent = (ModelPanelIntent)m.WParam.ToInt32(); } catch { }
+                ShowModelPanel(intent);
+            }
             base.WndProc(ref m);
         }
 
@@ -267,7 +315,9 @@ namespace t9s2t
             {
                 using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true))
                 {
-                    if (chkAutoStart.Checked) key.SetValue("t9s2t", Application.ExecutablePath);
+                    // 必须加引号：安装目录形如 C:\Program Files (x86)\...，含空格时
+                    // 不加引号的 Run 值会被系统错误解析，自启动直接失效
+                    if (chkAutoStart.Checked) key.SetValue("t9s2t", "\"" + Application.ExecutablePath + "\"");
                     else key.DeleteValue("t9s2t", false);
                 }
             }
@@ -300,7 +350,7 @@ namespace t9s2t
             string appDir = AppDomain.CurrentDomain.BaseDirectory;
             try { string p = Path.Combine(appDir, "wechat_qr.png"); if (File.Exists(p)) qrWechat.Image = Image.FromFile(p); } catch { }
             try { string p = Path.Combine(appDir, "alipay_qr.png"); if (File.Exists(p)) qrAlipay.Image = Image.FromFile(p); } catch { }
-            try { string p = Path.Combine(appDir, "pdd_qrcode.png"); if (File.Exists(p)) qrPdd.Image = Image.FromFile(p); } catch { }
+            try { string p = Path.Combine(appDir, "taobao_qrcode.png"); if (File.Exists(p)) qrTaobao.Image = Image.FromFile(p); } catch { }
 
             // 恢复广告面板折叠状态
             RestoreAdPanelState();
@@ -338,8 +388,8 @@ namespace t9s2t
                 g.DrawString("支付宝打赏", labelFont, darkBrush, 213, 160);
                 g.DrawString("感谢支持小白输入法", smallFont, grayBrush, 193, 178);
 
-                // 拼多多店铺
-                g.DrawString("拼多多店铺", labelFont, darkBrush, 388, 160);
+                // 淘宝店铺
+                g.DrawString("淘宝店铺", labelFont, darkBrush, 388, 160);
                 g.DrawString("捐助98元可赠送", smallFont, grayBrush, 393, 178);
                 g.DrawString("小白T9无线键盘一台!", smallFont, redBrush, 380, 194);
 
@@ -517,6 +567,18 @@ namespace t9s2t
             btnDownloadModel.Enabled = false;
             lblStatus.Text = "⚙️ 正在下载引擎组件..."; lblStatus.Refresh();
 
+            // 先清掉损坏 / 位数不对的旧文件，否则会被下面的 "已存在则跳过" 逻辑漏过而永远修不好
+            foreach (var dll in RequiredEngineDlls)
+            {
+                string p = Path.Combine(appDir, dll);
+                string why;
+                if (File.Exists(p) && !IsX64NativePe(p, out why))
+                {
+                    Debug.WriteLine($"[t9s2t] 删除无效引擎组件 {dll}（{why}）");
+                    try { File.Delete(p); } catch { }
+                }
+            }
+
             List<EngineDllInfo> engineDlls = await FetchEngineDllsAsync();
             if (engineDlls == null || engineDlls.Count == 0)
             {
@@ -528,32 +590,69 @@ namespace t9s2t
             try
             {
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
-                using (var client = new WebClient())
+                int total = engineDlls.Count;
+                var errors = new List<string>();
+
+                for (int i = 0; i < engineDlls.Count; i++)
                 {
-                    client.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
-                    int total = engineDlls.Count, current = 0;
-                    foreach (var dll in engineDlls)
+                    var dll = engineDlls[i];
+                    string dllPath = Path.Combine(appDir, dll.name);
+                    if (File.Exists(dllPath) && new FileInfo(dllPath).Length > 0) continue;
+
+                    // 组装候选地址：主地址 + 所有镜像（wp.xiaobai.pro:1111 是单点，必须能切备用源）
+                    var urls = new List<string>();
+                    if (!string.IsNullOrWhiteSpace(dll.url)) urls.Add(dll.url);
+                    if (dll.mirrors != null)
+                        foreach (var m in dll.mirrors)
+                            if (!string.IsNullOrWhiteSpace(m)) urls.Add(m);
+
+                    if (urls.Count == 0) { errors.Add(dll.name + ": 无可用下载地址"); continue; }
+
+                    bool ok = false;
+                    for (int u = 0; u < urls.Count && !ok; u++)
                     {
-                        string dllPath = Path.Combine(appDir, dll.name);
-                        if (File.Exists(dllPath) && new FileInfo(dllPath).Length > 0) continue;
-                        current++;
-                        lblStatus.Text = $"⬇️ 正在下载引擎组件 ({current}/{total}): {dll.description}"; lblStatus.Refresh();
-                        await client.DownloadFileTaskAsync(new Uri(dll.url), dllPath);
+                        try
+                        {
+                            lblStatus.Text = $"⬇️ 正在下载引擎组件 ({i + 1}/{total}): {dll.description}"
+                                             + (u > 0 ? $"（备用源 {u}）" : "");
+                            lblStatus.Refresh();
+                            Debug.WriteLine($"[t9s2t] 下载引擎组件 {dll.name} <- {urls[u]}");
+                            await DownloadFileAsync(urls[u], dllPath);
+
+                            // 每个源下完立即校验，避免把错误页 / 32 位库当成合法文件
+                            string why;
+                            if (IsX64NativePe(dllPath, out why))
+                            {
+                                ok = true;
+                            }
+                            else
+                            {
+                                Debug.WriteLine($"[t9s2t] {dll.name} 校验失败（{why}），改试下一个源");
+                                try { File.Delete(dllPath); } catch { }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine($"[t9s2t] {dll.name} 从 {urls[u]} 下载失败: {ex.Message}");
+                            errors.Add($"{dll.name}@{u}: {ex.Message}");
+                            try { if (File.Exists(dllPath)) File.Delete(dllPath); } catch { }
+                        }
                     }
+                    if (!ok) errors.Add($"{dll.name}: 所有下载源均失败");
                 }
 
-                if (AreEngineDllsReady())
+                if (AreEngineDllsReady() && VerifyEngineDllsIntegrity())
                 {
                     lblStatus.Text = "✅ 引擎组件下载完成"; lblStatus.Refresh();
                     if (!silent) UpdateEngineButtonState(); // 自动下载流程由 AutoSetupComponentsAsync 接管后续状态
                     return true;
                 }
-                else
-                {
-                    lblStatus.Text = "❌ 引擎组件下载不完整"; lblStatus.Refresh();
-                    if (!silent) btnDownloadModel.Enabled = true;
-                    return false;
-                }
+
+                lblStatus.Text = "❌ 引擎组件下载失败"
+                                 + (errors.Count > 0 ? "：" + errors[0] : "（文件不完整）");
+                lblStatus.Refresh();
+                if (!silent) btnDownloadModel.Enabled = true;
+                return false;
             }
             catch (Exception ex)
             {
@@ -567,6 +666,71 @@ namespace t9s2t
                 lblStatus.Text = $"❌ 下载失败: {ex.Message}"; lblStatus.Refresh();
                 if (!silent) btnDownloadModel.Enabled = true;
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// 带断点续传与超时的文件下载器。
+        /// WebClient 不支持续传（258MB 模型中途断网就得从头下），这里改用 HttpWebRequest：
+        /// 每次失败重试时带上 Range 头，从已下好的字节处继续。
+        /// </summary>
+        /// <param name="onProgress">进度回调 (已下载字节, 总字节)；总字节未知时传 0</param>
+        private static Task DownloadFileAsync(string url, string destPath, Action<long, long> onProgress = null, int retries = 3)
+        {
+            return Task.Run(() => DownloadFileCore(url, destPath, onProgress, retries));
+        }
+
+        private static void DownloadFileCore(string url, string destPath, Action<long, long> onProgress, int retries)
+        {
+            for (int attempt = 1; ; attempt++)
+            {
+                long existing = File.Exists(destPath) ? new FileInfo(destPath).Length : 0;
+                bool resuming = false;
+                try
+                {
+                    var req = (HttpWebRequest)WebRequest.Create(url);
+                    req.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64)";
+                    req.Accept = "*/*";
+                    req.AllowAutoRedirect = true;
+                    req.Timeout = 30000;          // 建立连接 / 等待响应超时
+                    req.ReadWriteTimeout = 60000; // 单次读写超时（防止连上后卡死不动）
+                    if (existing > 0) req.AddRange(existing);
+
+                    using (var resp = (HttpWebResponse)req.GetResponse())
+                    {
+                        // 只有服务器返回 206 Partial Content 才说明支持续传
+                        resuming = existing > 0 && resp.StatusCode == HttpStatusCode.PartialContent;
+                        long total = resuming ? existing + resp.ContentLength : resp.ContentLength;
+                        long got = resuming ? existing : 0;
+                        if (!resuming) existing = 0;
+
+                        using (var src = resp.GetResponseStream())
+                        using (var fs = new FileStream(destPath,
+                                   resuming ? FileMode.Append : FileMode.Create,
+                                   FileAccess.Write, FileShare.None))
+                        {
+                            var buffer = new byte[81920];
+                            int n;
+                            while ((n = src.Read(buffer, 0, buffer.Length)) > 0)
+                            {
+                                fs.Write(buffer, 0, n);
+                                got += n;
+                                if (onProgress != null) onProgress(got, total);
+                            }
+                        }
+
+                        // 服务端给了长度就核对一遍，防止静默截断
+                        if (total > 0 && got < total)
+                            throw new IOException($"下载不完整（{got}/{total} 字节）");
+                        return;
+                    }
+                }
+                catch (Exception)
+                {
+                    if (attempt > retries) throw;
+                    Debug.WriteLine($"[t9s2t] 下载中断，第 {attempt + 1}/{retries + 1} 次尝试续传: {url}");
+                    System.Threading.Thread.Sleep(1500 * attempt);
+                }
             }
         }
 
@@ -607,6 +771,8 @@ namespace t9s2t
             public string name { get; set; }
             public string url { get; set; }
             public string description { get; set; }
+            /// <summary>备用下载地址（可选）。主地址失败时按顺序尝试，用于规避 1111 端口被拦。</summary>
+            public List<string> mirrors { get; set; }
         }
 
         // ==================== 首次启动自动下载 ====================
@@ -648,7 +814,7 @@ namespace t9s2t
                     }
                 }
 
-                // 第二步：模型缺失则获取列表并自动下载第一个（推荐）模型
+                // 第二步：模型缺失则获取列表，依次尝试每个候选（主源失败自动切备用源）
                 currentEngineType = EngineDetector.Detect(modelPath);
                 if (currentEngineType != EngineType.None)
                 {
@@ -668,19 +834,28 @@ namespace t9s2t
                         continue;
                     }
 
-                    ModelInfo selected = models[0]; // 列表第一个为推荐模型
-                    if (string.IsNullOrWhiteSpace(selected?.url) || string.IsNullOrWhiteSpace(selected.folder))
+                    bool ok = false;
+                    for (int mi = 0; mi < models.Count && !ok; mi++)
                     {
-                        lblStatus.Text = "❌ 模型配置无效（缺少下载地址），无法自动下载";
-                        lblStatus.Refresh();
-                        break;
-                    }
+                        ModelInfo cand = models[mi];
+                        if (string.IsNullOrWhiteSpace(cand?.url) || string.IsNullOrWhiteSpace(cand.folder))
+                        {
+                            Debug.WriteLine($"[t9s2t] 跳过无效模型配置: {cand?.name}");
+                            continue;
+                        }
 
-                    lblStatus.Text = $"⬇️ 首次运行，正在自动下载 {selected.name}（{selected.size_hint}），请耐心等待...";
-                    lblStatus.Refresh();
-                    bool ok = await StartDownloadProcess(selected, silent: true);
-                    if (ok && EngineDetector.Detect(modelPath) != EngineType.None)
-                        return; // 下载并安装成功，AutoCheckModel 已完成引擎加载
+                        lblStatus.Text = $"⬇️ 首次运行，正在自动下载 {cand.name}（{cand.size_hint}），请耐心等待...";
+                        lblStatus.Refresh();
+                        ok = await StartDownloadProcess(cand, silent: true)
+                             && EngineDetector.Detect(modelPath) != EngineType.None;
+
+                        if (!ok && mi < models.Count - 1)
+                        {
+                            lblStatus.Text = $"⏳ {cand.name} 下载失败，正在尝试备用源...";
+                            lblStatus.Refresh();
+                        }
+                    }
+                    if (ok) return; // 下载并安装成功，AutoCheckModel 已完成引擎加载
 
                     if (attempt < AutoDownloadMaxRetries)
                     {
@@ -711,7 +886,8 @@ namespace t9s2t
         }
 
         /// <summary>
-        /// 校验已下载的引擎 DLL 完整性：文件非空且带有 PE 文件头（"MZ"魔数）
+        /// 校验已下载的引擎 DLL：文件非空、有 MZ/PE 头，且必须是 64 位（AMD64）原生库。
+        /// 与宿主进程位数不匹配的库会导致 "试图加载格式不正确的程序"，必须在下完就拦掉。
         /// </summary>
         private bool VerifyEngineDllsIntegrity()
         {
@@ -719,25 +895,67 @@ namespace t9s2t
             foreach (var dll in RequiredEngineDlls)
             {
                 string dllPath = Path.Combine(appDir, dll);
-                try
+                string reason;
+                if (!IsX64NativePe(dllPath, out reason))
                 {
-                    if (!File.Exists(dllPath) || new FileInfo(dllPath).Length == 0) return false;
-                    using (var fs = File.OpenRead(dllPath))
-                    {
-                        if (fs.Length < 2) return false;
-                        int b1 = fs.ReadByte(), b2 = fs.ReadByte();
-                        if (b1 != 'M' || b2 != 'Z')
-                        {
-                            Debug.WriteLine($"[t9s2t] {dll} 不是有效的 DLL 文件（缺少 MZ 头），删除后重新下载");
-                            fs.Close();
-                            File.Delete(dllPath);
-                            return false;
-                        }
-                    }
+                    Debug.WriteLine($"[t9s2t] {dll} 校验失败（{reason}），删除后重新下载");
+                    try { File.Delete(dllPath); } catch { }
+                    return false;
                 }
-                catch { return false; }
             }
             return true;
+        }
+
+        /// <summary>
+        /// 判断文件是否为 64 位（AMD64, machine 0x8664）原生 PE 模块。
+        /// 用于在下载阶段就发现 32 位库 / 错误页 / 损坏文件，避免运行时抛 BadImageFormatException。
+        /// </summary>
+        private static bool IsX64NativePe(string path, out string reason)
+        {
+            reason = null;
+            try
+            {
+                if (!File.Exists(path)) { reason = "文件不存在"; return false; }
+                using (var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                {
+                    if (fs.Length < 0x40) { reason = "文件过小"; return false; }
+                    var br = new BinaryReader(fs);
+                    if (br.ReadUInt16() != 0x5A4D) { reason = "缺少 MZ 头（可能是错误页）"; return false; }
+                    fs.Position = 0x3C;
+                    int peOff = br.ReadInt32();
+                    if (peOff <= 0 || peOff + 6 > fs.Length) { reason = "PE 偏移非法"; return false; }
+                    fs.Position = peOff;
+                    if (br.ReadUInt32() != 0x00004550) { reason = "缺少 PE 签名"; return false; }
+                    ushort machine = br.ReadUInt16();
+                    if (machine != 0x8664)
+                    {
+                        reason = (machine == 0x014C) ? "是 32 位 DLL" : $"架构不匹配 (0x{machine:X4})";
+                        return false;
+                    }
+                    return true;
+                }
+            }
+            catch (Exception ex) { reason = ex.Message; return false; }
+        }
+
+        /// <summary>
+        /// 宿主进程位数自检。引擎组件只有 64 位版本，32 位进程无法加载，
+        /// 提前给出明确提示，代替晦涩的 "试图加载格式不正确的程序"。
+        /// </summary>
+        private bool EnsureHostIs64Bit()
+        {
+            if (Environment.Is64BitProcess) return true;
+            try
+            {
+                this.Invoke((MethodInvoker)delegate {
+                    lblStatus.Text = "❌ 当前程序以 32 位运行，引擎组件需要 64 位（请使用 x64 版本）";
+                    lblStatus.ForeColor = Color.FromArgb(200, 60, 60);
+                    lblEngine.Text = "引擎: 位数不匹配";
+                });
+            }
+            catch (Exception ex) { Debug.WriteLine($"[t9s2t] 位数提示刷新失败: {ex.Message}"); }
+            Debug.WriteLine("[t9s2t] 宿主进程为 32 位，无法加载 x64 引擎组件");
+            return false;
         }
 
         /// <summary>
@@ -750,6 +968,7 @@ namespace t9s2t
             btnDownloadModel.BackColor = SystemColors.Control;
             btnDownloadModel.ForeColor = SystemColors.ControlText;
             btnDeleteModel.Enabled = true;
+            SyncModelStateToRegistry();   // 就绪状态变了，同步给外部
         }
 
         /// <summary>
@@ -760,9 +979,92 @@ namespace t9s2t
             return EngineDetector.Detect(modelPath) != EngineType.None;
         }
 
+        // ==================== 模型面板的统一入口（2026-10-10 新增）====================
+
+        /// <summary>
+        /// 把「引擎 / 模型」面板摆到用户面前。所有唤起路径（启动参数 / 单实例转发 / 托盘菜单）都走这里，
+        /// 避免每个入口各写一套显示逻辑。
+        /// </summary>
+        private void ShowModelPanel(ModelPanelIntent intent)
+        {
+            ForceShowMainWindow();
+
+            switch (intent)
+            {
+                case ModelPanelIntent.Manage:
+                    if (IsModelInstalled())
+                        lblStatus.Text = "模型已就绪。如需更换或释放空间，可点「删除模型」后重新下载。";
+                    else
+                        RefreshInstallReasonText();
+                    try { btnDeleteModel.Focus(); } catch { }
+                    break;
+
+                case ModelPanelIntent.Install:
+                default:
+                    RefreshInstallReasonText();   // 按实际状态说明「为什么需要装」
+                    try { btnDownloadModel.Focus(); } catch { }
+                    break;
+            }
+        }
+
+        /// <summary>按当前状态设置「需要安装」的原因文案（区分缺引擎 / 上次没装完 / 完全没装）</summary>
+        private void RefreshInstallReasonText()
+        {
+            if (!AreEngineDllsReady())
+                lblStatus.Text = "⚠️ 缺少引擎组件（onnxruntime.dll / sherpa-onnx-c-api.dll），请先点「下载引擎组件」";
+            else if (Directory.Exists(modelPath))
+                lblStatus.Text = "⚠️ 检测到上次模型安装未完成（模型目录不完整），建议点下方按钮重新下载";
+            else
+                lblStatus.Text = "📦 未检测到语音模型，点下方按钮即可下载（约 258MB）";
+            lblStatus.ForeColor = Color.FromArgb(200, 100, 0);
+        }
+
+        /// <summary>
+        /// 把「引擎 / 模型到底能不能用」写到注册表，供外部（t9keyboard）判断，
+        /// 而不是只判断进程在不在。只写 HKCU，不需要管理员权限；失败一律忽略。
+        /// </summary>
+        private void SyncModelStateToRegistry()
+        {
+            try
+            {
+                bool engineReady = AreEngineDllsReady();
+                bool modelReady = engineReady && EngineDetector.Detect(modelPath) != EngineType.None;
+                using (RegistryKey k = Registry.CurrentUser.CreateSubKey(@"Software\Rime\Weasel\T9S2T"))
+                {
+                    if (k == null) return;
+                    k.SetValue("EngineReady", engineReady ? 1 : 0, RegistryValueKind.DWord);
+                    k.SetValue("ModelReady", modelReady ? 1 : 0, RegistryValueKind.DWord);
+                    k.SetValue("ModelDir", modelPath, RegistryValueKind.String);
+                    k.SetValue("UpdatedAt", (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds, RegistryValueKind.DWord);
+                }
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// 把「上次没装完」的模型目录改名挪走（不直接删，避免误伤用户手动放进来的文件）。
+        /// 只在准备自动重新下载时调用。
+        /// </summary>
+        private void QuarantineBrokenModel()
+        {
+            try
+            {
+                if (!Directory.Exists(modelPath)) return;
+                if (EngineDetector.Detect(modelPath) != EngineType.None) return;
+                string brokenDir = modelPath + ".broken";
+                try { if (Directory.Exists(brokenDir)) Directory.Delete(brokenDir, true); } catch { }
+                Directory.Move(modelPath, brokenDir);
+                Debug.WriteLine("[t9s2t] 未完成的模型目录已移到: " + brokenDir);
+            }
+            catch (Exception ex) { Debug.WriteLine("[t9s2t] 挪走未完成的模型目录失败: " + ex.Message); }
+        }
+
         private async Task AutoCheckModel()
         {
-            // 先检查引擎 DLL
+            // 先确认宿主进程为 64 位（引擎组件只有 x64 版本）
+            if (!EnsureHostIs64Bit()) return;
+
+            // 再检查引擎 DLL
             if (!AreEngineDllsReady())
             {
                 UpdateEngineButtonState();
@@ -790,6 +1092,7 @@ namespace t9s2t
                 lblEngine.Text = "引擎: 未加载";
                 lblStatus.Text = "❌ 模型未找到，请点击下方按钮下载";
                 lblStatus.ForeColor = SystemColors.ControlText;
+                SyncModelStateToRegistry();   // 就绪状态变了，同步给外部
             }
         }
 
@@ -798,6 +1101,9 @@ namespace t9s2t
         {
             try
             {
+                // 位数自检：32 位进程加载 64 位原生库必然失败，提前给出明确原因
+                if (!EnsureHostIs64Bit()) return;
+
                 engine?.Dispose();
                 engine = EngineDetector.DetectAndCreate(modelPath);
 
@@ -867,8 +1173,28 @@ namespace t9s2t
                 // 加载失败：释放引擎实例，允许用户通过"重新下载模型"按钮修复
                 try { engine?.Dispose(); } catch { }
                 engine = null;
+
+                // 把底层晦涩异常翻译成可操作的提示
+                string friendly = "❌ 加载失败: " + ex.Message;
+                bool isBitness = ex is BadImageFormatException
+                    || (ex.InnerException is BadImageFormatException)
+                    || (ex.Message != null && ex.Message.Contains("格式不正确"));
+                bool isMissing = ex is DllNotFoundException
+                    || (ex.InnerException is DllNotFoundException);
+
+                if (isBitness)
+                {
+                    friendly = Environment.Is64BitProcess
+                        ? "❌ 引擎组件与当前程序位数不匹配（组件需 64 位），请点击按钮重新下载引擎组件"
+                        : "❌ 当前程序以 32 位运行，引擎组件需要 64 位，请使用 x64 版本";
+                }
+                else if (isMissing)
+                {
+                    friendly = "❌ 缺少系统依赖（引擎组件需 Windows 8 及以上），请升级系统后重试";
+                }
+
                 this.Invoke((MethodInvoker)delegate {
-                    lblStatus.Text = "❌ 加载失败: " + ex.Message;
+                    lblStatus.Text = friendly;
                     btnDownloadModel.Enabled = true;
                     btnDownloadModel.Text = "⬇️ 重新下载模型";
                 });
@@ -1040,91 +1366,99 @@ namespace t9s2t
         private async Task<bool> DownloadWithProgress(ProgressBar progressBar, string url, string targetFolder, bool silent = false)
         {
             string archivePath = null;
+            // 解压目标固定到程序目录，不能用 "."（工作目录在自启动时会变成 system32 之类）
+            string appDir = AppDomain.CurrentDomain.BaseDirectory;
+            string targetDir = Path.Combine(appDir, targetFolder);
             try
             {
                 ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls;
 
-                using (var client = new WebClient())
+                // 1. 清理可能存在的旧模型文件夹
+                if (Directory.Exists(modelPath)) Directory.Delete(modelPath, true);
+                if (Directory.Exists(targetDir)) Directory.Delete(targetDir, true);
+
+                // 2. 下载文件（带超时 + 断点续传，中途断网可续，不必重下 258MB）
+                archivePath = Path.Combine(Path.GetTempPath(), "model_temp_" + Guid.NewGuid().ToString("N") + ".bin");
+                await DownloadFileAsync(url, archivePath, (got, total) =>
                 {
-                    client.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36");
-                    client.Headers.Add("Accept", "*/*");
-
-                    client.DownloadProgressChanged += (s, ev) =>
+                    try
                     {
-                        if (ev.TotalBytesToReceive > 0)
+                        this.BeginInvoke((MethodInvoker)delegate
                         {
-                            progressBar.Style = ProgressBarStyle.Blocks;
-                            progressBar.Value = ev.ProgressPercentage;
-                            lblStatus.Text = $"⬇️ 正在下载... {ev.ProgressPercentage}% ({ev.BytesReceived / 1048576}MB / {ev.TotalBytesToReceive / 1048576}MB)";
-                        }
-                        else
-                        {
-                            progressBar.Style = ProgressBarStyle.Marquee;
-                            lblStatus.Text = $"⬇️ 正在下载... 已下载 {ev.BytesReceived / 1048576} MB";
-                        }
-                        lblStatus.Refresh();
-                    };
-
-                    // 1. 清理可能存在的旧模型文件夹
-                    if (Directory.Exists(modelPath)) Directory.Delete(modelPath, true);
-                    if (Directory.Exists(targetFolder)) Directory.Delete(targetFolder, true);
-
-                    // 下载文件
-                    archivePath = Path.Combine(Path.GetTempPath(), "model_temp_" + Guid.NewGuid().ToString("N") + ".bin");
-                    await client.DownloadFileTaskAsync(new Uri(url), archivePath);
-
-                    // 完整性校验：文件过小（<1MB）说明下载到的是错误页而不是模型压缩包
-                    long archiveSize = new FileInfo(archivePath).Length;
-                    if (archiveSize < 1048576)
-                        throw new InvalidDataException($"下载的文件异常（仅 {archiveSize} 字节），可能是错误页面而非模型文件。");
-
-                    progressBar.Style = ProgressBarStyle.Blocks;
-                    progressBar.Value = 100;
-                    lblStatus.Text = "📦 下载完成，正在解压...";
-                    lblStatus.Refresh();
-
-                    // 2. 根据文件内容（魔数）判断压缩格式
-                    bool isTarBz2File = TarBz2Extractor.IsTarBz2File(archivePath);
-                    if (isTarBz2File)
-                    {
-                        await TarBz2Extractor.ExtractAsync(archivePath, ".");
+                            if (total > 0)
+                            {
+                                progressBar.Style = ProgressBarStyle.Blocks;
+                                int pct = (int)Math.Min(100, got * 100 / total);
+                                progressBar.Value = pct;
+                                lblStatus.Text = $"⬇️ 正在下载... {pct}% ({got / 1048576}MB / {total / 1048576}MB)";
+                            }
+                            else
+                            {
+                                progressBar.Style = ProgressBarStyle.Marquee;
+                                lblStatus.Text = $"⬇️ 正在下载... 已下载 {got / 1048576} MB";
+                            }
+                        });
                     }
-                    else
-                    {
-                        ZipFile.ExtractToDirectory(archivePath, ".");
-                    }
-                    File.Delete(archivePath);
-                    archivePath = null;
+                    catch { }
+                });
 
-                    // 3. 智能查找解压后的模型目录
-                    string extractedFolder = null;
+                // 完整性校验：文件过小（<1MB）说明下载到的是错误页而不是模型压缩包
+                long archiveSize = new FileInfo(archivePath).Length;
+                if (archiveSize < 1048576)
+                    throw new InvalidDataException($"下载的文件异常（仅 {archiveSize} 字节），可能是错误页面而非模型文件。");
 
-                    // 情况 A：解压出了 JSON 中指定的 folder 目录
-                    if (Directory.Exists(targetFolder))
-                    {
-                        extractedFolder = targetFolder;
-                    }
-                    // 情况 B：寻找任何包含已知模型文件的目录
-                    foreach (var dir in Directory.GetDirectories("."))
-                    {
-                        // SenseVoice / Paraformer 模型
-                        if (File.Exists(Path.Combine(dir, "model.int8.onnx")) ||
-                            File.Exists(Path.Combine(dir, "encoder.int8.onnx")) ||
-                            File.Exists(Path.Combine(dir, "tokens.txt")))
-                        { extractedFolder = dir; break; }
-                    }
+                progressBar.Style = ProgressBarStyle.Blocks;
+                progressBar.Value = 100;
+                lblStatus.Text = "📦 下载完成，正在解压...";
+                lblStatus.Refresh();
 
-                    // 4. 将找到的目录重命名为 "model"
-                    if (extractedFolder != null && Directory.Exists(extractedFolder))
+                // 3. 根据文件内容（魔数）判断压缩格式
+                bool isTarBz2File = TarBz2Extractor.IsTarBz2File(archivePath);
+                if (isTarBz2File)
+                {
+                    await TarBz2Extractor.ExtractAsync(archivePath, appDir);
+                }
+                else
+                {
+                    ZipFile.ExtractToDirectory(archivePath, appDir);
+                }
+                File.Delete(archivePath);
+                archivePath = null;
+
+                // 4. 智能查找解压后的模型目录
+                string extractedFolder = null;
+
+                // 情况 A：解压出了 JSON 中指定的 folder 目录
+                if (Directory.Exists(targetDir))
+                {
+                    extractedFolder = targetDir;
+                }
+                // 情况 B：寻找任何包含已知模型文件的目录
+                foreach (var dir in Directory.GetDirectories(appDir))
+                {
+                    // SenseVoice / Paraformer 模型
+                    if (File.Exists(Path.Combine(dir, "model.int8.onnx")) ||
+                        File.Exists(Path.Combine(dir, "encoder.int8.onnx")) ||
+                        File.Exists(Path.Combine(dir, "tokens.txt")))
+                    { extractedFolder = dir; break; }
+                }
+
+                // 5. 将找到的目录重命名为 "model"（已经是 model 则无需移动）
+                if (extractedFolder != null && Directory.Exists(extractedFolder))
+                {
+                    if (!string.Equals(
+                            Path.GetFullPath(extractedFolder).TrimEnd('\\'),
+                            Path.GetFullPath(modelPath).TrimEnd('\\'),
+                            StringComparison.OrdinalIgnoreCase))
                     {
                         Directory.Move(extractedFolder, modelPath);
-                        lblStatus.Text = "✅ 模型安装完成！";
-                        return true;
                     }
-                    else
-                    {
-                        throw new DirectoryNotFoundException("解压后未找到有效的模型目录结构。\n请检查压缩包是否正确。");
-                    }
+                    lblStatus.Text = "✅ 模型安装完成！";
+                    return true;
+                }
+                else
+                {
+                    throw new DirectoryNotFoundException("解压后未找到有效的模型目录结构。\n请检查压缩包是否正确。");
                 }
             }
             catch (Exception ex)
@@ -1141,7 +1475,7 @@ namespace t9s2t
                 }
                 else
                 {
-                    MessageBox.Show($"下载或解压失败: {ex.Message}\n\n排查建议：\n1. 检查链接是否已过期\n2. .tar.bz2 需要 Windows 10+ 自带 tar.exe 或安装 7-Zip", "错误",
+                    MessageBox.Show($"下载或解压失败: {ex.Message}\n\n排查建议：\n1. 检查链接是否已过期\n2. 检查网络是否可访问下载地址", "错误",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                     lblStatus.Text = "❌ 下载失败";
                     btnDownloadModel.Enabled = true;
@@ -1156,17 +1490,55 @@ namespace t9s2t
 
         private void btnDeleteModel_Click(object sender, EventArgs e)
         {
-            if (Directory.Exists(modelPath))
+            if (!Directory.Exists(modelPath))
             {
-                if (MessageBox.Show("确定删除模型吗？", "确认", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                lblStatus.Text = "❌ 未找到模型目录，无需删除";
+                _ = AutoCheckModel();
+                return;
+            }
+
+            // 先算占用空间，让用户在点「确定」之前知道自己在删什么
+            long sizeMB = 0;
+            try
+            {
+                foreach (var f in new DirectoryInfo(modelPath).EnumerateFiles("*", SearchOption.AllDirectories))
+                    sizeMB += f.Length;
+                sizeMB = sizeMB / 1024 / 1024;
+            }
+            catch { }
+
+            DialogResult r = MessageBox.Show(
+                $"将删除语音模型（约 {sizeMB} MB）：\n{modelPath}\n\n" +
+                "删除后「按住 Ctrl+Alt+D 语音输入」将不可用，可随时重新下载。\n\n确定删除吗？",
+                "删除语音模型", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+            if (r != DialogResult.Yes) return;
+
+            // ★ 顺序很重要：必须先把引擎和 VAD 释放掉再删文件。
+            // ONNX Runtime 会持有 model.onnx 等文件的句柄，先删会抛 IOException（原来的顺序正好是反的）。
+            try { engine?.Dispose(); } catch { }
+            engine = null;
+            vadProcessor = null;
+            currentEngineType = EngineType.None;
+
+            string delErr = null;
+            for (int attempt = 1; attempt <= 3; attempt++)
+            {
+                try { Directory.Delete(modelPath, true); delErr = null; break; }
+                catch (Exception ex)
                 {
-                    Directory.Delete(modelPath, true);
-                    engine?.Dispose(); engine = null; vadProcessor = null; currentEngineType = EngineType.None;
-                    lblEngine.Text = "引擎: 未加载";
-                    lblEngine.ForeColor = Color.FromArgb(120, 120, 120);
-                    _ = AutoCheckModel();
+                    delErr = ex.Message;
+                    Thread.Sleep(300);   // 文件句柄释放有延迟，稍等再试
                 }
             }
+
+            if (delErr != null)
+                MessageBox.Show("删除失败：" + delErr + "\n\n请关闭其他正在占用模型的程序后重试。",
+                                "删除失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            lblEngine.Text = "引擎: 未加载";
+            lblEngine.ForeColor = Color.FromArgb(120, 120, 120);
+            _ = AutoCheckModel();          // 无论成功与否都刷新按钮状态
+            SyncModelStateToRegistry();
         }
 
 

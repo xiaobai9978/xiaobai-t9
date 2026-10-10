@@ -30,6 +30,9 @@ namespace t9keyboard
             // help f2 = new help(); // removed to avoid duplicate tray icon
             //f2.Show();
             // f2.yes.PerformClick(); // 建议把这行逻辑放在help窗体内部处理，或者确保yes按钮存在
+
+            // 贴边收起：拖动吸附 / 滑出收起 / 悬停展开（实现见 Form2.EdgeDock.cs）
+            AttachEdgeDock();
         }
 
         // 窗口拖动相关变量
@@ -53,6 +56,7 @@ namespace t9keyboard
         {
             if (e.Button == MouseButtons.Left)
             {
+                DockBeginDrag();   // 贴边收起：从收起状态开始拖动时先恢复完整显示
                 Point cur = this.PointToScreen(e.Location);
                 offset = new Point(cur.X - this.Left, cur.Y - this.Top);
             }
@@ -74,6 +78,9 @@ namespace t9keyboard
 
         private void button1_Click(object sender, EventArgs e)
         {
+            // 贴边收起：处于收起状态时，这一下点击只用来展开，不参与双击判定
+            if (DockHandleClick()) return;
+
             // 核心修改：双击逻辑判定
             if (timer1.Enabled)
             {

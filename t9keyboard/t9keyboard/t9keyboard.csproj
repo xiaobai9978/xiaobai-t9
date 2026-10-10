@@ -95,6 +95,7 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form2.EdgeDock.cs" />
     <Compile Include="Form4.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -178,7 +179,7 @@
   <ItemGroup>
     <None Include="Resources\dc09882c-1165-40a0-b42b-913b121e6299.png" />
     <None Include="Resources\0beffad9-8150-4b9c-849a-7960866759b1.png" />
-    <None Include="Resources\1781684592078_d.png" />
+    <None Include="Resources\taobao_qrcode.png" />
     <Content Include="xiaobait9.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

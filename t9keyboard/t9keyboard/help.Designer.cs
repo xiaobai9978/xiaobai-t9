@@ -89,13 +89,13 @@
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.chkAutoStart = new System.Windows.Forms.CheckBox();
             this.adPanel = new System.Windows.Forms.Panel();
-            this.qrPdd = new System.Windows.Forms.PictureBox();
+            this.qrTaobao = new System.Windows.Forms.PictureBox();
             this.qrAlipay = new System.Windows.Forms.PictureBox();
             this.qrWechat = new System.Windows.Forms.PictureBox();
             this.btnToggleAd = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.adPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.qrPdd)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.qrTaobao)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.qrAlipay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.qrWechat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -626,7 +626,7 @@
             // 
             this.adPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(250)))), ((int)(((byte)(240)))));
             this.adPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.adPanel.Controls.Add(this.qrPdd);
+            this.adPanel.Controls.Add(this.qrTaobao);
             this.adPanel.Controls.Add(this.qrAlipay);
             this.adPanel.Controls.Add(this.qrWechat);
             this.adPanel.Location = new System.Drawing.Point(754, 0);
@@ -634,15 +634,15 @@
             this.adPanel.Size = new System.Drawing.Size(190, 520);
             this.adPanel.TabIndex = 200;
             // 
-            // qrPdd
+            // qrTaobao
             // 
-            this.qrPdd.Image = global::t9keyboard.Properties.Resources._1781684592078_d;
-            this.qrPdd.Location = new System.Drawing.Point(38, 300);
-            this.qrPdd.Name = "qrPdd";
-            this.qrPdd.Size = new System.Drawing.Size(110, 110);
-            this.qrPdd.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.qrPdd.TabIndex = 0;
-            this.qrPdd.TabStop = false;
+            this.qrTaobao.Image = global::t9keyboard.Properties.Resources.taobao_qrcode;
+            this.qrTaobao.Location = new System.Drawing.Point(38, 300);
+            this.qrTaobao.Name = "qrTaobao";
+            this.qrTaobao.Size = new System.Drawing.Size(110, 110);
+            this.qrTaobao.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.qrTaobao.TabIndex = 0;
+            this.qrTaobao.TabStop = false;
             // 
             // qrAlipay
             // 
@@ -761,7 +761,7 @@
             this.Text = "关于";
             this.Load += new System.EventHandler(this.help_Load);
             this.adPanel.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.qrPdd)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.qrTaobao)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.qrAlipay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.qrWechat)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -834,6 +834,6 @@
         private System.Windows.Forms.Button btnToggleAd;
         private System.Windows.Forms.PictureBox qrWechat;
         private System.Windows.Forms.PictureBox qrAlipay;
-        private System.Windows.Forms.PictureBox qrPdd;
+        private System.Windows.Forms.PictureBox qrTaobao;
     }
 }

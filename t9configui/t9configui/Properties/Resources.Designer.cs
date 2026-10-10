@@ -73,9 +73,9 @@ namespace t9configui.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap _1781684592078_d {
+        internal static System.Drawing.Bitmap taobao_qrcode {
             get {
-                object obj = ResourceManager.GetObject("1781684592078_d", resourceCulture);
+                object obj = ResourceManager.GetObject("taobao_qrcode", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

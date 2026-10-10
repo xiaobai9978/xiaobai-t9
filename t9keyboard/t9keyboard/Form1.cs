@@ -432,6 +432,7 @@ namespace t9keyboard
 
         private void jia_MouseDown(object sender, MouseEventArgs e)
         {
+            // 短按（左键）= 方向键↓，长按（右键）= 运算符 +
             if (e.Button == MouseButtons.Right)
             {
                 new SendMsg().SendText("+");
@@ -447,7 +448,7 @@ namespace t9keyboard
 
         private void jian_MouseDown(object sender, MouseEventArgs e)
         {
-
+            // 短按（左键）= 方向键↑，长按（右键）= 运算符 -
             if (e.Button == MouseButtons.Right)
             {
                 new SendMsg().SendText("-");
@@ -463,7 +464,7 @@ namespace t9keyboard
 
         private void cheng_MouseDown(object sender, MouseEventArgs e)
         {
-
+            // 短按（左键）= 方向键→，长按（右键）= 运算符 *
             if (e.Button == MouseButtons.Right)
             {
                 new SendMsg().SendText("*");
@@ -479,7 +480,7 @@ namespace t9keyboard
 
         private void chu_MouseDown(object sender, MouseEventArgs e)
         {
-
+            // 短按（左键）= 方向键←，长按（右键）= 运算符 /
             if (e.Button == MouseButtons.Right)
             {
                 new SendMsg().SendText("/");
@@ -842,14 +843,30 @@ namespace t9keyboard
         {
             try
             {
-                // 检测 t9s2t.exe 是否在运行
-                if (Process.GetProcessesByName("t9s2t").Length > 0) return true;
-
-                // 未运行，询问用户是否启动
                 string exePath = Path.Combine(Application.StartupPath, "t9s2t", "t9s2t.exe");
+
+                // ① 已经在运行：再问一句"模型到底能不能用"（t9s2t 会把状态写到注册表）
+                //    以前这里只要进程活着就 return true，模型还在下载时用户按语音键会"没反应"
+                if (Process.GetProcessesByName("t9s2t").Length > 0)
+                {
+                    if (ReadT9s2tModelReady() == false)
+                    {
+                        DialogResult r0 = MessageBox.Show(
+                            "t9s2t 已在运行，但语音模型还没有准备好，暂时无法语音输入。\n\n" +
+                            "点「是」打开它的模型管理界面（首次使用需下载约 258MB）。",
+                            "语音模型尚未就绪", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (r0 == DialogResult.Yes) LaunchT9s2t(exePath, "/model");
+                        return false;
+                    }
+                    return true;   // 已就绪，或读不到状态（读不到时保持原有的乐观放行）
+                }
+
+                // ② 没在运行：问过用户再启动
                 DialogResult result = MessageBox.Show(
-                    "检测到 t9s2t.exe 未在运行，语音输入功能需要该程序支持。\n\n是否立即启动 t9s2t.exe？",
-                    "语音输入提示",
+                    "语音输入需要 t9s2t 支持，它当前没有运行。\n\n" +
+                    "点「是」启动它（会请求一次管理员权限）。\n" +
+                    "如果还没装过语音模型，还需要下载约 258MB。",
+                    "语音输入",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
 
@@ -859,12 +876,8 @@ namespace t9keyboard
                     {
                         try
                         {
-                            Process.Start(new ProcessStartInfo
-                            {
-                                FileName = exePath,
-                                WorkingDirectory = Path.GetDirectoryName(exePath),
-                                UseShellExecute = true
-                            });
+                            // 带 /model：让它把模型面板摆出来（模型已就绪时该参数只是显示主界面）
+                            LaunchT9s2t(exePath, "/model");
                             // 等待片刻让 t9s2t 启动完成
                             Thread.Sleep(2000);
                             return true;
@@ -889,9 +902,45 @@ namespace t9keyboard
             }
             catch (Exception ex)
             {
-                MessageBox.Show("检测 t9s2t 进程时出错：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("检测 t9s2t 状态时出错：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+        }
+
+        /// <summary>启动 t9s2t 并带上意图参数（/model = 把模型面板摆出来）</summary>
+        private static void LaunchT9s2t(string exePath, string arguments)
+        {
+            if (!File.Exists(exePath)) return;
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = exePath,
+                    Arguments = arguments ?? "",
+                    WorkingDirectory = Path.GetDirectoryName(exePath),
+                    UseShellExecute = true
+                });
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// 读 t9s2t 写入的就绪状态（HKCU\Software\Rime\Weasel\T9S2T）。
+        /// 返回 null 表示读不到（旧版本没写 / 注册表不可用），调用方按"无法判断"处理。
+        /// </summary>
+        private static bool? ReadT9s2tModelReady()
+        {
+            try
+            {
+                using (var k = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\Rime\Weasel\T9S2T", false))
+                {
+                    if (k == null) return null;
+                    object v = k.GetValue("ModelReady");
+                    if (v == null) return null;
+                    return Convert.ToInt32(v) != 0;
+                }
+            }
+            catch { return null; }
         }
 
 
